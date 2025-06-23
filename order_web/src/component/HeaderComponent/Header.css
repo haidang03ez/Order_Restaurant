@@ -2,9 +2,20 @@
   position: fixed;
   padding: 2rem 0;
   background-color: #f6efe1;
-  font-size: 1.1rem;
+  font-size: 1rem;
   width: 100%;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.navbar_scrolled {
+  position: fixed;
+  padding: 1rem 0;
+  background-color: #ffffff;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
 }
 
 .navbar_component {

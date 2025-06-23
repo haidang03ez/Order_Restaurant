@@ -1,11 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import image from "../../assets/images/image.png";
 import "./Header.css";
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Effect scroll header
+  useEffect(() => {
+    const handleScroll = () => {
+      const scroll = window.scrollY;
+      setIsScrolled(scroll > 50);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); 
+
   return (
     <>
-      <nav className="navbar">
+      <nav className={isScrolled ? "navbar_scrolled" : "navbar"}>
         <div className="navbar_component">
           <a className="navbar_component--logo" href="#">
             <img
@@ -22,22 +36,22 @@ const Header = () => {
                 </a>
               </li>
               <li className="menu_item">
-                <a href="#" className="menu_item--link">
+                <a href="#restaurant" className="menu_item--link">
                   Restaurant
                 </a>
               </li>
               <li className="menu_item">
-                <a href="#" className="menu_item--link">
+                <a href="#features" className="menu_item--link">
                   Features
                 </a>
               </li>
               <li className="menu_item">
-                <a href="#" className="menu_item--link">
+                <a href="#testimonials" className="menu_item--link">
                   Testimonials
                 </a>
               </li>
               <li className="menu_item">
-                <a href="#" className="menu_item--link">
+                <a href="#Download" className="menu_item--link">
                   Download
                 </a>
               </li>
