@@ -1,0 +1,23 @@
+1. File HTML
+index.html: Đây là file HTML gốc duy nhất trong ứng dụng React (Single Page Application)
+Chứa thẻ <div id="root"> là điểm mount của React application
+Nơi định nghĩa các meta tags, title và load các resources bên ngoài
+2. File CSS
+App.css: CSS dành riêng cho component App
+
+Chứa styles chỉ áp dụng cho App component
+Thường chứa các style cục bộ
+index.css/main.css: CSS toàn cục cho ứng dụng
+
+Chứa các style global như reset CSS, font chung, variables
+Áp dụng cho toàn bộ ứng dụng
+3. File JavaScript/JSX
+main.jsx: File entry point của ứng dụng
+
+Import các dependencies chính (React, ReactDOM)
+Render App component vào DOM
+Import các global CSS
+App.jsx: Component chính của ứng dụng
+
+Chứa layout chính và routing
+Import App.css cho styles riêng

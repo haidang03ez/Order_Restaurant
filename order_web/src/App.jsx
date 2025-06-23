@@ -1,14 +1,17 @@
-import { useState } from 'react'
-import './App.css'
+import Header from "./component/headerComponent/header";
+import Footer from "./component/footerComponent/footer";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HomePage } from "./screen/HomePage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1> Xin Chào </h1>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
