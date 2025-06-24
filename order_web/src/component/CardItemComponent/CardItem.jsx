@@ -12,9 +12,9 @@ export const CardItem = ({
   return (
     <>
       <div className="card_item">
-        <div className="card_item--thumbnail">
+        {/* <div className="card_item--thumbnail"> */}
           <img src={thumbnail} alt={name} className="card_thumbnail" />
-        </div>
+        {/* </div> */}
         <h3>
           <a className="card_item--name">{name}</a>
         </h3>

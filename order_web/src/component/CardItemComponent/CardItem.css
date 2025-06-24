@@ -1,20 +1,26 @@
 .card_item img {
-    width: 500px;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .card_item a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
-.card_item--name h3 {
-    margin: 2rem 0 !important;
+.card_item {
+  text-align: left;
+  padding: 10px;
+  width: 100%;
+}
+
+.card_item--name {
+  margin: 2rem 0 !important;
 }
 
 .group_card--items {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
 }
-
