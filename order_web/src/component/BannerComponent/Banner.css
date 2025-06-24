@@ -102,3 +102,14 @@
   border-radius: 5px;
   gap: 1rem;
 }
+
+.banner_app--link {
+  text-decoration: none;
+  color: black;
+}
+
+.banner_app--link:hover {
+  background-color: #000000;
+  color: white;
+  transition: all 0.2s ease;
+}

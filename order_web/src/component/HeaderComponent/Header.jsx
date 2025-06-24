@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import image from "../../assets/images/image.png";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
@@ -10,12 +11,13 @@ const Header = () => {
     const handleScroll = () => {
       const scroll = window.scrollY;
       setIsScrolled(scroll > 50);
-    }
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -51,7 +53,7 @@ const Header = () => {
                 </a>
               </li>
               <li className="menu_item">
-                <a href="#Download" className="menu_item--link">
+                <a href="#download" className="menu_item--link">
                   Download
                 </a>
               </li>
@@ -59,9 +61,10 @@ const Header = () => {
             <a>
               <button className="btn-login">Login Now</button>
             </a>
-            <a>
+
+            <Link to="/placeorder" className="btn-register">
               <button className="btn-join">Join Free</button>
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

@@ -4,6 +4,12 @@
   object-fit: cover;
 }
 
+.card_item img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  
+}
+
 .card_item a {
   text-decoration: none;
   color: inherit;

@@ -25,14 +25,14 @@ export const Banner = () => {
 
         <p>Apps Available to download on</p>
         <div className="banner_app d-flex">
-          <a>
+          <a href="#" className="banner_app--link">
             <i className="bi bi-apple"></i>
             <div className="banner_app--items">
               <span>Download on</span>
               <p>App Store</p>
             </div>
           </a>
-          <a>
+          <a href="#" className="banner_app--link">
             <i className="bi bi-google-play"></i>
             <div className="banner_app--items">
               <span>Download on</span>
