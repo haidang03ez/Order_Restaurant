@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  box-sizing: border-box !important;
+}
+
+/* Header */
+.nav-list li{
+  padding: 1rem;
+  width: 100%;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-list a:hover {
+  background-color: bisque;
+  transition: all 0.3s ease;
+}
