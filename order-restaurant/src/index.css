@@ -12,18 +12,7 @@
   box-sizing: border-box !important;
 }
 
-/* Header */
-.nav-list li{
-  padding: 1rem;
-  width: 100%;
-}
-
-.nav-list a {
-  text-decoration: none;
-  color: black;
-}
-
-.nav-list a:hover {
-  background-color: bisque;
-  transition: all 0.3s ease;
+a {
+  text-decoration: none !important;
+  color: black !important;
 }

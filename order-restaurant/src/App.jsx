@@ -1,4 +1,3 @@
-import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
@@ -6,6 +5,10 @@ import { PlaceOrderPage } from "./pages/PlaceOrderPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { MainLayout } from "./layout/MainLayout";
 import { AboutUsPage } from "./pages/AboutUsPage";
+import { NewsPage } from "./pages/NewsPage";
+import { MenuPage } from "./pages/MenuPage";
+import { SignInPage } from "./pages/SignInPage";
+import { SignUpPage } from "./pages/SignUpPage";
 
 function App() {
   return (
@@ -14,10 +17,15 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="place-order" element={<PlaceOrderPage />} />
-            <Route path="about" element={<AboutUsPage/>} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="about" element={<AboutUsPage />} />
+            <Route path="news" element={<NewsPage />} />
+            <Route path="menu" element={<MenuPage />} />
           </Route>
+
+          <Route path="sign-in" element={<SignInPage/>}/>
+          <Route path="sign-up" element={<SignUpPage/>}/>
+          <Route path="place-order" element={<PlaceOrderPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </>

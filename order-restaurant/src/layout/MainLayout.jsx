@@ -1,6 +1,7 @@
 import React from "react";
 import { Header } from "../components/Header";
 import { Outlet } from "react-router-dom";
+import "../index.css"
 
 export const MainLayout = () => {
   return (
@@ -14,7 +15,7 @@ export const MainLayout = () => {
           navItem5={"Đặt tiệc ngay"}
         />
       </header>
-      <main className="content">
+      <main className="container content">
         <Outlet />
       </main>
     </div>
