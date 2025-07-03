@@ -2,7 +2,7 @@ import React from "react";
 
 export const AboutUsPage = () => {
   return (
-    <div className="about-me-page">
+    <div className="about-me-page container">
       <h1>About Me</h1>
       <p>
         Hello! I'm a passionate web developer with a love for creating dynamic

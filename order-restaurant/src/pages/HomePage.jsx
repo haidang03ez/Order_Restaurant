@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SlideBanner } from "./../components/SlideBanner";
+import image_banner_1 from "../assets/image_banner_1.png";
+import image_banner_2 from "../assets/image_banner_2.png";
 import {
   PlayCircleOutlined,
   BookOutlined,
@@ -8,10 +10,17 @@ import {
   UserOutlined,
   WalletOutlined,
 } from "@ant-design/icons";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 
 export const HomePage = () => {
   const [open, setOpen] = useState(false);
+  const [dateNow, setDateNow] = useState("");
+  const [qtyBooking, setQtyBooking] = useState(0);
+
+  useEffect(() => {
+    const now = new Date().toISOString().split("T")[0];
+    setDateNow(now);
+  }, []);
 
   const steps = [
     {
@@ -41,13 +50,40 @@ export const HomePage = () => {
     },
   ];
 
+  const reasons = [
+    {
+      imgUrl:
+        "https://intern-project-chi.vercel.app/static/media/bg1.da6d3327978f205184d6.jpg",
+      title: "sự lựa chọn ẩm thực số 1",
+      desc: "Thuộc Golden Gate Group - 15 năm kinh nghiệp, hơn 400 nhà hàng toàn quốc",
+    },
+    {
+      imgUrl:
+        "https://intern-project-chi.vercel.app/static/media/bg1.da6d3327978f205184d6.jpg",
+      title: "sự lựa chọn ẩm thực số 1",
+      desc: "Thuộc Golden Gate Group - 15 năm kinh nghiệp, hơn 400 nhà hàng toàn quốc",
+    },
+    {
+      imgUrl:
+        "https://intern-project-chi.vercel.app/static/media/bg1.da6d3327978f205184d6.jpg",
+      title: "sự lựa chọn ẩm thực số 1",
+      desc: "Thuộc Golden Gate Group - 15 năm kinh nghiệp, hơn 400 nhà hàng toàn quốc",
+    },
+    {
+      imgUrl:
+        "https://intern-project-chi.vercel.app/static/media/bg1.da6d3327978f205184d6.jpg",
+      title: "sự lựa chọn ẩm thực số 1",
+      desc: "Thuộc Golden Gate Group - 15 năm kinh nghiệp, hơn 400 nhà hàng toàn quốc",
+    },
+  ];
+
   return (
     <div className="home-page">
-      <section>
+      <section className="slider">
         <SlideBanner />
       </section>
 
-      <section className="py-5">
+      <section className="production py-5">
         <div className="bg-gray-100 py-5 px-4 md:px-16">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
             <div>
@@ -111,12 +147,12 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="my-4">
+      <section className="step-booking my-4">
         <div className="py-16 bg-white">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+          <h2 className="!text-3xl !font-bold !text-center !mb-12 !text-gray-800">
             5 BƯỚC ĐỂ ĐẶT TIỆC
           </h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+          <div className="!max-w-7xl !mx-auto !grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
             {steps.map((step, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="bg-gray-100 w-28 h-28 rounded-full flex items-center justify-center mb-4">
@@ -135,9 +171,138 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <p className="text-center text-gray-500 py-6">
-        Enjoy delicious food delivered to your door.
-      </p>
+      <section className="booking mt-4">
+        <div className="relative">
+          <img
+            className="w-full h-[33vh] brightness-50 object-cover"
+            src={image_banner_1}
+          />
+          <div className="booking-overlay absolute inset-0 flex items-center justify-center gap-10 text-white px-5">
+            <div className="booking-items w-1/4">
+              <h3>ĐẶT TIỆC NGAY TẠI ĐÂY</h3>
+              <p>
+                Đặt tiệc ngay hôm nay để những sự kiện quan trọng của bạn trở
+                nên đơn giản và dễ dàng hơn bao giờ hết
+              </p>
+            </div>
+            <div className="booking-items w-1/4">
+              <div className="booking-date flex flex-col gap-2">
+                <div className="booking-date-title text-center">
+                  <h3>CHỌN NGÀY ĐẶT</h3>
+                </div>
+                <div className="booking-date-input text-2xl text-center">
+                  <input
+                    className="w-45"
+                    type="date"
+                    value={dateNow}
+                    onChange={(e) => {
+                      setDateNow(e.target.value);
+                    }}
+                  ></input>
+                </div>
+              </div>
+            </div>
+            <div className="booking-items w-1/4">
+              <div className="booking-qty flex flex-col gap-2">
+                <div className="booking-qty-title text-center">
+                  <h3>SỐ BÀN TIỆC</h3>
+                </div>
+                <div className="booking-qty-input text-5xl text-center">
+                  <input
+                    className="w-15"
+                    type="number"
+                    defaultValue={0}
+                    onChange={(e) => {
+                      setQtyBooking(e.target.value);
+                    }}
+                  ></input>
+                </div>
+              </div>
+            </div>
+            <div className="booking-items w-1/4 flex flex-col items-center gap-3">
+              <Link to="/place-order">
+                <Button className="btn-booking !border-none !rounded-none p-4 !bg-yellow-600 !font-bold text-white hover:scale-105">
+                  ĐẶT TIỆC NGAY
+                </Button>
+              </Link>
+              <Link to="/menu">
+                <Button className="btn-menu  !rounded-none p-4 bg-transparent !font-bold text-white hover:scale-105 hover:border-yellow-700">
+                  XEM THỰC ĐƠN
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="menu-options mb-4 !px-50 !py-20 flex gap-10 bg-gray-100">
+        <div className="option-items text-center w-1/3 gap-4">
+          <div className="sevice-option bg-yellow-900 p-2 text-white">
+            <h3>Dịch vụ</h3>
+            <ul>
+              <li className="sevice-items">Tiệc tại gia</li>
+              <li className="sevice-items">Tiệc cưới hỏi</li>
+              <li className="sevice-items">Tiệc buffet</li>
+              <li className="sevice-items">Tiệc sự kiện</li>
+              <li className="sevice-items">Tiệc tea break</li>
+            </ul>
+          </div>
+          <div className="contact-option bg-orange-400 p-2 !mt-2.5">
+            <h3>Liên hệ</h3>
+            <p>
+              Address: abc@cmcglobal.vn <br /> Hotline: 0919319071
+            </p>
+          </div>
+        </div>
+
+        <div className="relative text-center w-1/3 overflow-hidden group">
+          <img
+            src={image_banner_1}
+            className="w-full h-full object-cover brightness-50 transform group-hover:scale-110 transition duration-500 ease-in-out"
+            alt="Banner"
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+            <h3 className="text-xl font-semibold">SET MENU</h3>
+            <Link
+              to="/menu"
+              className="text-white underline hover:text-yellow-400 mt-2"
+            >
+              Xem chi tiết
+            </Link>
+          </div>
+        </div>
+
+        <div className="relative option-items text-center w-1/3 overflow-hidden group">
+          <img
+            src={image_banner_2}
+            className="w-full h-full object-cover brightness-50 transform group-hover:scale-110 transition duration-500 ease-in-out"
+            alt="Banner"
+          />
+          <div className="absolute w-full flex flex-col text-white inset-0 items-center justify-center">
+            <div>
+              <h3>MENU TỰ CHỌN</h3>
+            </div>
+            <Link to="/menu" className="text-white">
+              Xem chi tiết
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="reasons">
+        <h3 className="text-center p-4 text-bold">TẠI SAO NÊN CHỌN CHÚNG TÔI?</h3>
+        <div className=" flex gap-10 !px-30">
+          {reasons.map((item, index) => (
+            <div key={index} className="flex flex-col text-center gap-3">
+              <img src={item.imgUrl} className="w-full h-full object-cover" />
+              <div>
+                <h5 className="uppercase">{item.title}</h5>
+                <p>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

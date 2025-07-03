@@ -1,6 +1,9 @@
 import React from "react";
 import { Carousel, Button } from "antd";
-import image from "../assets/image.png";
+import image_banner_1 from "../assets/image_banner_1.png"
+import image_banner_2 from "../assets/image_banner_2.png"
+import image_banner_3 from "../assets/image_banner_3.png"
+
 import { Link } from "react-router-dom";
 
 const slideItem = [
@@ -9,21 +12,21 @@ const slideItem = [
     desc: "KHI ĐẶT SET MENU SUM VẦY",
     subDesc: "Áp dụng cho tiệc tại Hà Nội, từ 15/11 - 20/11/2021",
     btnLabel: "XEM CHI TIẾT ƯU ĐÃI",
-    imgUrl: image,
+    imgUrl: image_banner_1,
   },
   {
     title: "ƯU ĐÃI LÊN TỚI 30%",
     desc: "KHI ĐẶT SET MENU SUM VẦY",
     subDesc: "Áp dụng cho tiệc tại Hà Nội, từ 15/11 - 20/11/2021",
     btnLabel: "XEM CHI TIẾT ƯU ĐÃI",
-    imgUrl: image,
+    imgUrl: image_banner_2,
   },
   {
     title: "ƯU ĐÃI LÊN TỚI 30%",
     desc: "KHI ĐẶT SET MENU SUM VẦY",
     subDesc: "Áp dụng cho tiệc tại Hà Nội, từ 15/11 - 20/11/2021",
     btnLabel: "XEM CHI TIẾT ƯU ĐÃI",
-    imgUrl: image,
+    imgUrl: image_banner_3,
   },
 ];
 
@@ -49,7 +52,7 @@ export const SlideBanner = () => {
                 <Button
                   type="primary"
                   size="large"
-                  className="bg-orange-600 border-none hover:bg-orange-700 font-semibold px-6 py-2 rounded"
+                  className="!bg-orange-600 !border-none !hover:bg-orange-700 !font-semibold !px-6 !py-2 !rounded"
                 >
                   {item.btnLabel}
                 </Button>
