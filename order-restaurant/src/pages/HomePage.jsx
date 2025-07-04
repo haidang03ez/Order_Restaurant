@@ -11,6 +11,7 @@ import {
   WalletOutlined,
 } from "@ant-design/icons";
 import { Button, Modal } from "antd";
+import "../index.css";
 
 export const HomePage = () => {
   const [open, setOpen] = useState(false);
@@ -59,21 +60,21 @@ export const HomePage = () => {
     },
     {
       imgUrl:
-        "https://intern-project-chi.vercel.app/static/media/bg1.da6d3327978f205184d6.jpg",
-      title: "sự lựa chọn ẩm thực số 1",
-      desc: "Thuộc Golden Gate Group - 15 năm kinh nghiệp, hơn 400 nhà hàng toàn quốc",
+        "https://intern-project-chi.vercel.app/static/media/bg4.63e3fbb06b475740c09e.jpg",
+      title: "thực phẩm an toàn",
+      desc: "Đảo bảm an toàn vệ sinh thực phẩm từ nguồn cung cấp đén khâu chế biến",
     },
     {
       imgUrl:
-        "https://intern-project-chi.vercel.app/static/media/bg1.da6d3327978f205184d6.jpg",
-      title: "sự lựa chọn ẩm thực số 1",
-      desc: "Thuộc Golden Gate Group - 15 năm kinh nghiệp, hơn 400 nhà hàng toàn quốc",
+        "https://intern-project-chi.vercel.app/static/media/bg3.cd94ec83ef439a755c40.jpg",
+      title: "thực đơn đa dạng",
+      desc: "Menu phong phú, kết hợp tinh hoa ẩm thực Á - Âu, đa dạng lựa chọn",
     },
     {
       imgUrl:
-        "https://intern-project-chi.vercel.app/static/media/bg1.da6d3327978f205184d6.jpg",
-      title: "sự lựa chọn ẩm thực số 1",
-      desc: "Thuộc Golden Gate Group - 15 năm kinh nghiệp, hơn 400 nhà hàng toàn quốc",
+        "https://intern-project-chi.vercel.app/static/media/bg4.63e3fbb06b475740c09e.jpg",
+      title: "phục vụ chuyên nghiệp",
+      desc: "Tư vấn tận tâm, phục vụ chu đáo, dịch vụ linh hoạt, thanh toán tiện lợi",
     },
   ];
 
@@ -88,7 +89,7 @@ export const HomePage = () => {
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                Tiệc tại gia chất nhà hàng
+                Con gì đang bơi chúng tôi đều có
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
@@ -211,9 +212,9 @@ export const HomePage = () => {
                   <input
                     className="w-15"
                     type="number"
-                    defaultValue={0}
+                    value={qtyBooking}
                     onChange={(e) => {
-                      setQtyBooking(e.target.value);
+                      setQtyBooking(Number(e.target.value));
                     }}
                   ></input>
                 </div>
@@ -239,12 +240,22 @@ export const HomePage = () => {
         <div className="option-items text-center w-1/3 gap-4">
           <div className="sevice-option bg-yellow-900 p-2 text-white">
             <h3>Dịch vụ</h3>
-            <ul>
-              <li className="sevice-items">Tiệc tại gia</li>
-              <li className="sevice-items">Tiệc cưới hỏi</li>
-              <li className="sevice-items">Tiệc buffet</li>
-              <li className="sevice-items">Tiệc sự kiện</li>
-              <li className="sevice-items">Tiệc tea break</li>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 !pr-0 !pl-1">
+              <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
+                Tiệc tại gia
+              </li>
+              <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
+                Tiệc cưới hỏi
+              </li>
+              <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
+                Tiệc buffet
+              </li>
+              <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
+                Tiệc sự kiện
+              </li>
+              <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
+                Tiệc tea break
+              </li>
             </ul>
           </div>
           <div className="contact-option bg-orange-400 p-2 !mt-2.5">
@@ -289,11 +300,13 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="reasons">
-        <h3 className="text-center p-4 text-bold">TẠI SAO NÊN CHỌN CHÚNG TÔI?</h3>
+      <section className="reasons my-5">
+        <h3 className="text-center p-4 text-bold">
+          TẠI SAO NÊN CHỌN CHÚNG TÔI?
+        </h3>
         <div className=" flex gap-10 !px-30">
           {reasons.map((item, index) => (
-            <div key={index} className="flex flex-col text-center gap-3">
+            <div key={index} className="flex flex-col text-center gap-3 w-1/4">
               <img src={item.imgUrl} className="w-full h-full object-cover" />
               <div>
                 <h5 className="uppercase">{item.title}</h5>

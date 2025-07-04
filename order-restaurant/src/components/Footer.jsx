@@ -34,9 +34,7 @@ export const Footer = () => {
                 </Link>
               </li>
               <li className="flex items-center gap-2">
-                <Link
-                  to="/facebook-page"
-                >
+                <Link to="/facebook-page">
                   <i className="bi bi-instagram text-white"> - Instagram</i>
                 </Link>
               </li>
@@ -45,7 +43,7 @@ export const Footer = () => {
                   to="/facebook-page"
                   className="flex items-center !hover:underline"
                 >
-                  <i className="bi bi-twitter text-white"> - Twitter</i> 
+                  <i className="bi bi-twitter text-white"> - Twitter</i>
                 </Link>
               </li>
               <li className="flex items-center gap-2">
@@ -53,12 +51,19 @@ export const Footer = () => {
                   to="/facebook-page"
                   className="flex items-center !hover:underline"
                 >
-                  <i className="bi bi-youtube text-white"> - Youtube</i> 
+                  <i className="bi bi-youtube text-white"> - Youtube</i>
                 </Link>
               </li>
             </ul>
           </div>
-          <div className="footer-items w-1/4">1</div>
+          <div className="footer-items w-1/4">
+            <h3>Hỗ trợ khách hàng 
+              <br/>Liên hệ</h3>
+            <p>
+              Hotline: 036.555.1123 Email: happy.@gmal.com 
+              <br/>Địa chỉ: Số 33 Nhân Chính, Trung Hòa, Cầu Giấy, Hà Nội
+            </p>
+          </div>
         </div>
       </div>
     </>

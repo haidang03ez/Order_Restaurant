@@ -1,13 +1,13 @@
 import React from "react";
 import { Header } from "../components/Header";
 import { Outlet } from "react-router-dom";
-import "../index.css"
+import "../index.css";
 import { Footer } from "../components/Footer";
 
 export const MainLayout = () => {
   return (
     <div className="main-layout">
-      <header className="header">
+      <header className="header fixed z-40 w-full">
         <Header
           navItem1={"Trang chủ"}
           navItem2={"Thực đơn"}
@@ -16,11 +16,11 @@ export const MainLayout = () => {
           navItem5={"Đặt tiệc ngay"}
         />
       </header>
-      <main className="content">
-        <Outlet />
+      <main className="content !pt-22">
+          <Outlet />
       </main>
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

@@ -20,11 +20,12 @@ function App() {
             <Route path="about" element={<AboutUsPage />} />
             <Route path="news" element={<NewsPage />} />
             <Route path="menu" element={<MenuPage />} />
+            <Route path="place-order" element={<PlaceOrderPage />} />
           </Route>
 
-          <Route path="sign-in" element={<SignInPage/>}/>
-          <Route path="sign-up" element={<SignUpPage/>}/>
-          <Route path="place-order" element={<PlaceOrderPage />} />
+          <Route path="sign-in" element={<SignInPage />} />
+          <Route path="sign-up" element={<SignUpPage />} />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>

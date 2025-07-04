@@ -16,7 +16,7 @@ const slideItem = [
   },
   {
     title: "ƯU ĐÃI LÊN TỚI 30%",
-    desc: "KHI ĐẶT SET MENU SUM VẦY",
+    desc: "Nhân ngày phụ nữ Việt Nam",
     subDesc: "Áp dụng cho tiệc tại Hà Nội, từ 15/11 - 20/11/2021",
     btnLabel: "XEM CHI TIẾT ƯU ĐÃI",
     imgUrl: image_banner_2,
@@ -43,16 +43,16 @@ export const SlideBanner = () => {
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white max-w-2xl px-4">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 uppercase">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 uppercase">
                 {item.title}
-              </h2>
-              <p className="text-2xl mb-2 uppercase">{item.desc}</p>
+              </h1>
+              <h2 className="text-2xl mb-2 uppercase">{item.desc}</h2>
               <p className="text-sm mb-6">{item.subDesc}</p>
               <Link to='place-order'>
                 <Button
                   type="primary"
                   size="large"
-                  className="!bg-orange-600 !border-none !hover:bg-orange-700 !font-semibold !px-6 !py-2 !rounded"
+                  className="!bg-orange-600 !border-none hover:!bg-orange-700 hover:!scale-110 !font-semibold !px-6 !py-2 !rounded-none"
                 >
                   {item.btnLabel}
                 </Button>

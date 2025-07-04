@@ -50,149 +50,148 @@ export const PlaceOrderPage = () => {
   };
 
   return (
-    <div className="container">
-      <div className="background_thumbnail ">
+    <div className="relative min-h-screen">
+      <div className="absolute inset-0 -z-10">
         <img
           src="https://media.gettyimages.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?s=2048x2048&w=gi&k=20&c=Qkrzd6gmhPehu7vqwaqcztKX_cSLIo0EhePAjQjmdaE="
           alt="background"
-          className="background_thumbnail--img"
+          className="w-full h-full object-cover brightness-50 blur-sm"
         />
       </div>
-      <div
-        className="form_order"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
-          padding: "20px",
-        }}
-      >
-        <div className="form_order--title">Liên hệ đặt tiệc</div>
-        <div className="form_order--content">
-          <div className="form_order--content-desc">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry type and scrambled it to make a type specimen book.Lorem
-            Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since
-            the 1500s.
-          </div>
-          <form className="form_order--content-form" onSubmit={handleSubmit}>
-            <div className="form_infor d-flex gap-3">
-              <div className="form_infor-group">
-                <div className="form_infor--items">
-                  <label htmlFor="name" className="form_infor-items--label">
-                    Họ và tên
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="form_infor-items--input"
-                    placeholder="Nhập họ và tên"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form_infor--items">
-                  <label htmlFor="phone" className="form_infor-items--label">
-                    Số điện thoại
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    className="form_infor-items--input"
-                    placeholder="Nhập số điện thoại"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form_infor--items">
-                  <label htmlFor="address" className="form_infor-items--label">
-                    Địa chỉ
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    className="form_infor-items--input"
-                    placeholder="Nhập địa chỉ"
-                    required
-                    value={formData.address}
-                    onChange={handleChange}
-                  />
-                </div>
+
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-90 !p-20 rounded-xl shadow-2xl w-[90%] max-w-5xl">
+        <h2 className="uppercase font-bold text-3xl text-center text-gray-800 mb-4">
+          Liên hệ đặt tiệc
+        </h2>
+
+        <p className="text-center text-gray-600 mb-6 leading-relaxed">
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry type and scrambled it to make a type specimen book. Lorem
+          Ipsum has been the industry's standard dummy text ever since the
+          1500s.
+        </p>
+
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col md:flex-row gap-6 mb-6">
+            <div className="flex flex-col gap-4 w-full md:w-1/2">
+              <div>
+                <label htmlFor="name" className="block font-medium mb-1">
+                  Họ và tên
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập họ và tên"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                />
               </div>
-
-              <div className="form_infor-group">
-                <div className="form_infor--items">
-                  <label htmlFor="quantity" className="form_infor-items--label">
-                    Số lượng khách
-                  </label>
-                  <input
-                    type="number"
-                    id="quantity"
-                    className="form_infor-items--input"
-                    placeholder="Nhập số lượng khách"
-                    required
-                    value={formData.quantity}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form_infor--items">
-                  <label htmlFor="date" className="form_infor-items--label">
-                    Ngày tổ chức
-                  </label>
-                  <input
-                    type="date"
-                    id="date"
-                    className="form_infor-items--input"
-                    required
-                    value={formData.date}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form_infor--items">
-                  <label
-                    htmlFor="type_even"
-                    className="form_infor-items--label"
-                  >
-                    Loại sự kiện
-                  </label>
-                  <input
-                    type="text"
-                    id="typeEvent"
-                    className="form_infor-items--input"
-                    placeholder="Nhập loại sự kiện"
-                    required
-                    value={formData.typeEvent}
-                    onChange={handleChange}
-                  />
-                </div>
+              <div>
+                <label htmlFor="phone" className="block font-medium mb-1">
+                  Số điện thoại
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập số điện thoại"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="address" className="block font-medium mb-1">
+                  Địa chỉ
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập địa chỉ"
+                  required
+                  value={formData.address}
+                  onChange={handleChange}
+                />
               </div>
             </div>
-            <label htmlFor="checkbox" className="form_checkbox">
+
+            <div className="flex flex-col gap-4 w-full md:w-1/2">
+              <div>
+                <label htmlFor="quantity" className="block font-medium mb-1">
+                  Số lượng khách
+                </label>
+                <input
+                  type="number"
+                  id="quantity"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập số lượng khách"
+                  required
+                  value={formData.quantity}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="date" className="block font-medium mb-1">
+                  Ngày tổ chức
+                </label>
+                <input
+                  type="date"
+                  id="date"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                  value={formData.date}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="typeEvent" className="block font-medium mb-1">
+                  Loại sự kiện
+                </label>
+                <input
+                  type="text"
+                  id="typeEvent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập loại sự kiện"
+                  required
+                  value={formData.typeEvent}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <label
+              htmlFor="checkbox"
+              className="flex items-center !gap-2 mt-4 mb-4 text-gray-700"
+            >
               <input
                 type="checkbox"
                 id="checkbox"
-                className="form_checkbox--input"
+                className="w-4 h-4 "
                 onChange={(e) => setIsChecked(e.target.checked)}
               />
-              <span className="form_checkbox--text">
-                Nhận tư vấn trọn gói sự kiện (MC, ánh sáng, sân khẩu,...)
+              <span>
+                Nhận tư vấn trọn gói sự kiện (MC, ánh sáng, sân khấu,...)
               </span>
             </label>
+
             <button
-              className="btn btn-primary button_submit"
               type="submit"
               disabled={!isChecked}
+              className={`!w-[300px]  md:w-auto !px-6 py-2 text-white font-semibold !rounded-md transition duration-300 ${
+                isChecked
+                  ? "bg-yellow-600 hover:bg-yellow-700"
+                  : "bg-gray-400 cursor-not-allowed"
+              }`}
             >
               Gửi thông tin
             </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );

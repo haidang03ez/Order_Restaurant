@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button, Dropdown } from "antd";
 import "../index.css";
@@ -18,11 +18,7 @@ export const Header = ({
   const items = [
     {
       key: "1",
-      label: (
-        <Link to="/sign-in">
-          Thông tin cá nhân
-        </Link>
-      ),
+      label: <Link to="/sign-in">Thông tin cá nhân</Link>,
     },
     {
       key: "2",
@@ -57,8 +53,25 @@ export const Header = ({
       ),
     },
   ];
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scroll = window.scrollY;
+      setIsScrolled(scroll > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="header w-full border-b border-gray-200 bg-white">
+    <header
+      className={`w-full border-b border-none transition-all duration-300 ${
+        isScrolled ? "!h-[80px] bg-yellow-600 text-white" : "!h-[90px] bg-white text-black"
+      }`}
+    >
       <div className=" mx-auto flex items-center justify-between py-3 !px-10">
         <nav>
           <ul className="nav-list flex items-center gap-6 font-semibold text-base">
@@ -69,8 +82,8 @@ export const Header = ({
                 className={({ isActive }) =>
                   `pb-1 ${
                     isActive
-                      ? "text-orange-600 border-b-2 border-orange-600"
-                      : "text-black hover:text-orange-600"
+                      ? "!text-orange-600 border-b-2 border-orange-600"
+                      : "text-black hover:!text-orange-600"
                   }`
                 }
               >
@@ -84,8 +97,8 @@ export const Header = ({
                 className={({ isActive }) =>
                   `pb-1 ${
                     isActive
-                      ? "text-orange-600 border-b-2 border-orange-600"
-                      : "text-black hover:text-orange-600"
+                      ? "!text-orange-600 border-b-2 border-orange-600"
+                      : "text-black hover:!text-orange-600"
                   }`
                 }
               >
@@ -99,8 +112,8 @@ export const Header = ({
                 className={({ isActive }) =>
                   `pb-1 ${
                     isActive
-                      ? "text-orange-600 border-b-2 border-orange-600"
-                      : "text-black hover:text-orange-600"
+                      ? "!text-orange-600 border-b-2 border-orange-600"
+                      : "text-black hover:!text-orange-600"
                   }`
                 }
               >
@@ -114,8 +127,8 @@ export const Header = ({
                 className={({ isActive }) =>
                   `pb-1 ${
                     isActive
-                      ? "text-orange-600 border-b-2 border-orange-600"
-                      : "text-black hover:text-orange-600"
+                      ? "!text-orange-600 border-b-2 border-orange-600"
+                      : "text-black hover:!text-orange-600"
                   }`
                 }
               >
@@ -127,7 +140,7 @@ export const Header = ({
               <NavLink to="/place-order">
                 <Button
                   type="primary"
-                  className="!bg-orange-600 !text-white font-semibold px-4 py-2 rounded hover:!bg-orange-700 !rounded-none"
+                  className="!bg-orange-600 !text-white !font-semibold !px-4 !py-2 hover:!bg-orange-700 hover:!scale-110 !rounded-none"
                 >
                   {navItem5 || "Đặt tiệc ngay"}
                 </Button>
@@ -148,7 +161,7 @@ export const Header = ({
             <Button
               type="text"
               icon={<UserOutlined className="text-xl" />}
-              className="flex items-center gap-1 text-gray-900 hover:text-orange-600"
+              className="flex items-center gap-1 text-gray-900 hover:!text-orange-600"
             >
               <span className="font-medium">Tài khoản</span>
             </Button>
