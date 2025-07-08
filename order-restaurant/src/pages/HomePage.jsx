@@ -162,9 +162,9 @@ export const HomePage = () => {
                 <div className="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-semibold mb-2">
                   {index + 1}
                 </div>
-                <h3 className="text-sm font-semibold text-gray-800 uppercase mb-1">
+                <h5 className="text-sm font-semibold text-gray-800 uppercase mb-1">
                   {step.title}
-                </h3>
+                </h5>
                 <p className="text-sm text-gray-600">{step.desc}</p>
               </div>
             ))}
@@ -236,7 +236,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="menu-options mb-4 !px-50 !py-20 flex gap-10 bg-gray-100">
+      <section className="menu-options mb-4 !px-30 !py-20 flex gap-10 bg-gray-100">
         <div className="option-items text-center w-1/3 gap-4">
           <div className="sevice-option bg-yellow-900 p-2 text-white">
             <h3>Dịch vụ</h3>
@@ -255,6 +255,9 @@ export const HomePage = () => {
               </li>
               <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
                 Tiệc tea break
+              </li>
+              <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
+                Tiệc sinh nhật
               </li>
             </ul>
           </div>

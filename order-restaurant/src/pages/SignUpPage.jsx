@@ -5,14 +5,15 @@ import { useForm } from "react-hook-form";
 import { Button } from "antd";
 
 export const SignUpPage = () => {
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const [showPass, setShowPass] = useState(false);
-  const [showConfirmPass, setShowConfirmPass] = useState(false);
 
   const onSubmit = (data) => {
     console.log("Dữ liệu gửi đi:", data);
@@ -116,8 +117,7 @@ export const SignUpPage = () => {
         <div
           className="relative w-1/2 hidden md:block bg-cover bg-center"
           style={{ backgroundImage: `url(${image_banner_1})` }}
-        >
-        </div>
+        ></div>
       </div>
     </div>
   );

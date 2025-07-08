@@ -1,52 +1,18 @@
 import React, { useState } from "react";
 import "../index.css";
+import { useForm } from "react-hook-form";
 
 export const PlaceOrderPage = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    quantity: "",
-    date: "",
-    typeEvent: "",
-  });
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isChecked) {
-      console.log(formData);
-      alert(
-        "Cảm ơn bạn đã gửi thông tin đặt tiệc thành công! Bao gồm:\n" +
-          `Họ và tên: ${formData.name}\n` +
-          `Số điện thoại: ${formData.phone}\n` +
-          `Địa chỉ: ${formData.address}\n` +
-          `Số lượng khách: ${formData.quantity}\n` +
-          `Ngày tổ chức: ${formData.date}\n` +
-          `Loại sự kiện: ${formData.typeEvent}\n` +
-          "Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất."
-      );
-
-      setFormData({
-        name: "",
-        phone: "",
-        address: "",
-        quantity: "",
-        date: "",
-        typeEvent: "",
-      });
-      setIsChecked(false);
-    } else {
-      alert("Vui lòng chọn nhận tư vấn trọn gói sự kiện để gửi thông tin.");
-    }
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return (
@@ -71,7 +37,7 @@ export const PlaceOrderPage = () => {
           1500s.
         </p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col md:flex-row gap-6 mb-6">
             <div className="flex flex-col gap-4 w-full md:w-1/2">
               <div>
@@ -80,13 +46,18 @@ export const PlaceOrderPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="name"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Nhập họ và tên"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
+                  {...register("username", {
+                    required: "Vui lòng nhập tên người đặt",
+                    minLength: { value: 5, message: "Tối thiểu 5 ký tự" },
+                  })}
                 />
+                {errors.username && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.username.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="phone" className="block font-medium mb-1">
@@ -94,13 +65,21 @@ export const PlaceOrderPage = () => {
                 </label>
                 <input
                   type="tel"
-                  id="phone"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Nhập số điện thoại"
-                  required
-                  value={formData.phone}
-                  onChange={handleChange}
+                  {...register("phone", {
+                    required: "Vui lòng nhập số điện thoại",
+                    pattern: {
+                      value: /^[0-9]{10}$/,
+                      message: "Nhập đầy đủ 10 chữ số",
+                    },
+                  })}
                 />
+                {errors.phone && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.phone.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="address" className="block font-medium mb-1">
@@ -108,13 +87,17 @@ export const PlaceOrderPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="address"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Nhập địa chỉ"
-                  required
-                  value={formData.address}
-                  onChange={handleChange}
+                  {...register("address", {
+                    required: "Vui lòng nhập địa chỉ",
+                  })}
                 />
+                {errors.address && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.address.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -125,13 +108,19 @@ export const PlaceOrderPage = () => {
                 </label>
                 <input
                   type="number"
-                  id="quantity"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Nhập số lượng khách"
-                  required
-                  value={formData.quantity}
-                  onChange={handleChange}
+                  {...register("quantity", {
+                    required: "Vui lòng nhập số lượng",
+                    validate: (value) =>
+                      parseInt(value) > 0 || "Số lượng phải lớn hơn 0",
+                  })}
                 />
+                {errors.quantity && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.quantity.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="date" className="block font-medium mb-1">
@@ -139,26 +128,32 @@ export const PlaceOrderPage = () => {
                 </label>
                 <input
                   type="date"
-                  id="date"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                  value={formData.date}
-                  onChange={handleChange}
+                  {...register("date", {
+                    required: "Vui lòng chọn ngày đặt bàn",
+                  })}
                 />
+                {errors.date && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.date.message}
+                  </p>
+                )}
               </div>
               <div>
-                <label htmlFor="typeEvent" className="block font-medium mb-1">
-                  Loại sự kiện
-                </label>
+                <label className="block font-medium mb-1">Loại sự kiện</label>
                 <input
                   type="text"
-                  id="typeEvent"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Nhập loại sự kiện"
-                  required
-                  value={formData.typeEvent}
-                  onChange={handleChange}
+                  {...register("typeEvent", {
+                    required: "Vui lòng chọn thể loại tiệc",
+                  })}
                 />
+                {errors.typeEvent && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.typeEvent.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>

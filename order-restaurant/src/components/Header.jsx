@@ -68,13 +68,15 @@ export const Header = ({
 
   return (
     <header
-      className={`w-full border-b border-none transition-all duration-300 ${
-        isScrolled ? "!h-[80px] bg-yellow-600 text-white" : "!h-[90px] bg-white text-black"
+      className={`w-full flex border-b border-none transition-all duration-300 ${
+        isScrolled
+          ? "!h-[80px] backdrop-blur-md bg-white/30 p-6 shadow-lg"
+          : "!h-[90px] bg-white text-black"
       }`}
     >
-      <div className=" mx-auto flex items-center justify-between py-3 !px-10">
+      <div className="w-full mx-auto flex items-center !justify-between py-3 !px-10">
         <nav>
-          <ul className="nav-list flex items-center gap-6 font-semibold text-base">
+          <ul className="nav-list flex items-center gap-6 font-semibold text-base !m-0">
             <li>
               <NavLink
                 to="/"
@@ -168,7 +170,7 @@ export const Header = ({
           </Dropdown>
           <div className="relative">
             <ShoppingCartOutlined className="text-2xl text-gray-900" />
-            <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full px-1.5 py-0.5 font-semibold">
+            <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 font-bold shadow-md">
               1
             </span>
           </div>
