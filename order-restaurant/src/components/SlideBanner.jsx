@@ -52,7 +52,7 @@ export const SlideBanner = () => {
                 <Button
                   type="primary"
                   size="large"
-                  className="!bg-orange-600 !border-none hover:!bg-orange-700 hover:!scale-110 !font-semibold !px-6 !py-2 !rounded-none"
+                  className="!bg-yellow-600 !p-7 !border-none hover:!bg-orange-700 hover:!scale-110 !font-semibold !rounded-none"
                 >
                   {item.btnLabel}
                 </Button>

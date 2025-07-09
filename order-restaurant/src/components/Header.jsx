@@ -142,7 +142,7 @@ export const Header = ({
               <NavLink to="/place-order">
                 <Button
                   type="primary"
-                  className="!bg-orange-600 !text-white !font-semibold !px-4 !py-2 hover:!bg-orange-700 hover:!scale-110 !rounded-none"
+                  className="!bg-yellow-600 !text-white !font-semibold !px-4 !py-2 hover:!bg-orange-700 hover:!scale-110 !rounded-none"
                 >
                   {navItem5 || "Đặt tiệc ngay"}
                 </Button>
@@ -155,7 +155,7 @@ export const Header = ({
             <input
               type="text"
               placeholder="Tìm kiếm món ăn"
-              className="outline-none border-none bg-transparent py-1 px-2 text-base w-40 placeholder-gray-500"
+              className="outline-none border-none bg-transparent py-1 px-2 text-base w-60 placeholder-gray-500"
             />
             <SearchOutlined className="text-lg text-gray-600" />
           </div>

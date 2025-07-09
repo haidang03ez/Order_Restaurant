@@ -10,8 +10,8 @@ import { MenuPage } from "./pages/MenuPage";
 import { SignInPage } from "./pages/SignInPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
-import PolicyPage from "./pages/PolicyPage";
-import CartPage from "./pages/CartPage";
+import { PolicyPage } from "./pages/PolicyPage";
+import { CartPage } from "./pages/CartPage";
 
 function App() {
   return (
