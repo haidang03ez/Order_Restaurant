@@ -23,7 +23,7 @@ export const Header = ({
     {
       key: "2",
       label: (
-        <a rel="noopener noreferrer" href="https://www.aliyun.com">
+        <a rel="noopener noreferrer" href="">
           Cài đặt địa chỉ
         </a>
       ),
@@ -31,7 +31,7 @@ export const Header = ({
     {
       key: "3",
       label: (
-        <a rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        <a rel="noopener noreferrer" href="">
           Quản lý đơn hàng
         </a>
       ),
@@ -39,7 +39,7 @@ export const Header = ({
     {
       key: "4",
       label: (
-        <a rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        <a rel="noopener noreferrer" href="">
           Mã đã lưu
         </a>
       ),
@@ -47,7 +47,7 @@ export const Header = ({
     {
       key: "5",
       label: (
-        <a rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        <a rel="noopener noreferrer" href="">
           Đăng xuất
         </a>
       ),
@@ -168,12 +168,14 @@ export const Header = ({
               <span className="font-medium">Tài khoản</span>
             </Button>
           </Dropdown>
-          <div className="relative">
-            <ShoppingCartOutlined className="text-2xl text-gray-900" />
-            <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 font-bold shadow-md">
-              1
-            </span>
-          </div>
+          <Link to="/shopping-cart">
+            <div className="relative">
+              <ShoppingCartOutlined className="text-2xl text-gray-900" />
+              <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 font-bold shadow-md">
+                1
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </header>

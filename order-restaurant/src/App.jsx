@@ -10,6 +10,8 @@ import { MenuPage } from "./pages/MenuPage";
 import { SignInPage } from "./pages/SignInPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
+import PolicyPage from "./pages/PolicyPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -22,7 +24,12 @@ function App() {
             <Route path="news" element={<NewsPage />} />
             <Route path="menu" element={<MenuPage />} />
             <Route path="place-order" element={<PlaceOrderPage />} />
-            <Route path="product-details/:id" element={<ProductDetailsPage/>} />
+            <Route
+              path="product-details/:id"
+              element={<ProductDetailsPage />}
+            />
+            <Route path="policy" element={<PolicyPage />} />
+            <Route path="shopping-cart" element={<CartPage />} />
           </Route>
 
           <Route path="sign-in" element={<SignInPage />} />
