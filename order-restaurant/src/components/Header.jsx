@@ -7,6 +7,7 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { ThemeButton } from "./ThemeButton";
 
 export const Header = ({
   navItem1,
@@ -159,6 +160,7 @@ export const Header = ({
             />
             <SearchOutlined className="text-lg text-gray-600" />
           </div>
+
           <Dropdown menu={{ items }} placement="bottomRight" arrow>
             <Button
               type="text"
@@ -176,6 +178,7 @@ export const Header = ({
               </span>
             </div>
           </Link>
+          <ThemeButton />
         </div>
       </div>
     </header>
