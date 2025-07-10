@@ -20,11 +20,16 @@ export const MenuPage = () => {
         throw new Error("Không nhận được phẩn hồi");
       }
       const data = await res.json();
-      const productList = [...product, ...data.products];
+      const updatedAll = [...allProduct, ...data.products];
 
-      setProduct(productList);
-      setAllProduct(productList);
+      // setProduct(productList);
+      setAllProduct(updatedAll);
       setSkip((prev) => prev + LIMIT);
+      
+      if (!filterCategory) {
+        setProduct(updatedAll);
+      }
+
       if (skip + LIMIT > data.total) setHasMore(false);
     } catch (error) {
       console.log("Lỗi lấy dữ liệu: ", error);
@@ -46,6 +51,12 @@ export const MenuPage = () => {
     setProduct(filteredProduct);
   };
 
+  const handleClearFilter = () => {
+    setFilterCategory("");
+    setProduct(allProduct);
+    setHasMore(true);
+  };
+
   const categoryList = product.map((item) => item.category);
   const uniqueCategoryList = Array.from(new Set(categoryList));
 
@@ -59,10 +70,7 @@ export const MenuPage = () => {
         <div className="flex flex-wrap gap-2 my-2">
           <a
             className="px-3 py-2 rounded-full bg-slate-100 font-medium text-base text-black w-fit cursor-pointer"
-            onClick={() => {
-              setFilterCategory("");
-              setProduct(allProduct);
-            }}
+            onClick={handleClearFilter}
           >
             Tất cả
           </a>
@@ -74,7 +82,10 @@ export const MenuPage = () => {
                   ? "bg-yellow-700 text-white"
                   : "bg-slate-100 text-black"
               }`}
-              onClick={() => handleFilterCategory(item)}
+              onClick={() => {
+                handleFilterCategory(item);
+                setHasMore(false);
+              }}
             >
               {item}
             </a>
@@ -85,6 +96,7 @@ export const MenuPage = () => {
       <div className="flex flex-wrap gap-5">
         {product.map((item) => (
           <CardItem
+            key={item.id}
             id={item.id}
             title={item.title}
             image={item.images}

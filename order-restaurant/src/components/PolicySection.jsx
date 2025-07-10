@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 export const PolicySection = ({ items }) => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -26,7 +27,7 @@ export const PolicySection = ({ items }) => {
                 {item.title}
               </span>
               <span className="!text-2xl !text-amber-600 !font-bold !transform !transition-transform !duration-200">
-                {openIndex === index ? "−" : "+"}
+                {openIndex === index ? (<AiOutlineArrowLeft/>) : (<AiOutlineArrowRight />)}
               </span>
             </div>
           </button>
