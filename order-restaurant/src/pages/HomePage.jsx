@@ -89,25 +89,21 @@ export const HomePage = () => {
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                Con gì đang bơi chúng tôi đều có
+                Nhà hàng Vista - Con gì đang bơi chúng tôi đều có
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-                quae fugit accusantium commodi esse modi pariatur praesentium,
-                voluptas dolor ea qui? Vel dolore ipsam vitae voluptatem esse
-                repellat nobis sint.
+                Nhà hàng Vista mang đến cho du khách những trải nghiệm ẩm thực
+                đặc sắc với những món ăn phong phú từ quốc tế, Việt Nam đến
+                những món đặc trưng xứ biển.
               </p>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-                quae fugit accusantium commodi esse modi pariatur praesentium,
-                voluptas dolor ea qui? Vel dolore ipsam vitae voluptatem esse
-                repellat nobis sint.
+                Nằm trong khuôn viên The Cliff Resort tọa lạc trên dốc đá thoai
+                thoải nhẹ nhàng. Nhà hàng sở hữu tầm nhìn toàn cảnh tuyệt đẹp ra
+                biển xanh, vị trí đắc địa và sang trọng bậc nhất Bình Thuận.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-                quae fugit accusantium commodi esse modi pariatur praesentium,
-                voluptas dolor ea qui? Vel dolore ipsam vitae voluptatem esse
-                repellat nobis sint.
+                Tại đây có khu vực ngồi trong nhà và ngoài trời với sức chứa lên
+                đến 200 - 300 khách, bạn có thể lựa chọn tuỳ sở thích
               </p>
             </div>
 
@@ -239,7 +235,7 @@ export const HomePage = () => {
       <section className="menu-options mb-4 !px-30 !py-20 flex gap-10 bg-gray-100">
         <div className="option-items text-center w-1/3 gap-4">
           <div className="sevice-option bg-yellow-900 p-2 text-white">
-            <h3>Dịch vụ</h3>
+            <h3>Dịch vụ cung cấp</h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 !pr-0 !pl-1">
               <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-5 rounded-xl shadow transition duration-300 cursor-pointer">
                 Tiệc tại gia
@@ -262,9 +258,10 @@ export const HomePage = () => {
             </ul>
           </div>
           <div className="contact-option bg-orange-400 p-2 !mt-2.5">
-            <h3>Liên hệ</h3>
+            <h3>Liên hệ chúng tôi</h3>
             <p>
-              Address: abc@cmcglobal.vn <br /> Hotline: 0919319071
+              Địa chỉ: 298 Đường Cầu Diễn, Quận Bắc Từ Liêm <br /> Hotline:
+              0982723221
             </p>
           </div>
         </div>

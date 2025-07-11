@@ -90,6 +90,7 @@ export const CartPage = () => {
           <Table columns={columns} dataSource={cartItems} />
         )}
       </div>
+      <Link to></Link>
       <ToastContainer />
     </div>
   );

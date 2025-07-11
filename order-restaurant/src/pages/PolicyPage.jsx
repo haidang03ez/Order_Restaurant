@@ -4,6 +4,54 @@ import { PolicySection } from "../components/PolicySection";
 export const PolicyPage = () => {
   const servicePolicies = [
     {
+      title: "Chính Sách Đổi - Trả - Hoàn Tiền",
+      content: `• Quý khách cần xuất trình hóa đơn khi đổi trả hàng
+• Thời gian đổi trả: trong vòng 3 ngày kể từ ngày mua
+• Sản phẩm phải còn nguyên vẹn, chưa qua sử dụng
+• Không áp dụng đổi trả với sản phẩm khuyến mãi
+• Hoàn tiền trong 7-10 ngày làm việc qua phương thức thanh toán ban đầu`,
+    },
+    {
+      title: "Chính Sách Bảo Hành - Bồi Hoàn",
+      content: `• Áp dụng bảo hành với các món ăn gặp sự cố chất lượng
+• Quý khách cần thông báo trong vòng 1 giờ sau khi nhận món
+• Bồi hoàn 100% hoặc thay thế món tương đương nếu đúng lỗi của nhà hàng
+• Không áp dụng cho các trường hợp khách không hài lòng do khẩu vị
+• Mọi phản ánh xin vui lòng liên hệ hotline hỗ trợ`,
+    },
+    {
+      title: "Chính Sách Vận Chuyển",
+      content: `• Giao hàng trong bán kính 5km tính từ nhà hàng
+• Miễn phí giao hàng cho đơn từ 500,000 VNĐ
+• Phí vận chuyển tùy thuộc vào khoảng cách và đơn vị giao hàng
+• Thời gian giao hàng trung bình từ 30–60 phút
+• Khách kiểm tra món ăn trước khi nhận hàng`,
+    },
+    {
+      title: "Điều Khoản Sử Dụng",
+      content: `• Việc truy cập và sử dụng website đồng nghĩa với việc quý khách đồng ý các điều khoản
+• Không sử dụng website vào mục đích gian lận hoặc vi phạm pháp luật
+• Nhà hàng có quyền chỉnh sửa nội dung mà không cần báo trước
+• Mọi hành vi xâm nhập trái phép sẽ bị xử lý theo pháp luật
+• Điều khoản có thể thay đổi theo từng thời điểm`,
+    },
+    {
+      title: "Chính Sách Bảo Mật Thông Tin Cá Nhân",
+      content: `• Thu thập thông tin cá nhân chỉ nhằm mục đích hỗ trợ đặt bàn và phục vụ khách hàng
+• Không chia sẻ thông tin cho bên thứ ba nếu không có sự đồng ý
+• Khách hàng có quyền yêu cầu chỉnh sửa hoặc xóa thông tin cá nhân
+• Thông tin được lưu trữ bảo mật bằng hệ thống mã hóa
+• Cam kết tuân thủ theo Luật An Toàn Thông Tin Việt Nam`,
+    },
+    {
+      title: "Chính Sách Bảo Mật Thanh Toán",
+      content: `• Giao dịch thanh toán được thực hiện qua cổng thanh toán bảo mật (SSL/TLS)
+• Không lưu trữ thông tin thẻ thanh toán trên hệ thống
+• Hỗ trợ thanh toán qua các cổng đáng tin cậy như Momo, ZaloPay, VNPay
+• Mọi rủi ro phát sinh từ phía người dùng sẽ không thuộc trách nhiệm của nhà hàng
+• Liên hệ ngay bộ phận hỗ trợ nếu có sự cố liên quan đến thanh toán`,
+    },
+    {
       title: "Chính Sách Đặt Bàn",
       content: `• Quý khách vui lòng đặt bàn trước ít nhất 30 phút
 • Đối với nhóm từ 8 người trở lên, vui lòng đặt bàn trước 24 tiếng

@@ -40,7 +40,7 @@ export const PlaceOrderPage = () => {
             },
             {
               key: "2",
-              label: "Mang về",
+              label: "Giao tận cửa",
               icon: <TagsOutlined />,
               children: <TakeAwayForm />,
             },
