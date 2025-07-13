@@ -23,8 +23,8 @@ export const SignInPage = () => {
           style={{ backgroundImage: `url(${image_banner_1})` }}
         ></div>
 
-        <div className="w-full lg:w-1/2 !p-6 md:p-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">
+        <div className="w-full lg:w-1/2 !p-6 !md:p-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-center !mb-6 md:mb-8">
             Đăng nhập
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,7 +34,7 @@ export const SignInPage = () => {
               </label>
               <input
                 type="text"
-                className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-yellow-300"
                 placeholder="Nhập tên đăng nhập"
                 {...register("username", {
                   required: "Không bỏ trống tên đăng nhập",
@@ -55,7 +55,7 @@ export const SignInPage = () => {
               <div className="relative">
                 <input
                   type={showPass ? "text" : "password"}
-                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-yellow-300"
                   placeholder="Nhập mật khẩu"
                   {...register("password", {
                     required: "Vui lòng nhập mật khẩu",

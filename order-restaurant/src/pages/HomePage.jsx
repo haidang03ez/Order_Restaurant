@@ -146,7 +146,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="step-booking my-4">
+      <section className="step-booking !my-8">
         <div className="py-8 md:py-16 bg-white px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800">
             5 BƯỚC ĐỂ ĐẶT TIỆC
@@ -170,7 +170,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="booking mt-4">
+      <section className="booking !my-10">
         <div className="relative">
           <img
             className="w-full h-[200px] md:h-[33vh] brightness-50 object-cover"
@@ -240,7 +240,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="menu-options mb-4 px-4 md:px-30 py-10 md:py-20 flex flex-col lg:flex-row gap-6 md:gap-10 bg-gray-100">
+      <section className="menu-options mb-4 px-4 md:!px-30 !py-10 md:!py-20 flex flex-col lg:flex-row !gap-6 md:!gap-10 bg-gray-100">
         <div className="option-items text-center w-full lg:w-1/3 gap-4">
           <div className="sevice-option bg-yellow-900 p-4 md:p-2 text-white">
             <h3 className="text-lg md:text-xl font-bold mb-4">
