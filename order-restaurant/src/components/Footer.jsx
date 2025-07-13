@@ -92,7 +92,7 @@ export const Footer = () => {
             </p>
             <p className="flex items-center gap-2">
               <MdEmail className="text-lg flex-shrink-0" />
-              <span>haidanghaui@gmail.com</span>
+              <span>haidanghaui2021@gmail.com</span>
             </p>
             <p className="flex items-center gap-2">
               <MdPhone className="text-lg flex-shrink-0" />
@@ -100,7 +100,7 @@ export const Footer = () => {
             </p>
           </div>
 
-          <div className="flex gap-6 md:gap-10 space-x-4 text-xl text-gray-600 justify-center lg:justify-end">
+          <div className="flex !gap-6 md:!gap-10 space-x-4 text-xl text-gray-600 justify-center lg:justify-end items-center">
             <FaFacebookF className="hover:text-blue-600 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
             <FaInstagram className="hover:text-pink-500 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
             <FaYoutube className="hover:text-red-600 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
@@ -108,7 +108,6 @@ export const Footer = () => {
             <FaTwitter className="hover:text-blue-400 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
           </div>
 
-          {/* Payment */}
           <div className="mt-6 flex flex-wrap items-center gap-3 md:gap-4 justify-center lg:justify-end">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/1200px-MasterCard_Logo.svg.png"
@@ -133,7 +132,6 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="text-xs text-center text-gray-500 mt-6 md:mt-4 border-t border-gray-300 pt-4">
           Giấy chứng nhận Đăng ký Kinh doanh số 1234567890 do Sở KHĐT TP.Hà Nội
           cấp ngày 20/12/XXXX, đăng ký thay đổi lần thứ X, ngày 20/05/XXXX.

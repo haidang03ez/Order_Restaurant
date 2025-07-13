@@ -106,7 +106,7 @@ export const Header = ({
               className={({ isActive }) =>
                 `block py-2 px-4 rounded-lg transition-colors ${
                   isActive
-                    ? "!text-orange-600 bg-orange-50 border-l-4 border-orange-600"
+                    ? "!text-orange-600 bg-orange-50  border-orange-600"
                     : "text-gray-700 hover:!text-orange-600 hover:bg-gray-50"
                 }`
               }
@@ -140,53 +140,51 @@ export const Header = ({
       }`}
     >
       <div className="w-full mx-auto flex items-center !justify-between py-3 !px-4 md:!px-10">
-        {/* Logo */}
-        <div className="flex items-center">
-          <Link
-            to="/"
-            className="text-xl md:text-2xl font-bold text-orange-600"
-          >
-            Vista
-          </Link>
-        </div>
+        <div className="flex">
+          <div className="flex items-center">
+            <Link
+              to="/"
+              className="text-xl md:text-2xl font-bold text-orange-600"
+            >
+              Vista
+            </Link>
+          </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:block">
-          <ul className="nav-list flex items-center gap-6 font-semibold text-base !m-0">
-            {navItems.map((item, index) => (
-              <li key={index}>
-                <NavLink
-                  to={item.to}
-                  end={item.end}
-                  className={({ isActive }) =>
-                    `pb-1 ${
-                      isActive
-                        ? "!text-orange-600 border-b-2 border-orange-600"
-                        : "text-black hover:!text-orange-600"
-                    }`
-                  }
-                >
-                  {item.label}
+          <nav className="hidden lg:block">
+            <ul className="nav-list flex items-center gap-6 font-semibold text-base !m-0">
+              {navItems.map((item, index) => (
+                <li key={index}>
+                  <NavLink
+                    to={item.to}
+                    end={item.end}
+                    className={({ isActive }) =>
+                      `pb-1 ${
+                        isActive
+                          ? "!text-orange-600 border-b-2 border-orange-600"
+                          : "text-black hover:!text-orange-600"
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
+
+              <li>
+                <NavLink to="/place-order">
+                  <Button
+                    type="primary"
+                    className="!bg-yellow-600 !text-white !font-semibold !px-4 !py-2 hover:!bg-orange-700 hover:!scale-110 !rounded-none"
+                  >
+                    {navItem5 || "Đặt tiệc ngay"}
+                  </Button>
                 </NavLink>
               </li>
-            ))}
+            </ul>
+          </nav>
+        </div>
 
-            <li>
-              <NavLink to="/place-order">
-                <Button
-                  type="primary"
-                  className="!bg-yellow-600 !text-white !font-semibold !px-4 !py-2 hover:!bg-orange-700 hover:!scale-110 !rounded-none"
-                >
-                  {navItem5 || "Đặt tiệc ngay"}
-                </Button>
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-
-        {/* Right side items */}
         <div className="flex items-center gap-3 md:gap-6">
-          {/* Search - Hidden on mobile */}
           <div className="hidden md:flex items-center border-b border-gray-400 pr-2">
             <input
               type="text"
@@ -196,7 +194,6 @@ export const Header = ({
             <SearchOutlined className="text-lg text-gray-600" />
           </div>
 
-          {/* User dropdown */}
           <Dropdown menu={{ items }} placement="bottomRight" arrow>
             <Button
               type="text"
@@ -207,7 +204,6 @@ export const Header = ({
             </Button>
           </Dropdown>
 
-          {/* Cart */}
           <Link to="/shopping-cart">
             <div className="relative">
               <ShoppingCartOutlined className="text-xl md:text-2xl text-gray-900" />
@@ -217,7 +213,6 @@ export const Header = ({
             </div>
           </Link>
 
-          {/* Theme toggle */}
           <Flex gap="small" align="flex-start" vertical>
             <Segmented
               shape="round"
@@ -236,8 +231,6 @@ export const Header = ({
               size="small"
             />
           </Flex>
-
-          {/* Mobile menu button */}
           <MobileMenu />
         </div>
       </div>
