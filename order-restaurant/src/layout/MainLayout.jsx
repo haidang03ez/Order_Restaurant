@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import "../index.css";
 import { Footer } from "../components/Footer";
 import { ThemeWrapper } from "../components/ThemeWrapper";
+import { BackTopButton } from "./../components/BackTopButton";
 
 export const MainLayout = () => {
   return (
@@ -17,9 +18,11 @@ export const MainLayout = () => {
           navItem5={"Đặt tiệc ngay"}
         />
       </header>
+      <div id="top"></div>
       <main className="content !pt-[70px] md:!pt-[80px] lg:!pt-[90px]">
         <Outlet />
       </main>
+      <BackTopButton idTop="top"/>
       <div>
         <Footer />
       </div>
