@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Space, Table, Tag } from "antd";
+import { Space, Table, Tag, Button } from "antd";
 import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import { ThemeWrapper } from "../components/ThemeWrapper";
 
 export const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
-
   const [promotionCount, setPromotionCount] = useState(0);
 
   useEffect(() => {
@@ -43,9 +42,6 @@ export const CartPage = () => {
     [cartItems]
   );
 
-  // console.log(cartItems);
-  console.log("Render");
-
   const decreaseQuantity = useCallback(
     (dishId) => {
       const updatedCart = cartItems.map((item) =>
@@ -63,10 +59,6 @@ export const CartPage = () => {
     return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cartItems]);
 
-  // const e = calTotalOrder();
-
-  // console.log(e);
-
   const updateNote = useCallback(
     (dishId, newNote) => {
       const updatedCart = cartItems.map((item) =>
@@ -82,6 +74,73 @@ export const CartPage = () => {
     setPromotionCount((prev) => prev + 1);
   };
 
+  // Mobile card view for cart items
+  const CartItemCard = ({ item }) => (
+    <div className="bg-white rounded-lg shadow-md p-4 mb-4 lg:hidden">
+      <div className="flex items-center gap-4 mb-3">
+        <img
+          src={item.images}
+          alt={item.title}
+          className="w-16 h-16 object-cover rounded"
+        />
+        <div className="flex-1">
+          <Link
+            to={`/product-details/${item.id}`}
+            className="font-semibold text-gray-800 hover:text-orange-600"
+          >
+            {item.title}
+          </Link>
+          <p className="text-sm text-gray-600">
+            Giá: {item.price.toLocaleString()} VND
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium">Số lượng:</span>
+          <div className="flex items-center gap-2">
+            <button
+              className="w-8 h-8 rounded border flex items-center justify-center hover:bg-gray-100"
+              onClick={() => decreaseQuantity(item.id)}
+            >
+              -
+            </button>
+            <span className="w-8 text-center">{item.quantity}</span>
+            <button
+              className="w-8 h-8 rounded border flex items-center justify-center hover:bg-gray-100"
+              onClick={() => increaseQuantity(item.id)}
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <div className="text-right">
+          <p className="font-semibold">
+            Tổng: {(item.quantity * item.price).toLocaleString()} VND
+          </p>
+        </div>
+      </div>
+
+      <div className="mb-3">
+        <input
+          type="text"
+          value={item.note}
+          onChange={(e) => updateNote(item.id, e.target.value)}
+          className="w-full border px-3 py-2 rounded text-sm"
+          placeholder="Ghi chú: ít cay, không hành..."
+        />
+      </div>
+
+      <button
+        className="w-full bg-red-400 p-2 rounded text-white hover:bg-red-600 text-sm"
+        onClick={() => handleRemoveToCart(item.id)}
+      >
+        Xóa món ăn
+      </button>
+    </div>
+  );
+
   const columns = [
     {
       title: "Ảnh món ăn",
@@ -94,7 +153,6 @@ export const CartPage = () => {
       dataIndex: "title",
       key: "title",
       render: (text, record) => {
-        console.log("render:", record.id);
         return <Link to={`/product-details/${record.id}`}>{text}</Link>;
       },
     },
@@ -162,31 +220,45 @@ export const CartPage = () => {
   ];
 
   return (
-    <div className="container mt-5 !mb-[200px] ">
+    <div className="container mt-5 !mb-[200px] px-4">
       <div>
         {cartItems.length === 0 ? (
-          <div className="flex border bg-gray-100 rounded justify-center gap-3  p-5">
+          <div className="flex flex-col sm:flex-row border bg-gray-100 rounded justify-center items-center gap-3 p-5">
             <p className="flex items-center text-center !m-0">
               Chưa có món nào trong thực đơn
             </p>
             <Link
               to="/menu"
-              className="p-3 text-white border-0 !bg-yellow-600 rounded uppercase"
+              className="p-3 text-white border-0 !bg-yellow-600 rounded uppercase text-sm md:text-base"
             >
               Chọn món ngay!
             </Link>
           </div>
         ) : (
-          <Table columns={columns} dataSource={cartItems} rowKey="id" />
+          <>
+            {/* Mobile view */}
+            <div className="lg:hidden">
+              {cartItems.map((item) => (
+                <CartItemCard key={item.id} item={item} />
+              ))}
+            </div>
+
+            {/* Desktop view */}
+            <div className="hidden lg:block">
+              <Table columns={columns} dataSource={cartItems} rowKey="id" />
+            </div>
+          </>
         )}
       </div>
+
       <div className="text-right font-bold text-lg mt-4">
-        Tổng đơn hàng: {calTotalOrder.toLocaleString()}
+        Tổng đơn hàng: {calTotalOrder.toLocaleString()} VND
       </div>
+
       <div className="text-right my-4">
         <button
           onClick={loadPromotion}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm md:text-base"
         >
           Tải ưu đãi ({promotionCount})
         </button>

@@ -16,12 +16,12 @@ export const PlaceOrderPage = () => {
         />
       </div>
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-90 !p-20 rounded-xl shadow-2xl w-[90%] max-w-5xl">
-        <h2 className="uppercase font-bold text-3xl text-center text-gray-800 mb-4">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-90 !p-4 md:!p-20 rounded-xl shadow-2xl w-[95%] md:w-[90%] max-w-5xl max-h-[90vh] overflow-y-auto">
+        <h2 className="uppercase font-bold text-xl md:text-3xl text-center text-gray-800 mb-3 md:mb-4">
           Liên hệ đặt tiệc
         </h2>
 
-        <p className="text-center text-gray-600 mb-6 leading-relaxed">
+        <p className="text-center text-gray-600 mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
           Quý khách có nhu cầu tổ chức tiệc tại nhà, công ty hay bất kỳ địa điểm
           nào đều có thể liên hệ với chúng tôi để được tư vấn và đặt món theo
           yêu cầu. Nhà hàng cam kết phục vụ thực đơn chất lượng, trang trí đẹp
@@ -31,7 +31,7 @@ export const PlaceOrderPage = () => {
         <Tabs
           defaultActiveKey="2"
           centered
-          className="[&_.ant-tabs-nav]:!mb-6 [&_.ant-tabs-tab]:!px-6 [&_.ant-tabs-tab]:!py-2 [&_.ant-tabs-tab-active]:!bg-amber-200 [&_.ant-tabs-tab-active]:!text-white [&_.ant-tabs-tab]:!rounded-lg"
+          className="[&_.ant-tabs-nav]:!mb-4 md:[&_.ant-tabs-nav]:!mb-6 [&_.ant-tabs-tab]:!px-3 md:[&_.ant-tabs-tab]:!px-6 [&_.ant-tabs-tab]:!py-1 md:[&_.ant-tabs-tab]:!py-2 [&_.ant-tabs-tab-active]:!bg-amber-200 [&_.ant-tabs-tab-active]:!text-white [&_.ant-tabs-tab]:!rounded-lg [&_.ant-tabs-tab]:!text-sm md:[&_.ant-tabs-tab]:!text-base"
           items={[
             {
               key: "1",

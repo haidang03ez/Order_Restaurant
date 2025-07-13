@@ -16,74 +16,87 @@ export const SignInPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-xl rounded-2xl overflow-hidden flex w-[900px] max-w-full">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+      <div className="bg-white shadow-xl rounded-2xl overflow-hidden flex flex-col lg:flex-row w-full max-w-[900px]">
         <div
-          className="w-1/2 hidden md:block bg-cover bg-center"
+          className="w-full lg:w-1/2 h-48 lg:h-auto bg-cover bg-center"
           style={{ backgroundImage: `url(${image_banner_1})` }}
         ></div>
 
-        <div className="w-full md:w-1/2 p-10 px-5 py-5">
-          <h2 className="text-3xl font-bold text-center mb-8">Đăng nhập</h2>
+        <div className="w-full lg:w-1/2 !p-6 md:p-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">
+            Đăng nhập
+          </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <label className="block mb-1 font-semibold">Tên đăng nhập</label>
+              <label className="block mb-1 font-semibold text-sm md:text-base">
+                Tên đăng nhập
+              </label>
               <input
                 type="text"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-base"
+                className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Nhập tên đăng nhập"
                 {...register("username", {
                   required: "Không bỏ trống tên đăng nhập",
                   minLength: { value: 5, message: "Tối thiểu 5 ký tự" },
                 })}
               />
               {errors.username && (
-                <p className="text-red-600 text-sm mt-1">
+                <p className="text-red-600 text-xs md:text-sm mt-1">
                   {errors.username.message}
                 </p>
               )}
             </div>
 
-            <label className="block mt-4 mb-1 font-semibold">Mật khẩu</label>
-            <div className="relative">
-              <input
-                type={showPass ? "text" : "password"}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-base"
-                {...register("password", {
-                  required: "Vui lòng nhập mật khẩu",
-                  minLength: { value: 8, message: "Nhập tối thiểu 8 ký tự" },
-                })}
-              />
-              <button
-                type="button"
-                className="absolute right-3 top-2 text-sm text-gray-600"
-                onClick={() => {
-                  setShowPass(!showPass);
-                }}
-              >
-                {showPass ? "Ẩn" : "Hiện"}
-              </button>
+            <div className="mt-4">
+              <label className="block mb-1 font-semibold text-sm md:text-base">
+                Mật khẩu
+              </label>
+              <div className="relative">
+                <input
+                  type={showPass ? "text" : "password"}
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập mật khẩu"
+                  {...register("password", {
+                    required: "Vui lòng nhập mật khẩu",
+                    minLength: { value: 8, message: "Nhập tối thiểu 8 ký tự" },
+                  })}
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-600"
+                  onClick={() => {
+                    setShowPass(!showPass);
+                  }}
+                >
+                  {showPass ? "Ẩn" : "Hiện"}
+                </button>
+              </div>
               {errors.password && (
-                <p className="text-red-600 text-sm mt-1">
+                <p className="text-red-600 text-xs md:text-sm mt-1">
                   {errors.password.message}
                 </p>
               )}
             </div>
 
-            <div className="my-3 flex gap-2">
-              <input type="checkbox"></input>
-              <label>Ghi nhớ đăng nhập</label>
+            <div className="my-3 flex gap-2 items-center">
+              <input type="checkbox" className="w-4 h-4"></input>
+              <label className="text-sm md:text-base">Ghi nhớ đăng nhập</label>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-yellow-600 !rounded-sm text-white py-2 mt-6 rounded-lg text-lg hover:bg-yellow-700 transition-colors"
+              className="w-full bg-yellow-600 !rounded-sm text-white py-2 md:py-3 mt-4 md:mt-6 rounded-lg text-base md:text-lg hover:bg-yellow-700 transition-colors"
             >
               Đăng nhập
             </button>
 
-            <p className="text-center mt-3">
+            <p className="text-center mt-3 text-sm md:text-base">
               Bạn chưa có tài khoản đăng nhập?
-              <Link to="/sign-up" className="!text-yellow-600 !hover:underline">
+              <Link
+                to="/sign-up"
+                className="!text-yellow-600 !hover:underline ml-1"
+              >
                 | Đăng ký ngay
               </Link>
             </p>

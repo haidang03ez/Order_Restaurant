@@ -17,8 +17,8 @@ export const MainLayout = () => {
           navItem5={"Đặt tiệc ngay"}
         />
       </header>
-      <main className="content !pt-22">
-          <Outlet />
+      <main className="content !pt-[70px] md:!pt-[80px] lg:!pt-[90px]">
+        <Outlet />
       </main>
       <div>
         <Footer />

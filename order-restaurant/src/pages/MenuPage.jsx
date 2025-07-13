@@ -25,7 +25,7 @@ export const MenuPage = () => {
       // setProduct(productList);
       setAllProduct(updatedAll);
       setSkip((prev) => prev + LIMIT);
-      
+
       if (!filterCategory) {
         setProduct(updatedAll);
       }
@@ -61,26 +61,30 @@ export const MenuPage = () => {
   const uniqueCategoryList = Array.from(new Set(categoryList));
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="container mx-auto py-4 md:py-8 px-4">
       {/* <h1 className="text-3xl font-bold text-center !my-8 uppercase">
         Thực đơn
       </h1> */}
 
-      <div className="sticky w-full top-[80px] z-10 backdrop-blur-sm py-2">
+      <div className="sticky w-full top-[70px] md:top-[80px] z-10 backdrop-blur-sm py-2 bg-white/95">
         <div className="flex flex-wrap gap-2 my-2">
-          <a
-            className="px-3 py-2 rounded-full bg-slate-100 font-medium text-base text-black w-fit cursor-pointer"
+          <button
+            className={`px-3 py-2 rounded-full font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
+              filterCategory === ""
+                ? "bg-yellow-700 text-white"
+                : "bg-slate-100 text-black hover:bg-slate-200"
+            }`}
             onClick={handleClearFilter}
           >
             Tất cả
-          </a>
+          </button>
           {uniqueCategoryList.map((item, index) => (
-            <a
+            <button
               key={index}
-              className={`px-3 py-2 rounded-full font-medium text-base w-fit cursor-pointer ${
+              className={`px-3 py-2 rounded-full font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
                 filterCategory === item
                   ? "bg-yellow-700 text-white"
-                  : "bg-slate-100 text-black"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
               }`}
               onClick={() => {
                 handleFilterCategory(item);
@@ -88,12 +92,12 @@ export const MenuPage = () => {
               }}
             >
               {item}
-            </a>
+            </button>
           ))}
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
         {product.map((item) => (
           <CardItem
             key={item.id}
@@ -112,7 +116,7 @@ export const MenuPage = () => {
         <div className="text-center !my-6">
           <button
             onClick={getAllProducts}
-            className="!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700"
+            className="!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700 transition-colors"
             disabled={loading}
           >
             {loading ? "Đang tải..." : "Xem thêm"}
