@@ -12,32 +12,36 @@ import { SignUpPage } from "./pages/SignUpPage";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { PolicyPage } from "./pages/PolicyPage";
 import { CartPage } from "./pages/CartPage";
+import  ThemeProvider  from "./context/ThemeContext";
+import { ThemeWrapper } from "./components/ThemeWrapper";
 
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="about" element={<AboutUsPage />} />
-            <Route path="news" element={<NewsPage />} />
-            <Route path="menu" element={<MenuPage />} />
-            <Route path="place-order" element={<PlaceOrderPage />} />
-            <Route
-              path="product-details/:id"
-              element={<ProductDetailsPage />}
-            />
-            <Route path="policy" element={<PolicyPage />} />
-            <Route path="shopping-cart" element={<CartPage />} />
-          </Route>
+      <ThemeProvider>
+        <Router>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="about" element={<AboutUsPage />} />
+              <Route path="news" element={<NewsPage />} />
+              <Route path="menu" element={<MenuPage />} />
+              <Route path="place-order" element={<PlaceOrderPage />} />
+              <Route
+                path="product-details/:id"
+                element={<ProductDetailsPage />}
+              />
+              <Route path="policy" element={<PolicyPage />} />
+              <Route path="shopping-cart" element={<CartPage />} />
+            </Route>
 
-          <Route path="sign-in" element={<SignInPage />} />
-          <Route path="sign-up" element={<SignUpPage />} />
+            <Route path="sign-in" element={<SignInPage />} />
+            <Route path="sign-up" element={<SignUpPage />} />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Router>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </>
   );
 }

@@ -3,10 +3,11 @@ import { Header } from "../components/Header";
 import { Outlet } from "react-router-dom";
 import "../index.css";
 import { Footer } from "../components/Footer";
+import { ThemeWrapper } from "../components/ThemeWrapper";
 
 export const MainLayout = () => {
   return (
-    <div className="main-layout">
+    <ThemeWrapper className="main-layout">
       <header className="header fixed z-40 w-full">
         <Header
           navItem1={"Trang chủ"}
@@ -22,6 +23,6 @@ export const MainLayout = () => {
       <div>
         <Footer />
       </div>
-    </div>
+    </ThemeWrapper>
   );
 };

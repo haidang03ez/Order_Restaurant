@@ -12,7 +12,8 @@ export const BookingForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const updateData = {...data, type: "Đặt bàn trước"}
+    console.log(updateData);
   };
 
   return (

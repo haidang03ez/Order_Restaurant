@@ -3,13 +3,14 @@ import { CalendarOutlined, TagsOutlined } from "@ant-design/icons";
 import { BookingForm } from "../components/Form/BookingForm";
 import { TakeAwayForm } from "../components/Form/TakeAwayForm";
 import { Tabs } from "antd";
+import imageBg from "../assets/image_banner_3.png";
 
 export const PlaceOrderPage = () => {
   return (
     <div className="relative min-h-screen">
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 z-0">
         <img
-          src="https://media.gettyimages.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?s=2048x2048&w=gi&k=20&c=Qkrzd6gmhPehu7vqwaqcztKX_cSLIo0EhePAjQjmdaE="
+          src={imageBg}
           alt="background"
           className="w-full h-full object-cover brightness-50 blur-sm"
         />
@@ -21,10 +22,10 @@ export const PlaceOrderPage = () => {
         </h2>
 
         <p className="text-center text-gray-600 mb-6 leading-relaxed">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry type and scrambled it to make a type specimen book. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s.
+          Quý khách có nhu cầu tổ chức tiệc tại nhà, công ty hay bất kỳ địa điểm
+          nào đều có thể liên hệ với chúng tôi để được tư vấn và đặt món theo
+          yêu cầu. Nhà hàng cam kết phục vụ thực đơn chất lượng, trang trí đẹp
+          mắt và hỗ trợ giao hàng tận nơi nhanh chóng, đúng giờ.
         </p>
 
         <Tabs

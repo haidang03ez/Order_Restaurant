@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Button, Dropdown } from "antd";
+import { Button, Dropdown, Flex, Segmented } from "antd";
 import "../index.css";
 import {
+  MoonOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
+  SunOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { ThemeButton } from "./ThemeButton";
+import { useTheme } from "../hooks/useTheme";
 
 export const Header = ({
   navItem1,
@@ -56,8 +58,9 @@ export const Header = ({
   ];
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
+  useEffect(() => { 
     const handleScroll = () => {
       const scroll = window.scrollY;
       setIsScrolled(scroll > 50);
@@ -151,6 +154,7 @@ export const Header = ({
             </li>
           </ul>
         </nav>
+
         <div className="flex items-center gap-6">
           <div className="flex items-center border-b border-gray-400 pr-2">
             <input
@@ -170,6 +174,7 @@ export const Header = ({
               <span className="font-medium">Tài khoản</span>
             </Button>
           </Dropdown>
+
           <Link to="/shopping-cart">
             <div className="relative">
               <ShoppingCartOutlined className="text-2xl text-gray-900" />
@@ -178,7 +183,24 @@ export const Header = ({
               </span>
             </div>
           </Link>
-          <ThemeButton />
+
+          <Flex gap="small" align="flex-start" vertical>
+            <Segmented
+              shape="round"
+              value={theme}
+              onChange={(value) => setTheme(value)}
+              options={[
+                {
+                  value: "light",
+                  icon: <SunOutlined />,
+                },
+                {
+                  value: "dark",
+                  icon: <MoonOutlined />,
+                },
+              ]}
+            />
+          </Flex>
         </div>
       </div>
     </header>

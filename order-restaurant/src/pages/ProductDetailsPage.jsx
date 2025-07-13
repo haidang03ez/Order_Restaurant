@@ -33,14 +33,14 @@ export const ProductDetailsPage = () => {
     } else {
       cartItems.push({ ...dish, quantity: 1 });
     }
-
     localStorage.setItem("cart", JSON.stringify(cartItems));
 
     toast.success("Đã thêm vào thực đơn!", {
       position: "top-right",
-      autoClose: 2000,
+      autoClose: 1000,
     });
   };
+
 
   if (loading) return <p className="text-center mt-10">Đang tải dữ liệu...</p>;
 
@@ -75,16 +75,15 @@ export const ProductDetailsPage = () => {
           <p>
             <strong>Còn lại:</strong> {product.stock} sản phẩm
           </p>
-          
-            <button
-              className="!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700"
-              onClick={() => {
-                handleAddToCart(product);
-              }}
-            >
-              Thêm món
-            </button>
-          
+
+          <button
+            className="!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700"
+            onClick={() => {
+              handleAddToCart(product);
+            }}
+          >
+            Thêm món
+          </button>
         </div>
       </div>
       {product.reviews?.length > 0 && (

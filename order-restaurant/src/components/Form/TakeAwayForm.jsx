@@ -12,7 +12,8 @@ export const TakeAwayForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const updateData = {...data, type: "Giao tận cửa"}
+    console.log(updateData);
   };
 
   return (
