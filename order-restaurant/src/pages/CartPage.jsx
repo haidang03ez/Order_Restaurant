@@ -5,7 +5,7 @@ import { CartItemCard } from "../components/CardItemCart";
 
 export const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
-  // const [promotionCount, setPromotionCount] = useState(0);
+  const [promotionCount, setPromotionCount] = useState(0);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -13,7 +13,7 @@ export const CartPage = () => {
       ...item,
       note: item.note || "",
     }));
-    setCartItems(savedCart);
+    setCartItems(withNote);
   }, []);
 
   const handleRemoveToCart = useCallback(
@@ -35,11 +35,23 @@ export const CartPage = () => {
       const updatedCart = cartItems.map((item) =>
         item.id === dishId ? { ...item, quantity: item.quantity + 1 } : item
       );
+
+      console.log("Tăng")
       setCartItems(updatedCart);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     },
     [cartItems]
   );
+
+  // const increaseQuantity = (dishId) => {
+  //   const updatedCart = cartItems.map((item) =>
+  //     item.id === dishId ? { ...item, quantity: item.quantity + 1 } : item
+  //   );
+
+  //   console.log("Tăng");
+  //   setCartItems(updatedCart);
+  //   localStorage.setItem("cart", JSON.stringify(updatedCart));
+  // };
 
   const decreaseQuantity = useCallback(
     (dishId) => {
@@ -66,12 +78,15 @@ export const CartPage = () => {
   );
 
   const calTotalOrder = useMemo(() => {
+    // console.log("tính")
     return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cartItems]);
 
-  // const loadPromotion = () => {
-  //   setPromotionCount((prev) => prev + 1);
-  // };
+  const loadPromotion = () => {
+    setPromotionCount((prev) => prev + 1);
+  };
+
+  console.log("Cha");
 
   return (
     <div className="container mt-5 !mb-[200px] px-4">
@@ -90,16 +105,13 @@ export const CartPage = () => {
           </div>
         ) : (
           <div className="">
-            {cartItems.map((item) => (
-              <CartItemCard
-                key={item.id}
-                item={item}
-                onRemove={handleRemoveToCart}
-                onIncrease={increaseQuantity}
-                onDecrease={decreaseQuantity}
-                onUpdateNote={updateNote}
-              />
-            ))}
+            <CartItemCard
+              items={cartItems}
+              onRemove={handleRemoveToCart}
+              onIncrease={increaseQuantity}
+              onDecrease={decreaseQuantity}
+              onUpdateNote={updateNote}
+            />
           </div>
         )}
       </div>
@@ -108,14 +120,14 @@ export const CartPage = () => {
         Tổng đơn hàng: {calTotalOrder.toLocaleString()} VND
       </div>
 
-      {/* <div className="text-right my-4">
+      <div className="text-right my-4">
         <button
           onClick={loadPromotion}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm md:text-base"
         >
           Tải ưu đãi ({promotionCount})
         </button>
-      </div> */}
+      </div>
       <ToastContainer />
     </div>
   );

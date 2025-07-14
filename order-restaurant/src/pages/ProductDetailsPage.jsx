@@ -38,9 +38,11 @@ export const ProductDetailsPage = () => {
     toast.success("Đã thêm vào thực đơn!", {
       position: "top-right",
       autoClose: 1000,
+      className: "!font-sans bg-green-600 text-green rounded-lg shadow-lg",
+      bodyClassName: "text-base font-semibold",
+      progressClassName: "bg-white",
     });
   };
-
 
   if (loading) return <p className="text-center mt-10">Đang tải dữ liệu...</p>;
 
@@ -51,7 +53,7 @@ export const ProductDetailsPage = () => {
     <div className="container flex flex-col mx-auto px-4 !py-8">
       <div className="gap-10 flex items-start">
         <img
-          src={product.images[0]}
+          src={product.thumbnail}
           alt={product.title}
           className="w-1/2 h-1/2 object-cover "
         />
