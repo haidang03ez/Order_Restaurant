@@ -15,6 +15,7 @@ import { CartPage } from "./pages/CartPage";
 import ThemeProvider from "./context/ThemeContext";
 import AuthProvider from "./context/AuthContext";
 import { ProfileUserPage } from "./pages/ProfileUserPage";
+import { PrivateRoute } from "./routes/privateRoute";
 
 function App() {
   return (
@@ -33,8 +34,22 @@ function App() {
                 element={<ProductDetailsPage />}
               />
               <Route path="policy" element={<PolicyPage />} />
-              <Route path="shopping-cart" element={<CartPage />} />
-              <Route path="profile" element={<ProfileUserPage />} />
+              <Route
+                path="shopping-cart"
+                element={
+                  <PrivateRoute>
+                    <CartPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <PrivateRoute>
+                    <ProfileUserPage />
+                  </PrivateRoute>
+                }
+              />
             </Route>
 
             <Route path="sign-in" element={<SignInPage />} />

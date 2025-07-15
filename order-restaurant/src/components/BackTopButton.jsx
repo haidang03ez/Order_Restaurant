@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowUp } from "react-icons/bs";
+import { ThemeWrapper } from "./ThemeWrapper";
 
 export const BackTopButton = ({ idTop }) => {
   const [showButton, setShowButton] = useState(false);
@@ -22,7 +23,7 @@ export const BackTopButton = ({ idTop }) => {
     >
       <a href={`#${idTop}`}>
         <button>
-          <BsArrowUp className="bg-gray-300 rounded-[50%] p-2 w-[50px] h-[50px] text-gray-500 hover:scale-115 transition" />
+            <BsArrowUp className="bg-gray-300 rounded-[50%] p-2 w-[50px] h-[50px] text-gray-500 hover:scale-115 transition" />
         </button>
       </a>
     </div>

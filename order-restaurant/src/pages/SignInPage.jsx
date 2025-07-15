@@ -16,14 +16,14 @@ export const SignInPage = () => {
   } = useForm();
   const [showPass, setShowPass] = useState(false);
 
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
     try {
       const res = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: "emilys",
-          password: "emilyspass",
+          username: data.username,
+          password: data.password,
           expiresInMins: 600, 
         }),
         // credentials: "include",
@@ -32,7 +32,6 @@ export const SignInPage = () => {
         throw new Error("Đăng nhập thất bại");
       }
       const result = await res.json();
-      console.log("Đăng nhập thành công:", result);
 
       toast.success("Đăng nhập thành công!", {
         position: "top-center",

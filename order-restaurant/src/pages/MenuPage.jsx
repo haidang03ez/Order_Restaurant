@@ -85,9 +85,9 @@ export const MenuPage = () => {
 
   return (
     <div className="!container mx-auto py-4 md:py-8 px-4">
-      {/* <h1 className="text-3xl font-bold text-center !my-8 uppercase">
-        Thực đơn
-      </h1> */}
+      <h1 className="text-3xl font-bold text-center !my-8 uppercase">
+        Bạn chưa biết ăn gì? Chọn ngay nhé
+      </h1>
 
       {/* Search */}
       <div className="flex justify-center">
