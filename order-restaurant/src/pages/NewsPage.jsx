@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// import { ThemeWrapper } from "../components/ThemeWrapper";
 
 export const NewsPage = () => {
   const [newsList, setNewsList] = useState([]);

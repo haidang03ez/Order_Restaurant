@@ -12,6 +12,7 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 import { useTheme } from "../hooks/useTheme";
+import { useAuth } from "../hooks/useAuth";
 
 export const Header = ({
   navItem1,
@@ -20,10 +21,15 @@ export const Header = ({
   navItem4,
   navItem5,
 }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const { user, logout } = useAuth();
+
   const items = [
     {
       key: "1",
-      label: <Link to="/sign-in">Thông tin cá nhân</Link>,
+      label: <Link to="/profile">Thông tin cá nhân</Link>,
     },
     {
       key: "2",
@@ -52,16 +58,12 @@ export const Header = ({
     {
       key: "5",
       label: (
-        <a rel="noopener noreferrer" href="">
+        <a rel="noopener noreferrer" href="" onClick={logout}>
           Đăng xuất
         </a>
       ),
     },
   ];
-
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -194,15 +196,31 @@ export const Header = ({
             <SearchOutlined className="text-lg text-gray-600" />
           </div>
 
-          <Dropdown menu={{ items }} placement="bottomRight" arrow>
-            <Button
-              type="text"
-              icon={<UserOutlined className="text-lg md:text-xl" />}
-              className="flex items-center gap-1 text-gray-900 hover:!text-orange-600"
-            >
-              <span className="hidden md:inline font-medium">Tài khoản</span>
-            </Button>
-          </Dropdown>
+          {user ? (
+            <>
+              <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                <Button
+                  type="text"
+                  icon={<UserOutlined className="text-lg md:text-xl" />}
+                  className="flex items-center gap-1 text-gray-900 hover:!text-orange-600"
+                >
+                  <span className="hidden md:inline font-medium">
+                    Xin chào, {user.username} !
+                  </span>
+                </Button>
+              </Dropdown>
+            </>
+          ) : (
+            <Link to="/sign-in">
+              <Button
+                type="text"
+                icon={<UserOutlined className="text-lg md:text-xl" />}
+                className="flex items-center gap-1 text-gray-900 hover:!text-orange-600"
+              >
+                <span className="hidden md:inline font-medium">Đăng nhập</span>
+              </Button>
+            </Link>
+          )}
 
           <Link to="/shopping-cart">
             <div className="relative">

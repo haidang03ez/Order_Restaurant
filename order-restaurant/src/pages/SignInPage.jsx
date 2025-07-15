@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import image_banner_1 from "../assets/image_banner_1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../hooks/useAuth";
+import { toast, ToastContainer } from "react-toastify";
 
 export const SignInPage = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -11,8 +16,35 @@ export const SignInPage = () => {
   } = useForm();
   const [showPass, setShowPass] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async () => {
+    try {
+      const res = await fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: "emilys",
+          password: "emilyspass",
+          expiresInMins: 600, 
+        }),
+        // credentials: "include",
+      });
+      if (!res.ok) {
+        throw new Error("Đăng nhập thất bại");
+      }
+      const result = await res.json();
+      console.log("Đăng nhập thành công:", result);
+
+      toast.success("Đăng nhập thành công!", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+
+      login(result);
+      navigate("/");
+    } catch (err) {
+      console.error("Lỗi đăng nhập:", err.message);
+      alert("Sai tài khoản hoặc mật khẩu");
+    }
   };
 
   return (
@@ -103,6 +135,7 @@ export const SignInPage = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

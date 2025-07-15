@@ -12,13 +12,14 @@ import { SignUpPage } from "./pages/SignUpPage";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { PolicyPage } from "./pages/PolicyPage";
 import { CartPage } from "./pages/CartPage";
-import  ThemeProvider  from "./context/ThemeContext";
-import { ThemeWrapper } from "./components/ThemeWrapper";
+import ThemeProvider from "./context/ThemeContext";
+import AuthProvider from "./context/AuthContext";
+import { ProfileUserPage } from "./pages/ProfileUserPage";
 
 function App() {
   return (
-    <>
-      <ThemeProvider>
+    <ThemeProvider>
+      <AuthProvider>
         <Router>
           <Routes>
             <Route element={<MainLayout />}>
@@ -33,16 +34,16 @@ function App() {
               />
               <Route path="policy" element={<PolicyPage />} />
               <Route path="shopping-cart" element={<CartPage />} />
+              <Route path="profile" element={<ProfileUserPage />} />
             </Route>
 
             <Route path="sign-in" element={<SignInPage />} />
             <Route path="sign-up" element={<SignUpPage />} />
-
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
-      </ThemeProvider>
-    </>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

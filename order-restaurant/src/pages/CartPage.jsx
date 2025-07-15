@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import { CartItemCard } from "../components/CardItemCart";
+// import { ThemeWrapper } from './../components/ThemeWrapper';
 
 export const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -9,11 +10,13 @@ export const CartPage = () => {
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (savedCart.length > 0) {
     const withNote = savedCart.map((item) => ({
       ...item,
       note: item.note || "",
     }));
     setCartItems(withNote);
+  }
   }, []);
 
   const handleRemoveToCart = useCallback(

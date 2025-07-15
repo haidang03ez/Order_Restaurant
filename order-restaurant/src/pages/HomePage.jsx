@@ -12,7 +12,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import "../index.css";
-import { ThemeWrapper } from "../components/ThemeWrapper";
+// import { ThemeWrapper } from "../components/ThemeWrapper";
 
 export const HomePage = () => {
   const [open, setOpen] = useState(false);
@@ -80,7 +80,7 @@ export const HomePage = () => {
   ];
 
   return (
-    <ThemeWrapper className="home-page">
+    <div className="home-page">
       <section className="slider">
         <SlideBanner />
       </section>
@@ -335,6 +335,6 @@ export const HomePage = () => {
           ))}
         </div>
       </section>
-    </ThemeWrapper>
+    </div>
   );
 };

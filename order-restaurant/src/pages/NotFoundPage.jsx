@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// import { ThemeWrapper } from "../components/ThemeWrapper";
 
 export const NotFoundPage = () => {
   return (

@@ -165,13 +165,13 @@ export const CartItemCard = React.memo(
       </>
     );
   },
-  (prev, next) => {
-    return (
-      JSON.stringify(prev.items) === JSON.stringify(next.items) &&
-      prev.onRemove === next.onRemove &&
-      prev.onIncrease === next.onIncrease &&
-      prev.onDecrease === next.onDecrease &&
-      prev.onUpdateNote === next.onUpdateNote
-    );
-  }
+  // (prev, next) => {
+  //   return (
+  //     JSON.stringify(prev.items) === JSON.stringify(next.items) &&
+  //     prev.onRemove === next.onRemove &&
+  //     prev.onIncrease === next.onIncrease &&
+  //     prev.onDecrease === next.onDecrease &&
+  //     prev.onUpdateNote === next.onUpdateNote
+  //   );
+  // }
 );

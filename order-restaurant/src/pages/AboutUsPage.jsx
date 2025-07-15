@@ -2,6 +2,7 @@ import { Button } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import image_banner_2 from "../assets/image_banner_2.png";
+import { ThemeWrapper } from "../components/ThemeWrapper";
 
 const serItem = [
   {
@@ -32,7 +33,7 @@ const serItem = [
 
 export const AboutUsPage = () => {
   return (
-    <div className="about-me-page my-5">
+    <ThemeWrapper className="about-me-page my-5">
       <div className="video-intro flex px-5">
         <div className="aboutus-title flex flex-col w-1/2 p-2 gap-3">
           <h1 className="uppercase">sự lựa chọn ẩm thực số 1</h1>
@@ -121,6 +122,6 @@ export const AboutUsPage = () => {
           ))}
         </div>
       </div>
-    </div>
+    </ThemeWrapper>
   );
 };
