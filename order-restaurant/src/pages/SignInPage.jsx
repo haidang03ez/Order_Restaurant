@@ -24,7 +24,7 @@ export const SignInPage = () => {
         body: JSON.stringify({
           username: data.username,
           password: data.password,
-          expiresInMins: 600, 
+          expiresInMins: 60, 
         }),
         // credentials: "include",
       });

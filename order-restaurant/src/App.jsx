@@ -15,7 +15,7 @@ import { CartPage } from "./pages/CartPage";
 import ThemeProvider from "./context/ThemeContext";
 import AuthProvider from "./context/AuthContext";
 import { ProfileUserPage } from "./pages/ProfileUserPage";
-import { PrivateRoute } from "./routes/privateRoute";
+import { PrivateRoute } from "./routes/PrivateRoute";
 
 function App() {
   return (
