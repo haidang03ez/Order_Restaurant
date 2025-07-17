@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import "../index.css";
+import { ThemeWrapper } from "../components/ThemeWrapper";
 // import { ThemeWrapper } from "../components/ThemeWrapper";
 
 export const HomePage = () => {
@@ -80,35 +81,43 @@ export const HomePage = () => {
   ];
 
   return (
-    <div className="home-page">
-      <section className="slider">
+    <ThemeWrapper className="home-page">
+      <ThemeWrapper className="slider">
         <SlideBanner />
-      </section>
+      </ThemeWrapper>
 
-      <section className="production py-5">
-        <div className="bg-gray-100 py-5 px-4 md:px-16">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-            <div>
+      <ThemeWrapper className="production py-5">
+        <ThemeWrapper className="bg-gray-100 py-5 px-4 md:px-16">
+          <ThemeWrapper className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+            <ThemeWrapper>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
                 Nhà hàng Vista - Con gì đang bơi chúng tôi đều có
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Nhà hàng Vista mang đến cho du khách những trải nghiệm ẩm thực
-                đặc sắc với những món ăn phong phú từ quốc tế, Việt Nam đến
-                những món đặc trưng xứ biển.
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Nằm trong khuôn viên The Cliff Resort tọa lạc trên dốc đá thoai
-                thoải nhẹ nhàng. Nhà hàng sở hữu tầm nhìn toàn cảnh tuyệt đẹp ra
-                biển xanh, vị trí đắc địa và sang trọng bậc nhất Bình Thuận.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                Tại đây có khu vực ngồi trong nhà và ngoài trời với sức chứa lên
-                đến 200 - 300 khách, bạn có thể lựa chọn tuỳ sở thích
-              </p>
-            </div>
+              <ThemeWrapper className="text-gray-700 leading-relaxed mb-4">
+                <p>
+                  Nhà hàng Vista mang đến cho du khách những trải nghiệm ẩm thực
+                  đặc sắc với những món ăn phong phú từ quốc tế, Việt Nam đến
+                  những món đặc trưng xứ biển.
+                </p>
+              </ThemeWrapper>
 
-            <div className="relative group">
+              <ThemeWrapper className="text-gray-700 leading-relaxed mb-4">
+                <p>
+                  Nằm trong khuôn viên The Cliff Resort tọa lạc trên dốc đá
+                  thoai thoải nhẹ nhàng. Nhà hàng sở hữu tầm nhìn toàn cảnh
+                  tuyệt đẹp ra biển xanh, vị trí đắc địa và sang trọng bậc nhất
+                  Bình Thuận.
+                </p>
+              </ThemeWrapper>
+              <ThemeWrapper className="text-gray-700 leading-relaxed">
+                <p>
+                  Tại đây có khu vực ngồi trong nhà và ngoài trời với sức chứa
+                  lên đến 200 - 300 khách, bạn có thể lựa chọn tuỳ sở thích
+                </p>
+              </ThemeWrapper>
+            </ThemeWrapper>
+
+            <ThemeWrapper className="relative group">
               <img
                 src="https://mediawinwin.vn/upload/images/sanpham/bao-gia-chup-mon-an-dich-vu-chup-anh-do-an-chuyen-nghiep-5.JPG"
                 alt="Giới thiệu"
@@ -122,8 +131,8 @@ export const HomePage = () => {
                   <PlayCircleOutlined />
                 </button>
               </div>
-            </div>
-          </div>
+            </ThemeWrapper>
+          </ThemeWrapper>
 
           <Modal
             open={open}
@@ -143,35 +152,40 @@ export const HomePage = () => {
               ></iframe>
             </div>
           </Modal>
-        </div>
-      </section>
+        </ThemeWrapper>
+      </ThemeWrapper>
 
-      <section className="step-booking !my-8">
-        <div className="py-8 md:py-16 bg-white px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800">
-            5 BƯỚC ĐỂ ĐẶT TIỆC
-          </h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 text-center">
+      <ThemeWrapper className="step-booking !py-8">
+        <ThemeWrapper className="py-8 md:py-16 bg-white ">
+          <ThemeWrapper className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800 pb-5">
+            <h2>
+              5 BƯỚC ĐỂ ĐẶT TIỆC
+            </h2>
+          </ThemeWrapper>
+
+          <ThemeWrapper className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 text-center !px-40 !px-0">
             {steps.map((step, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="bg-gray-100 w-20 h-20 md:w-28 md:h-28 rounded-full flex items-center justify-center mb-4">
+              <ThemeWrapper key={index} className="flex flex-col items-center">
+                <ThemeWrapper className="bg-gray-100 w-20 h-20 md:w-28 md:h-28 rounded-full flex items-center justify-center mb-4">
                   {step.icon}
-                </div>
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-semibold mb-2 text-sm md:text-base">
+                </ThemeWrapper>
+                <ThemeWrapper className="w-8 h-8 md:w-10 md:h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-semibold mb-2 text-sm md:text-base">
                   {index + 1}
-                </div>
-                <h5 className="text-xs md:text-sm font-semibold text-gray-800 uppercase mb-1">
+                </ThemeWrapper>
+                <ThemeWrapper className="text-xs md:text-sm font-semibold text-gray-800 uppercase mb-1">
                   {step.title}
-                </h5>
-                <p className="text-xs md:text-sm text-gray-600">{step.desc}</p>
-              </div>
+                </ThemeWrapper>
+                <ThemeWrapper className="text-xs md:text-sm text-gray-600">
+                  {step.desc}
+                </ThemeWrapper>
+              </ThemeWrapper>
             ))}
-          </div>
-        </div>
-      </section>
+          </ThemeWrapper>
+        </ThemeWrapper>
+      </ThemeWrapper>
 
-      <section className="booking !my-10">
-        <div className="relative">
+      <ThemeWrapper className="booking !my-10">
+        <ThemeWrapper className="relative">
           <img
             className="w-full h-[200px] md:h-[33vh] brightness-50 object-cover"
             src={image_banner_1}
@@ -237,16 +251,16 @@ export const HomePage = () => {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
+        </ThemeWrapper>
+      </ThemeWrapper>
 
-      <section className="menu-options mb-4 px-4 md:!px-30 !py-10 md:!py-20 flex flex-col lg:flex-row !gap-6 md:!gap-10 bg-gray-100">
+      <ThemeWrapper className="menu-options mb-4 px-4 md:!px-30 !py-10 md:!py-20 flex flex-col lg:flex-row !gap-6 md:!gap-10 bg-gray-100">
         <div className="option-items text-center w-full lg:w-1/3 gap-4">
           <div className="sevice-option bg-yellow-900 p-4 md:p-2 text-white">
             <h3 className="text-lg md:text-xl font-bold mb-4">
               Dịch vụ cung cấp
             </h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4 p-0">
               <li className="bg-yellow-100 hover:bg-yellow-300 text-yellow-800 font-semibold py-3 px-3 md:px-5 rounded-xl shadow transition duration-300 cursor-pointer text-sm md:text-base">
                 Tiệc tại gia
               </li>
@@ -310,31 +324,33 @@ export const HomePage = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </ThemeWrapper>
 
-      <section className="reasons my-5 px-4 md:px-30">
+      <ThemeWrapper className="reasons my-5 px-4 md:px-30">
         <h3 className="text-center p-4 text-xl md:text-2xl font-bold mb-6">
           TẠI SAO NÊN CHỌN CHÚNG TÔI?
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
           {reasons.map((item, index) => (
-            <div key={index} className="flex flex-col text-center gap-3">
+            <ThemeWrapper key={index} className="flex flex-col text-center gap-3">
               <img
                 src={item.imgUrl}
                 className="w-full h-48 md:h-64 object-cover rounded-lg"
               />
-              <div>
+              <ThemeWrapper>
                 <h5 className="uppercase font-semibold text-sm md:text-base mb-2">
                   {item.title}
                 </h5>
-                <p className="text-sm md:text-base text-gray-600">
-                  {item.desc}
-                </p>
-              </div>
-            </div>
+                <ThemeWrapper className="text-sm md:text-base text-gray-600">
+                  <p >
+                    {item.desc}
+                  </p>
+                </ThemeWrapper>
+              </ThemeWrapper>
+            </ThemeWrapper>
           ))}
         </div>
-      </section>
-    </div>
+      </ThemeWrapper>
+    </ThemeWrapper>
   );
 };

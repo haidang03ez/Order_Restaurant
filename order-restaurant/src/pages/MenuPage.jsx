@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CardItem } from "./../components/CardItem";
 import { SearchOutlined } from "@ant-design/icons";
-// import { ThemeWrapper } from "../components/ThemeWrapper";
+import { ThemeWrapper } from './../components/ThemeWrapper';
 
 export const MenuPage = () => {
   const [allProduct, setAllProduct] = useState([]);
@@ -84,13 +84,13 @@ export const MenuPage = () => {
   const uniqueCategoryList = Array.from(new Set(categoryList));
 
   return (
-    <div className="!container mx-auto py-4 md:py-8 px-4">
+    <ThemeWrapper className="!container mx-auto py-4 md:py-8 px-4">
       <h1 className="text-3xl font-bold text-center !my-8 uppercase">
         Bạn chưa biết ăn gì? Chọn ngay nhé
       </h1>
 
       {/* Search */}
-      <div className="flex justify-center">
+      <div className="flex justify-center py-5">
         <div className="hidden md:flex items-center justify-between w-[20rem] border-b border-gray-400 pr-2">
           <input
             type="text"
@@ -106,13 +106,13 @@ export const MenuPage = () => {
       </div>
 
       {/* Tag */}
-      <div className="sticky w-full top-[70px] md:top-[80px] z-10 backdrop-blur-sm py-2 bg-white/95">
-        <div className="flex flex-wrap gap-2 my-2">
+      <ThemeWrapper className="sticky w-full top-[70px] md:top-[80px] z-10 backdrop-blur-sm bg-white/95 ">
+        <ThemeWrapper className="flex flex-wrap gap-2 py-3 px-0 justify-center">
           <button
-            className={`px-3 py-2 rounded-full font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
+            className={`px-3 py-2 font-medium text-sm md:text-base w-fit cursor-pointer transition-colors !rounded-[50px] ${
               filterCategory === ""
                 ? "bg-yellow-700 text-white"
-                : "bg-slate-100 text-black hover:bg-slate-200"
+                : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
             }`}
             onClick={handleClearFilter}
           >
@@ -121,10 +121,10 @@ export const MenuPage = () => {
           {uniqueCategoryList.map((item, index) => (
             <button
               key={index}
-              className={`px-3 py-2 rounded-full font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
+              className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
                 filterCategory === item
                   ? "bg-yellow-700 text-white"
-                  : "bg-slate-100 text-black hover:bg-slate-200"
+                  : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
               }`}
               onClick={() => {
                 handleFilterCategory(item);
@@ -134,11 +134,11 @@ export const MenuPage = () => {
               {item}
             </button>
           ))}
-        </div>
-      </div>
+        </ThemeWrapper>
+      </ThemeWrapper>
 
       {/* Products */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 mt-4">
         {product.map((item) => (
           <CardItem
             key={item.id}
@@ -164,6 +164,6 @@ export const MenuPage = () => {
           </button>
         </div>
       )}
-    </div>
+    </ThemeWrapper>
   );
 };

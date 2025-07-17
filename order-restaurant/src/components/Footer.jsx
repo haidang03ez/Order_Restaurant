@@ -9,13 +9,14 @@ import {
 } from "react-icons/fa";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { ThemeWrapper } from "./ThemeWrapper";
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-700 !py-8 md:!py-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 !gap-6 md:!gap-8 border-b border-gray-300 !pb-6 md:!pb-10">
-          <div className="space-y-4 pr-0 md:pr-5 border-r-0 md:border-r border-gray-300">
+    <ThemeWrapper className="bg-gray-100 text-gray-700 !py-8 md:!py-10">
+      <ThemeWrapper className="container mx-auto px-4">
+        <ThemeWrapper className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 !gap-6 md:!gap-8 border-b border-gray-300 !pb-6 md:!pb-10">
+          <ThemeWrapper className="space-y-4 pr-0 md:pr-5 border-r-0 md:border-r border-gray-300">
             <img src={logo} alt="Logo" className="items-center w-24 md:w-32" />
             <p className="text-sm md:text-base">
               Công Ty Cổ Phần Kinh Doanh
@@ -23,9 +24,9 @@ export const Footer = () => {
               298, Đường Cầu Diễn, <br />
               Quận Bắc Từ Liêm, Hà Nội
             </p>
-          </div>
+          </ThemeWrapper>
 
-          <div>
+          <ThemeWrapper>
             <h6 className="text-base md:text-lg font-semibold mb-3 md:mb-4">
               DỊCH VỤ
             </h6>
@@ -34,57 +35,57 @@ export const Footer = () => {
               <li>Chính sách bảo mật thông tin cá nhân</li>
               <li>Chính sách bảo mật thanh toán</li>
             </ul>
-          </div>
+          </ThemeWrapper>
 
-          <div>
+          <ThemeWrapper>
             <h6 className="text-base md:text-lg font-semibold mb-3 md:mb-4">
               HỖ TRỢ
             </h6>
             <ul className="flex flex-col gap-2 space-y-2 text-sm md:text-base">
               <li>
                 <Link to="/policy" className="hover:text-blue-600">
-                  Chính sách đổi - trả - hoàn tiền
+                  <ThemeWrapper>Chính sách đổi - trả - hoàn tiền</ThemeWrapper>
                 </Link>
               </li>
               <li>
                 <Link to="/policy" className="hover:text-blue-600">
-                  Chính sách bảo hành - bồi hoàn
+                  <ThemeWrapper>Chính sách bảo hành - bồi hoàn</ThemeWrapper>
                 </Link>
               </li>
               <li>
                 <Link to="/policy" className="hover:text-blue-600">
-                  Chính sách vận chuyển
+                  <ThemeWrapper>Chính sách vận chuyển</ThemeWrapper>
                 </Link>
               </li>
             </ul>
-          </div>
+          </ThemeWrapper>
 
-          <div>
+          <ThemeWrapper>
             <h6 className="text-base md:text-lg font-semibold mb-3 md:mb-4">
               TÀI KHOẢN CỦA TÔI
             </h6>
             <ul className="flex flex-col gap-2 space-y-2 text-sm md:text-base">
               <li>
                 <Link to="/sign-in" className="hover:text-blue-600">
-                  Đăng nhập/Tạo mới tài khoản
+                  <ThemeWrapper>Đăng nhập/Tạo mới tài khoản</ThemeWrapper>
                 </Link>
               </li>
               <li>
                 <Link to="/profile" className="hover:text-blue-600">
-                  Chi tiết tài khoản
+                  <ThemeWrapper>Chi tiết tài khoản</ThemeWrapper>
                 </Link>
               </li>
               <li>
                 <Link to="/profile" className="hover:text-blue-600">
-                  Lịch sử mua hàng
+                  <ThemeWrapper>Lịch sử mua hàng</ThemeWrapper>
                 </Link>
               </li>
             </ul>
-          </div>
-        </div>
+          </ThemeWrapper>
+        </ThemeWrapper>
 
-        <div className="flex flex-col lg:flex-row justify-between mt-6 md:mt-3 gap-6 lg:gap-0">
-          <div className="mt-6 lg:mt-10 space-y-2 text-sm md:text-base">
+        <ThemeWrapper className="flex flex-col lg:flex-row justify-between mt-6 md:mt-3 gap-6 lg:gap-0">
+          <ThemeWrapper className="mt-6 lg:mt-10 space-y-2 text-sm md:text-base">
             <p className="font-semibold uppercase">Liên hệ</p>
             <p className="flex items-start gap-2">
               <MdLocationOn className="text-lg mt-0.5 flex-shrink-0" />
@@ -98,17 +99,17 @@ export const Footer = () => {
               <MdPhone className="text-lg flex-shrink-0" />
               <span>0982723221</span>
             </p>
-          </div>
+          </ThemeWrapper>
 
-          <div className="flex !gap-6 md:!gap-10 space-x-4 text-xl text-gray-600 justify-center lg:justify-end items-center">
+          <ThemeWrapper className="flex !gap-6 md:!gap-10 space-x-4 text-xl text-gray-600 justify-center lg:justify-end items-center">
             <FaFacebookF className="hover:text-blue-600 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
             <FaInstagram className="hover:text-pink-500 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
             <FaYoutube className="hover:text-red-600 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
             <FaTiktok className="hover:text-black w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
             <FaTwitter className="hover:text-blue-400 w-6 h-6 md:w-7 md:h-7 cursor-pointer" />
-          </div>
+          </ThemeWrapper>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3 md:gap-4 justify-center lg:justify-end">
+          <ThemeWrapper className="mt-6 flex flex-wrap items-center gap-3 md:gap-4 justify-center lg:justify-end">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/1200px-MasterCard_Logo.svg.png"
               alt="MasterCard"
@@ -129,14 +130,14 @@ export const Footer = () => {
               alt="Credit"
               className="w-10 h-auto md:w-14 md:h-auto"
             />
-          </div>
-        </div>
+          </ThemeWrapper>
+        </ThemeWrapper>
 
-        <div className="text-xs text-center text-gray-500 mt-6 md:mt-4 border-t border-gray-300 pt-4">
+        <ThemeWrapper className="text-xs text-center text-gray-500 mt-6 md:mt-4 border-t border-gray-300 pt-4">
           Giấy chứng nhận Đăng ký Kinh doanh số 1234567890 do Sở KHĐT TP.Hà Nội
           cấp ngày 20/12/XXXX, đăng ký thay đổi lần thứ X, ngày 20/05/XXXX.
-        </div>
-      </div>
-    </footer>
+        </ThemeWrapper>
+      </ThemeWrapper>
+    </ThemeWrapper>
   );
 };

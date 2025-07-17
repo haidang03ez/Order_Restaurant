@@ -13,6 +13,7 @@ import {
 } from "@ant-design/icons";
 import { useTheme } from "../hooks/useTheme";
 import { useAuth } from "../hooks/useAuth";
+import { ThemeWrapper } from "./ThemeWrapper";
 
 export const Header = ({
   navItem1,
@@ -134,26 +135,26 @@ export const Header = ({
   );
 
   return (
-    <header
+    <ThemeWrapper
       className={`w-full flex border-b border-none transition-all duration-300 ${
         isScrolled
-          ? "!h-[70px] md:!h-[80px] backdrop-blur-md bg-white/30 p-4 md:p-6 shadow-lg"
+          ? "!h-[70px] md:!h-[80px] backdrop-blur-md bg-gray-100/30 p-4 md:p-6 shadow-lg"
           : "!h-[80px] md:!h-[90px] bg-white text-black"
       }`}
     >
-      <div className="w-full mx-auto flex items-center !justify-between py-3 !px-4 md:!px-10">
-        <div className="flex">
-          <div className="flex items-center">
+      <ThemeWrapper className="w-full mx-auto flex items-center !justify-between py-3 !px-4 md:!px-10">
+        <ThemeWrapper className="flex">
+          <ThemeWrapper className="flex items-center">
             <Link
               to="/"
               className="text-xl md:text-2xl font-bold text-orange-600"
             >
-              Vista
+              <ThemeWrapper>Vista</ThemeWrapper>
             </Link>
-          </div>
+          </ThemeWrapper>
 
-          <nav className="hidden lg:block">
-            <ul className="nav-list flex items-center gap-6 font-semibold text-base !m-0">
+          <ThemeWrapper className="hidden lg:block">
+            <ul className="nav-list flex items-center !gap-6 font-semibold text-base !m-0">
               {navItems.map((item, index) => (
                 <li key={index}>
                   <NavLink
@@ -162,12 +163,14 @@ export const Header = ({
                     className={({ isActive }) =>
                       `pb-1 ${
                         isActive
-                          ? "!text-orange-600 border-b-2 border-orange-600"
+                          ? "!text-orange-600 !border-b-2 !border-orange-600"
                           : "text-black hover:!text-orange-600"
                       }`
                     }
                   >
-                    {item.label}
+                    <ThemeWrapper className="inline text-inherit">
+                      {item.label}
+                    </ThemeWrapper>
                   </NavLink>
                 </li>
               ))}
@@ -183,33 +186,37 @@ export const Header = ({
                 </NavLink>
               </li>
             </ul>
-          </nav>
-        </div>
+          </ThemeWrapper>
+        </ThemeWrapper>
 
-        <div className="flex items-center gap-3 md:gap-6">
-          <div className="hidden md:flex items-center border-b border-gray-400 pr-2">
+        <ThemeWrapper className="flex items-center gap-3 md:gap-6">
+          <ThemeWrapper className="hidden md:flex items-center border-b border-gray-400 pr-2">
             <input
               type="text"
               placeholder="Tìm kiếm món ăn"
               className="outline-none border-none bg-transparent py-1 px-2 text-base w-60 placeholder-gray-500"
             />
             <SearchOutlined className="text-lg text-gray-600" />
-          </div>
+          </ThemeWrapper>
 
           {user ? (
-            <>
+            <ThemeWrapper>
               <Dropdown menu={{ items }} placement="bottomRight" arrow>
                 <Button
                   type="text"
-                  icon={<UserOutlined className="text-lg md:text-xl" />}
+                  icon={
+                    <ThemeWrapper>
+                      <UserOutlined className="text-lg md:text-xl" />
+                    </ThemeWrapper>
+                  }
                   className="flex items-center gap-1 text-gray-900 hover:!text-orange-600"
                 >
                   <span className="hidden md:inline font-medium">
-                    Xin chào, {user.username} !
+                    <ThemeWrapper>Xin chào, {user.username} !</ThemeWrapper>
                   </span>
                 </Button>
               </Dropdown>
-            </>
+            </ThemeWrapper>
           ) : (
             <Link to="/sign-in">
               <Button
@@ -223,12 +230,12 @@ export const Header = ({
           )}
 
           <Link to="/shopping-cart">
-            <div className="relative">
+            <ThemeWrapper className="relative">
               <ShoppingCartOutlined className="text-xl md:text-2xl text-gray-900" />
               <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 font-bold shadow-md">
                 1
               </span>
-            </div>
+            </ThemeWrapper>
           </Link>
 
           <Flex gap="small" align="flex-start" vertical>
@@ -250,8 +257,8 @@ export const Header = ({
             />
           </Flex>
           <MobileMenu />
-        </div>
-      </div>
-    </header>
+        </ThemeWrapper>
+      </ThemeWrapper>
+    </ThemeWrapper>
   );
 };

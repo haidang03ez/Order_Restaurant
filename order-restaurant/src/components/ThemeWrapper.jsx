@@ -1,20 +1,11 @@
 import React from "react";
 import { useTheme } from "../hooks/useTheme";
 
-export const ThemeWrapper = ({ children }) => {
+export const ThemeWrapper = ({ children, className = "" }) => {
   const { theme } = useTheme();
-  return (
-    <div
-      className={`
-        transition-colors duration-300
-        ${
-          theme === "light"
-            ? "bg-white text-gray-900"
-            : "bg-gray-900 text-white"
-        }
-      `}
-    >
-      {children}
-    </div>
-  );
+  const baseThemeClass = `
+    transition-colors duration-300
+    ${theme === "light" ? "" : "bg-gray-700 text-white"}
+  `;
+  return <div className={`${baseThemeClass} ${className}`}>{children}</div>;
 };
