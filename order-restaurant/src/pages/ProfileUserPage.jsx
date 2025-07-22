@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getUserDetails } from "../services/userService";
 
 export const ProfileUserPage = () => {
   const [user, setUser] = useState(null);
@@ -9,23 +10,10 @@ export const ProfileUserPage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch("https://dummyjson.com/auth/me", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          //   credentials: "include",
-        });
-
-        const data = await res.json();
-
-        if (res.ok) {
-          setUser(data);
-        } else {
-          console.error("Lỗi khi lấy thông tin user:", data.message);
-        }
+        const res = await getUserDetails();
+        setUser(res.data);
       } catch (err) {
-        console.error("Lỗi mạng:", err);
+        console.error("Không thể lấy thông tin user:", err.message);
       } finally {
         setLoading(false);
       }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button, Dropdown, Flex, Segmented, Drawer } from "antd";
 import "../index.css";
 import {

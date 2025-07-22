@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { toast, ToastContainer } from "react-toastify";
 import { ThemeWrapper } from "../components/ThemeWrapper";
+import { login as loginApi } from "../services/authService";
 
 export const SignInPage = () => {
   const { login } = useAuth();
@@ -20,27 +21,18 @@ export const SignInPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await fetch("https://dummyjson.com/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: data.username,
-          password: data.password,
-          expiresInMins: 60,
-        }),
-        // credentials: "include",
+      const res = await loginApi({
+        username: data.username,
+        password: data.password,
+        expiresInMins: 60,
       });
-      if (!res.ok) {
-        throw new Error("Đăng nhập thất bại");
-      }
-      const result = await res.json();
 
       toast.success("Đăng nhập thành công!", {
         position: "top-center",
         autoClose: 2000,
       });
 
-      login(result);
+      login(res.data);
       navigate("/");
     } catch (err) {
       console.error("Lỗi đăng nhập:", err.message);
@@ -102,7 +94,11 @@ export const SignInPage = () => {
                     setShowPass(!showPass);
                   }}
                 >
-                  {showPass ? <ThemeWrapper>Ẩn</ThemeWrapper> : <ThemeWrapper>Hiện</ThemeWrapper>}
+                  {showPass ? (
+                    <ThemeWrapper>Ẩn</ThemeWrapper>
+                  ) : (
+                    <ThemeWrapper>Hiện</ThemeWrapper>
+                  )}
                 </button>
               </div>
               {errors.password && (
