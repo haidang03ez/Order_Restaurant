@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { toast, ToastContainer } from "react-toastify";
+import { ThemeWrapper } from "../components/ThemeWrapper";
 
 export const SignInPage = () => {
   const { login } = useAuth();
@@ -12,6 +13,7 @@ export const SignInPage = () => {
   const {
     register,
     handleSubmit,
+    remember,
     formState: { errors },
   } = useForm();
   const [showPass, setShowPass] = useState(false);
@@ -24,7 +26,7 @@ export const SignInPage = () => {
         body: JSON.stringify({
           username: data.username,
           password: data.password,
-          expiresInMins: 60, 
+          expiresInMins: 60,
         }),
         // credentials: "include",
       });
@@ -47,14 +49,14 @@ export const SignInPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="bg-white shadow-xl rounded-2xl overflow-hidden flex flex-col lg:flex-row w-full max-w-[900px]">
+    <ThemeWrapper className="flex items-center justify-center min-h-screen bg-gray-100 px-4 bg-gradient-to-tr from-gray-800 to-yellow-600">
+      <ThemeWrapper className="bg-white shadow-xl rounded-2xl overflow-hidden flex flex-col lg:flex-row w-full max-w-[900px]">
         <div
           className="w-full lg:w-1/2 h-48 lg:h-auto bg-cover bg-center"
           style={{ backgroundImage: `url(${image_banner_1})` }}
         ></div>
 
-        <div className="w-full lg:w-1/2 !p-6 !md:p-10">
+        <ThemeWrapper className="w-full lg:w-1/2 !p-6 !md:p-10">
           <h2 className="text-2xl md:text-3xl font-bold text-center !mb-6 md:mb-8">
             Đăng nhập
           </h2>
@@ -100,7 +102,7 @@ export const SignInPage = () => {
                     setShowPass(!showPass);
                   }}
                 >
-                  {showPass ? "Ẩn" : "Hiện"}
+                  {showPass ? <ThemeWrapper>Ẩn</ThemeWrapper> : <ThemeWrapper>Hiện</ThemeWrapper>}
                 </button>
               </div>
               {errors.password && (
@@ -111,7 +113,7 @@ export const SignInPage = () => {
             </div>
 
             <div className="my-3 flex gap-2 items-center">
-              <input type="checkbox" className="w-4 h-4"></input>
+              <input type="checkbox" className="w-4 h-4" {...remember}></input>
               <label className="text-sm md:text-base">Ghi nhớ đăng nhập</label>
             </div>
 
@@ -132,9 +134,9 @@ export const SignInPage = () => {
               </Link>
             </p>
           </form>
-        </div>
-      </div>
+        </ThemeWrapper>
+      </ThemeWrapper>
       <ToastContainer />
-    </div>
+    </ThemeWrapper>
   );
 };

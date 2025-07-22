@@ -35,7 +35,7 @@ function App() {
               />
               <Route path="policy" element={<PolicyPage />} />
               <Route
-                path="shopping-cart"
+                path="shopping-cart/:id"
                 element={
                   <PrivateRoute>
                     <CartPage />

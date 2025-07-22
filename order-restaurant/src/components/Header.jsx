@@ -10,6 +10,7 @@ import {
   UserOutlined,
   MenuOutlined,
   CloseOutlined,
+  DesktopOutlined,
 } from "@ant-design/icons";
 import { useTheme } from "../hooks/useTheme";
 import { useAuth } from "../hooks/useAuth";
@@ -149,7 +150,9 @@ export const Header = ({
               to="/"
               className="text-xl md:text-2xl font-bold text-orange-600"
             >
-              <ThemeWrapper>Vista</ThemeWrapper>
+              <ThemeWrapper className="hover:scale-115 hover:rotate-360 !transition">
+                Vista
+              </ThemeWrapper>
             </Link>
           </ThemeWrapper>
 
@@ -218,18 +221,26 @@ export const Header = ({
               </Dropdown>
             </ThemeWrapper>
           ) : (
-            <Link to="/sign-in">
-              <Button
-                type="text"
-                icon={<UserOutlined className="text-lg md:text-xl" />}
-                className="flex items-center gap-1 text-gray-900 hover:!text-orange-600"
-              >
-                <span className="hidden md:inline font-medium">Đăng nhập</span>
-              </Button>
-            </Link>
+            <ThemeWrapper className="flex items-center gap-1 ">
+              <Link to="/sign-in">
+                <Button
+                  type="text"
+                  icon={
+                    <ThemeWrapper>
+                      <UserOutlined className="text-lg md:text-xl" />
+                    </ThemeWrapper>
+                  }
+                  className="flex items-center gap-1 text-gray-900 hover:!text-orange-600"
+                >
+                  <ThemeWrapper className="hidden md:inline font-medium">
+                    Đăng nhập
+                  </ThemeWrapper>
+                </Button>
+              </Link>
+            </ThemeWrapper>
           )}
 
-          <Link to="/shopping-cart">
+          <Link to={`/shopping-cart/${user?.id || ""}`} className="!mr-2">
             <ThemeWrapper className="relative">
               <ShoppingCartOutlined className="text-xl md:text-2xl text-gray-900" />
               <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 font-bold shadow-md">
@@ -246,11 +257,19 @@ export const Header = ({
               options={[
                 {
                   value: "light",
-                  icon: <SunOutlined />,
+                  label: <SunOutlined className="!text-yellow-500" />,
                 },
                 {
                   value: "dark",
-                  icon: <MoonOutlined />,
+                  label: (
+                    <MoonOutlined className="!text-gray-800 dark:text-white" />
+                  ),
+                },
+                {
+                  value: "system",
+                  label: (
+                    <DesktopOutlined className="!text-blue-500" />
+                  ),
                 },
               ]}
               size="small"

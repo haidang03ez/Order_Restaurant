@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import image_banner_1 from "../assets/image_banner_1.png";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Button } from "antd";
+import { ThemeWrapper } from './../components/ThemeWrapper';
 
 export const SignUpPage = () => {
   const [showPass, setShowPass] = useState(false);
@@ -20,9 +20,9 @@ export const SignUpPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-xl rounded-2xl overflow-hidden flex w-[900px] max-w-full">
-        <div className="w-full md:w-1/2 p-10 px-5 py-5">
+    <ThemeWrapper className="flex items-center justify-center min-h-screen bg-gray-100 bg-gradient-to-tr from-yellow-600 to-yellow-900">
+      <ThemeWrapper className="bg-white shadow-xl rounded-2xl overflow-hidden flex w-[900px] max-w-full">
+        <ThemeWrapper className="w-full md:w-1/2 p-10 px-5 py-5">
           <h2 className="text-3xl font-bold text-center mb-8">Đăng ký</h2>
 
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -31,6 +31,7 @@ export const SignUpPage = () => {
               <input
                 type="text"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg text-base"
+                placeholder="Nhập tên đăng nhập"
                 {...register("username", {
                   required: "Không bỏ trống tên đăng nhập",
                   minLength: { value: 5, message: "Tối thiểu 5 ký tự" },
@@ -49,6 +50,7 @@ export const SignUpPage = () => {
               <input
                 type={showPass ? "text" : "password"}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg text-base"
+                placeholder="Nhập mật khẩu"
                 {...register("password", {
                   required: "Vui lòng nhập mật khẩu",
                   minLength: { value: 8, message: "Tối thiểu 8 ký tự" },
@@ -61,7 +63,7 @@ export const SignUpPage = () => {
                   setShowPass(!showPass);
                 }}
               >
-                {showPass ? "Ẩn" : "Hiện"}
+                {showPass ? <ThemeWrapper>Ẩn</ThemeWrapper> : <ThemeWrapper>Hiện</ThemeWrapper>}
               </button>
 
               {errors.password && (
@@ -78,6 +80,7 @@ export const SignUpPage = () => {
               <input
                 type={showConfirmPass ? "text" : "password"}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg text-base pr-10"
+                placeholder="Nhập xác nhận mật khẩu"
                 {...register("confirmPassword", {
                   required: "Vui lòng nhập xác nhận mật khẩu",
                   validate: (value) =>
@@ -89,7 +92,7 @@ export const SignUpPage = () => {
                 onClick={() => setShowConfirmPass(!showConfirmPass)}
                 className="absolute right-3 top-2 text-sm text-gray-600"
               >
-                {showConfirmPass ? "Ẩn" : "Hiện"}
+                {showConfirmPass ? <ThemeWrapper>Ẩn</ThemeWrapper> : <ThemeWrapper>Hiện</ThemeWrapper>}
               </button>
               {errors.confirmPassword && (
                 <p className="text-red-600 text-sm mt-1">
@@ -112,13 +115,13 @@ export const SignUpPage = () => {
               </Link>
             </p>
           </form>
-        </div>
+        </ThemeWrapper>
 
         <div
           className="relative w-1/2 hidden md:block bg-cover bg-center"
           style={{ backgroundImage: `url(${image_banner_1})` }}
         ></div>
-      </div>
-    </div>
+      </ThemeWrapper>
+    </ThemeWrapper>
   );
 };

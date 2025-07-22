@@ -34,7 +34,7 @@ export const CardItem = ({
   // };
 
   return (
-    <ThemeWrapper>
+    <ThemeWrapper >
       <Card
         className="rounded-lg shadow-md transition duration-300 hover:shadow-xl border border-gray-100 h-full"
         style={{ width: "100%" }}
@@ -42,26 +42,30 @@ export const CardItem = ({
           <img
             alt={title}
             src={image[0]}
-            className="h-[150px] sm:h-[180px] object-cover rounded-t-lg"
+            className="h-[150px] sm:h-[180px] object-cover rounded-t-lg pt-2 px-2"
           />
         }
       >
-        <div className="flex flex-col h-full justify-between">
+        <ThemeWrapper className=" flex flex-col h-full justify-between">
           <Link to={`/product-details/${id}`}>
             <Meta
               title={
-                <h2 className="text-base md:text-lg font-semibold text-amber-900 truncate">
-                  {title}
-                </h2>
+                <ThemeWrapper>
+                  <h2 className="text-base md:text-lg font-semibold text-amber-900 truncate">
+                    {title}
+                  </h2>
+                </ThemeWrapper>
               }
               description={
-                <p className="text-xs md:text-sm text-gray-600 line-clamp-3 mt-1">
-                  {description}
-                </p>
+                <ThemeWrapper>
+                  <p className="text-xs md:text-sm text-gray-600 line-clamp-3 mt-1">
+                    {description}
+                  </p>
+                </ThemeWrapper>
               }
             />
 
-            <div className="mt-3 md:mt-4 space-y-1 text-xs md:text-sm text-gray-700">
+            <ThemeWrapper className="mt-3 md:mt-4 space-y-1 text-xs md:text-sm text-gray-700">
               <p>
                 <strong>Giá:</strong> {price.toLocaleString()} VND
               </p>
@@ -71,7 +75,7 @@ export const CardItem = ({
               <p>
                 <strong>Loại:</strong> {category}
               </p>
-            </div>
+            </ThemeWrapper>
 
             <button className="w-full !px-4 md:!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700 transition-colors text-sm md:text-base mt-3">
               Xem chi tiết
@@ -95,7 +99,7 @@ export const CardItem = ({
         >
           Thêm món
         </button> */}
-        </div>
+        </ThemeWrapper>
         {/* <ToastContainer/> */}
       </Card>
     </ThemeWrapper>

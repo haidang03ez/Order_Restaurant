@@ -10,8 +10,11 @@ import {
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ThemeWrapper } from "./ThemeWrapper";
+import { useAuth } from "./../hooks/useAuth";
 
 export const Footer = () => {
+  const { logout } = useAuth();
+
   return (
     <ThemeWrapper className="bg-gray-100 text-gray-700 !py-8 md:!py-10">
       <ThemeWrapper className="container mx-auto px-4">
@@ -65,7 +68,7 @@ export const Footer = () => {
               TÀI KHOẢN CỦA TÔI
             </h6>
             <ul className="flex flex-col gap-2 space-y-2 text-sm md:text-base">
-              <li>
+              <li onClick={logout}>
                 <Link to="/sign-in" className="hover:text-blue-600">
                   <ThemeWrapper>Đăng nhập/Tạo mới tài khoản</ThemeWrapper>
                 </Link>

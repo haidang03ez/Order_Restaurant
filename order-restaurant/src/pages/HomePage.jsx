@@ -240,12 +240,12 @@ export const HomePage = () => {
             </div>
             <div className="booking-items w-full md:w-1/4 flex flex-col items-center gap-3">
               <Link to="/place-order" className="w-full md:w-auto">
-                <Button className="btn-booking w-full md:w-auto !border-none !rounded-none p-3 md:p-4 !bg-yellow-600 !font-bold text-white hover:scale-105 text-sm md:text-base">
+                <Button className="btn-booking w-full md:w-auto !border-yellow-600 !rounded-none p-4 md:p-4 !bg-yellow-600 !font-bold text-white hover:scale-105 text-sm md:text-base">
                   ĐẶT TIỆC NGAY
                 </Button>
               </Link>
               <Link to="/menu" className="w-full md:w-auto">
-                <Button className="btn-menu w-full md:w-auto !rounded-none p-3 md:p-4 bg-transparent !font-bold text-white hover:scale-105 hover:border-yellow-700 text-sm md:text-base">
+                <Button className="btn-menu w-full md:w-auto !rounded-none p-4 md:p-4 bg-transparent !font-bold text-white hover:scale-105 hover:border-yellow-700 text-sm md:text-base">
                   XEM THỰC ĐƠN
                 </Button>
               </Link>

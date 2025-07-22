@@ -1,4 +1,3 @@
-// src/pages/ProfileUserPage.jsx
 import React, { useEffect, useState } from "react";
 
 export const ProfileUserPage = () => {
