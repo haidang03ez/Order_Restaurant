@@ -5,8 +5,10 @@ import { Pagination } from "antd";
 export const NewsPage = () => {
   const [newsList, setNewsList] = useState([]);
   const [tagsList, setTagsList] = useState([]);
-  const [filterTag, setFilterTag] = useState([]);
+  const [newsListByTag, setNewsListByTag] = useState([]);
+
   const [currentTagPage, setCurrentTagPage] = useState(1);
+  const [currentNewsPage, setCurrentNewsPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   const getAllNews = async () => {
@@ -39,7 +41,7 @@ export const NewsPage = () => {
     }
   };
 
-  const getPostByTag = async ({ tag }) => {
+  const getNewsByTag = async ({ tag }) => {
     try {
       const res = await fetch(`https://dummyjson.com/posts/tag/${tag}`);
       if (!res.ok) {
@@ -47,7 +49,7 @@ export const NewsPage = () => {
       }
       const data = await res.json();
       console.log(data.posts);
-      setFilterTag(data.posts);
+      setNewsListByTag(data.posts);
     } catch (err) {
       console.log("Lỗi lấy dữ liệu: ", err);
     } finally {
@@ -56,13 +58,24 @@ export const NewsPage = () => {
   };
 
   const handleClickTag = (tag) => {
-    getPostByTag({ tag });
+    setCurrentNewsPage(1);
+    setCurrentTagPage(1);
+    getNewsByTag({ tag });
   };
 
-  const pageSize = 10;
-  const firstIndex = (currentTagPage - 1) * pageSize;
-  const endIndex = firstIndex + pageSize;
+  const pageSize = 12;
+
+  const firstIndex = (currentTagPage - 1) * 10;
+  const endIndex = firstIndex + 10;
   const currentTagList = tagsList.slice(firstIndex, endIndex);
+
+  const firstIndexNews = (currentNewsPage - 1) * pageSize;
+  const endIndexNews = firstIndexNews + pageSize;
+  const currentNewsList = newsList.slice(firstIndexNews, endIndexNews);
+  const currentNewsListByTag = newsListByTag.slice(
+    firstIndexNews,
+    endIndexNews
+  );
 
   useEffect(() => {
     getAllNews();
@@ -85,11 +98,15 @@ export const NewsPage = () => {
               <div className="flex justify-center gap-1">
                 <button
                   className={`px-3 py-2 font-medium text-sm md:text-base w-fit cursor-pointer transition-colors !rounded-[50px] ${
-                    filterTag === ""
+                    newsListByTag === ""
                       ? "bg-yellow-700 text-white"
                       : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
                   }`}
-                  onClick={() => setFilterTag([])}
+                  onClick={() => {
+                    setNewsListByTag([]);
+                    setCurrentNewsPage(1);
+                    setCurrentTagPage(1);
+                  }}
                 >
                   Tất cả
                 </button>
@@ -98,7 +115,7 @@ export const NewsPage = () => {
                     <button
                       onClick={() => handleClickTag(tag)}
                       className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
-                        filterTag === tag
+                        newsListByTag === tag
                           ? "!bg-yellow-700 !text-white"
                           : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
                       }`}
@@ -119,18 +136,38 @@ export const NewsPage = () => {
             </div>
           )}
 
-          {filterTag.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filterTag.map((news) => (
-                <NewsCard item={news} key={news.id} />
-              ))}
-            </div>
+          {newsListByTag.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {currentNewsListByTag.map((news) => (
+                  <NewsCard item={news} key={news.id} />
+                ))}
+              </div>
+              <div className="flex justify-center mt-6">
+                <Pagination
+                  current={currentNewsPage}
+                  pageSize={pageSize}
+                  total={newsListByTag.length}
+                  onChange={(page) => setCurrentNewsPage(page)}
+                />
+              </div>
+            </>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {newsList.map((news) => (
-                <NewsCard item={news} key={news.id} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {currentNewsList.map((news) => (
+                  <NewsCard item={news} key={news.id} />
+                ))}
+              </div>
+              <div className="flex justify-center mt-6">
+                <Pagination
+                  current={currentNewsPage}
+                  pageSize={pageSize}
+                  total={newsList.length}
+                  onChange={(page) => setCurrentNewsPage(page)}
+                />
+              </div>
+            </>
           )}
         </div>
       )}

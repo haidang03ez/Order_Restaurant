@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink } from "react-router-dom";
 import { Button, Dropdown, Flex, Segmented, Drawer } from "antd";
 import "../index.css";
 import {
@@ -150,7 +150,7 @@ export const Header = ({
               to="/"
               className="text-xl md:text-2xl font-bold text-orange-600"
             >
-              <ThemeWrapper className="hover:scale-115 hover:rotate-360 !transition">
+              <ThemeWrapper className="hover:scale-115 !transition">
                 Vista
               </ThemeWrapper>
             </Link>
@@ -240,7 +240,7 @@ export const Header = ({
             </ThemeWrapper>
           )}
 
-          <Link to={`/shopping-cart/${user?.id || ""}`} className="!mr-2">
+          <Link to={`/shopping-cart`} className="!mr-2">
             <ThemeWrapper className="relative">
               <ShoppingCartOutlined className="text-xl md:text-2xl text-gray-900" />
               <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 font-bold shadow-md">
@@ -257,18 +257,32 @@ export const Header = ({
               options={[
                 {
                   value: "light",
-                  label: <SunOutlined className="!text-yellow-500" />,
+                  label: (
+                    <SunOutlined
+                      className={
+                        theme === "light" ? "!text-yellow-600" : "text-gray-400"
+                      }
+                    />
+                  ),
                 },
                 {
                   value: "dark",
                   label: (
-                    <MoonOutlined className="!text-gray-800 dark:text-white" />
+                    <MoonOutlined
+                      className={
+                        theme === "dark" ? "!text-gray-800" : "text-gray-400"
+                      }
+                    />
                   ),
                 },
                 {
                   value: "system",
                   label: (
-                    <DesktopOutlined className="!text-blue-500" />
+                    <DesktopOutlined
+                      className={
+                        theme === "system" ? "!text-blue-500" : "text-gray-400"
+                      }
+                    />
                   ),
                 },
               ]}

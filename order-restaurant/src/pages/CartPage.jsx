@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CartItemCard } from "../components/CardItemCart";
 import { useAuth } from "../hooks/useAuth";
 
 export const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
   const { user } = useAuth();
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch(`https://dummyjson.com/carts/user/${id}`);
+        const res = await fetch(`https://dummyjson.com/carts/user/${user.id}`);
         if (!res.ok) {
           throw new Error("Không nhận được phản hồi");
         }
@@ -27,7 +26,7 @@ export const CartPage = () => {
     };
 
     fetchCart();
-  }, [id]);
+  }, [user.id]);
 
   if (loading) return <div>Đang tải...</div>;
 
