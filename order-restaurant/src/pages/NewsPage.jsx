@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { NewsCard } from "../components/NewsCard";
 import { Pagination } from "antd";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import {
+  fetchNewsList,
+  fetchNewsByATag,
+  fetchNewsTagList,
+} from "../services/newsService";
 
 export const NewsPage = () => {
   const [newsList, setNewsList] = useState([]);
-  const [tagsList, setTagsList] = useState([]);
-  const [newsListByTag, setNewsListByTag] = useState([]);
-
-  const [currentTagPage, setCurrentTagPage] = useState(1);
-  const [currentNewsPage, setCurrentNewsPage] = useState(1);
+  const [tagNewsList, setTagNewsList] = useState([]);
+  const [newsListByATag, setNewsListByATag] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedTag, setSelectedTag] = useState("");
+  const [total, setTotal] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 6;
 
-  const getAllNews = async () => {
+  const loadNewsList = async (page = 1) => {
     try {
-      const res = await fetch("https://dummyjson.com/posts");
-      if (!res.ok) {
-        throw new Error("Không nhận được phản hồi");
-      }
-      const data = await res.json();
-      setNewsList(data.posts);
+      const skip = (page - 1) * pageSize;
+      const res = await fetchNewsList({ limit: pageSize, skip });
+      setNewsList(res.data.posts);
+      setTotal(res.data.total);
+      setCurrentPage(page);
     } catch (err) {
       console.log("Lỗi lấy dữ liệu: ", err);
     } finally {
@@ -26,14 +32,10 @@ export const NewsPage = () => {
     }
   };
 
-  const getAllTags = async () => {
+  const loadNewsTagList = async () => {
     try {
-      const res = await fetch("https://dummyjson.com/posts/tag-list");
-      if (!res.ok) {
-        throw new Error("Không nhận được phản hồi");
-      }
-      const data = await res.json();
-      setTagsList(data);
+      const res = await fetchNewsTagList();
+      setTagNewsList(res.data);
     } catch (err) {
       console.log("Lỗi lấy dữ liệu: ", err);
     } finally {
@@ -41,15 +43,16 @@ export const NewsPage = () => {
     }
   };
 
-  const getNewsByTag = async ({ tag }) => {
+  const loadNewsByATag = async ({ tag, page = 1 }) => {
     try {
-      const res = await fetch(`https://dummyjson.com/posts/tag/${tag}`);
-      if (!res.ok) {
-        throw new Error("Không nhận được phản hồi");
-      }
-      const data = await res.json();
-      console.log(data.posts);
-      setNewsListByTag(data.posts);
+      const skip = (page - 1) * pageSize;
+      const res = await fetchNewsByATag({
+        tag,
+        params: { limit: pageSize, skip },
+      });
+      setNewsListByATag(res.data.posts);
+      setTotal(res.data.total);
+      setCurrentPage(page);
     } catch (err) {
       console.log("Lỗi lấy dữ liệu: ", err);
     } finally {
@@ -57,29 +60,35 @@ export const NewsPage = () => {
     }
   };
 
-  const handleClickTag = (tag) => {
-    setCurrentNewsPage(1);
-    setCurrentTagPage(1);
-    getNewsByTag({ tag });
+  const handlePageChange = (page) => {
+    loadNewsList(page);
   };
 
-  const pageSize = 12;
+  const handlePageTagChange = (page) => {
+    if (selectedTag) {
+      loadNewsByATag({ page, tag: selectedTag });
+    }
+  };
 
-  const firstIndex = (currentTagPage - 1) * 10;
-  const endIndex = firstIndex + 10;
-  const currentTagList = tagsList.slice(firstIndex, endIndex);
+  // Pagination for tag news
+  const tagPageSize = 10;
+  const [tagPage, setTagPage] = useState(0);
+  const totalTagPage = Math.ceil(tagNewsList.length / tagPageSize);
+  const handleTagPrev = () => {
+    if (tagPage > 0) setTagPage(tagPage - 1);
+  };
+  const handleTagNext = () => {
+    if (tagPage < totalTagPage - 1) setTagPage(tagPage + 1);
+  };
 
-  const firstIndexNews = (currentNewsPage - 1) * pageSize;
-  const endIndexNews = firstIndexNews + pageSize;
-  const currentNewsList = newsList.slice(firstIndexNews, endIndexNews);
-  const currentNewsListByTag = newsListByTag.slice(
-    firstIndexNews,
-    endIndexNews
+  const currentTagList = tagNewsList.slice(
+    tagPage * tagPageSize,
+    (tagPage + 1) * tagPageSize
   );
 
   useEffect(() => {
-    getAllNews();
-    getAllTags();
+    loadNewsList();
+    loadNewsTagList();
   }, []);
 
   return (
@@ -92,83 +101,100 @@ export const NewsPage = () => {
         <p>Đang tải tin tức...</p>
       ) : (
         <div className="flex flex-col gap-3">
-          {/* Tags List */}
-          {tagsList && (
-            <div className="flex flex-col gap-2 py-4">
-              <div className="flex justify-center gap-1">
+          <div className="flex flex-wrap gap-2 mb-4 justify-between items-center">
+            <button
+              className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors
+                  ${
+                    tagPage === 0
+                      ? "opacity-30 cursor-not-allowed"
+                      : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110"
+                  }
+                `}
+              onClick={handleTagPrev}
+            >
+              <LeftOutlined />
+            </button>
+
+            <div className="flex flex-wrap gap-2 justify-center">
+              <button
+                className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
+                  selectedTag === ""
+                    ? "!bg-yellow-700 !text-white"
+                    : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
+                }`}
+                onClick={() => {
+                  setSelectedTag("");
+                  setNewsListByATag([]);
+                  setCurrentPage(1);
+                  loadNewsList(1);
+                }}
+              >
+                Tất cả
+              </button>
+              {currentTagList.map((tag) => (
                 <button
-                  className={`px-3 py-2 font-medium text-sm md:text-base w-fit cursor-pointer transition-colors !rounded-[50px] ${
-                    newsListByTag === ""
-                      ? "bg-yellow-700 text-white"
+                  key={tag}
+                  className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
+                    selectedTag === tag
+                      ? "!bg-yellow-700 !text-white"
                       : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
                   }`}
                   onClick={() => {
-                    setNewsListByTag([]);
-                    setCurrentNewsPage(1);
-                    setCurrentTagPage(1);
+                    setSelectedTag(tag);
+                    loadNewsByATag({ tag, page: 1 });
                   }}
                 >
-                  Tất cả
+                  {tag}
                 </button>
-                {currentTagList.map((tag, index) => (
-                  <div key={index}>
-                    <button
-                      onClick={() => handleClickTag(tag)}
-                      className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
-                        newsListByTag === tag
-                          ? "!bg-yellow-700 !text-white"
-                          : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
-                      }`}
-                    >
-                      {tag}
-                    </button>
-                  </div>
-                ))}
-              </div>
-
-              <Pagination
-                align="center"
-                current={currentTagPage}
-                pageSize={pageSize}
-                total={tagsList.length}
-                onChange={(page) => setCurrentTagPage(page)}
-              />
+              ))}
             </div>
-          )}
 
-          {newsListByTag.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {currentNewsListByTag.map((news) => (
-                  <NewsCard item={news} key={news.id} />
-                ))}
-              </div>
-              <div className="flex justify-center mt-6">
+            <button
+              className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors
+                  ${
+                    tagPage === totalTagPage - 1
+                      ? "opacity-30 cursor-not-allowed"
+                      : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110"
+                  }
+                `}
+              onClick={handleTagNext}
+            >
+              <RightOutlined />
+            </button>
+          </div>
+          <>
+            {newsListByATag.length > 0 ? (
+              <div className="flex flex-col gap-3 justify-center items-center">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {newsListByATag.map((news) => (
+                    <NewsCard item={news} key={news.id}></NewsCard>
+                  ))}
+                </div>
                 <Pagination
-                  current={currentNewsPage}
+                  current={currentPage}
                   pageSize={pageSize}
-                  total={newsListByTag.length}
-                  onChange={(page) => setCurrentNewsPage(page)}
+                  total={total}
+                  onChange={handlePageTagChange}
+                  className="mt-4 text-center "
                 />
               </div>
-            </>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {currentNewsList.map((news) => (
-                  <NewsCard item={news} key={news.id} />
-                ))}
-              </div>
-              <div className="flex justify-center mt-6">
+            ) : (
+              <div className="flex flex-col gap-3 justify-center items-center">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {newsList.map((news) => (
+                    <NewsCard item={news} key={news.id}></NewsCard>
+                  ))}
+                </div>
                 <Pagination
-                  current={currentNewsPage}
+                  current={currentPage}
                   pageSize={pageSize}
-                  total={newsList.length}
-                  onChange={(page) => setCurrentNewsPage(page)}
+                  total={total}
+                  onChange={handlePageChange}
+                  className="mt-4 text-center "
                 />
               </div>
-            </>
-          )}
+            )}
+          </>
         </div>
       )}
     </div>

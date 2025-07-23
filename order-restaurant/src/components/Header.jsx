@@ -31,36 +31,24 @@ export const Header = ({
   const items = [
     {
       key: "1",
-      label: <Link to="/profile">Thông tin cá nhân</Link>,
+      label: <NavLink to="/profile">Thông tin cá nhân</NavLink>,
     },
     {
       key: "2",
-      label: (
-        <a rel="noopener noreferrer" href="">
-          Cài đặt địa chỉ
-        </a>
-      ),
+      label: <NavLink to="/profile">Cài đặt địa chỉ</NavLink>,
     },
     {
       key: "3",
-      label: (
-        <a rel="noopener noreferrer" href="">
-          Quản lý đơn hàng
-        </a>
-      ),
+      label: <NavLink to="/profile">Quản lý đơn hàng</NavLink>,
     },
     {
       key: "4",
-      label: (
-        <a rel="noopener noreferrer" href="">
-          Mã đã lưu
-        </a>
-      ),
+      label: <NavLink to="/profile">Mã đã lưu</NavLink>,
     },
     {
       key: "5",
       label: (
-        <a rel="noopener noreferrer" href="" onClick={logout}>
+        <a onClick={logout} className="!text-red-600 hover:!text-red-700 hover:!font-bold">
           Đăng xuất
         </a>
       ),

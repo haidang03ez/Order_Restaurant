@@ -2,7 +2,6 @@ import React from "react";
 import { Card } from "antd";
 import { Link } from "react-router-dom";
 import { ThemeWrapper } from "./ThemeWrapper";
-// import { toast, ToastContainer } from "react-toastify";
 
 const { Meta } = Card;
 
@@ -15,26 +14,8 @@ export const CardItem = ({
   category,
   rating,
 }) => {
-  // const handleAddToCart = (dish) => {
-  //   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  //   const indexItems = cartItems.findIndex((item) => item.id === dish.id);
-
-  //   if (indexItems !== -1) {
-  //     cartItems[indexItems].quantity += 1;
-  //   } else {
-  //     cartItems.push({ ...dish, quantity: 1 });
-  //   }
-
-  //   localStorage.setItem("cart", JSON.stringify(cartItems));
-
-  //   toast.success("Đã thêm vào thực đơn!", {
-  //     position: "top-right",
-  //     autoClose: 1000,
-  //   });
-  // };
-
   return (
-    <ThemeWrapper >
+    <ThemeWrapper>
       <Card
         className="rounded-lg shadow-md transition duration-300 hover:shadow-xl border border-gray-100 h-full"
         style={{ width: "100%" }}
@@ -81,26 +62,7 @@ export const CardItem = ({
               Xem chi tiết
             </button>
           </Link>
-
-          {/* <button
-          className="mt-2 !px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700"
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddToCart({
-              id,
-              title,
-              image: image[0],
-              description,
-              price,
-              category,
-              rating,
-            });
-          }}
-        >
-          Thêm món
-        </button> */}
         </ThemeWrapper>
-        {/* <ToastContainer/> */}
       </Card>
     </ThemeWrapper>
   );

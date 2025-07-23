@@ -6,6 +6,8 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+
+  // Restore user session from localStorage
   useEffect(() => {
     const restoreSession = async () => {
       const accessToken = localStorage.getItem("accessToken");
@@ -26,6 +28,7 @@ const AuthProvider = ({ children }) => {
     restoreSession();
   }, []);
 
+  // Function to log in the user
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem("accessToken", userData.accessToken);
@@ -34,6 +37,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  // Function to log out the user
   const logout = () => {
     setUser(null);
     localStorage.removeItem("accessToken");
