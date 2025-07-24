@@ -14,6 +14,7 @@ export const NewsPage = () => {
   const [newsListByATag, setNewsListByATag] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedTag, setSelectedTag] = useState("");
+  
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;

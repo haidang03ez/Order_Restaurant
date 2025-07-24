@@ -34,9 +34,23 @@ export const Footer = () => {
               DỊCH VỤ
             </h6>
             <ul className="flex flex-col gap-2 space-y-2 text-sm md:text-base">
-              <li>Điều khoản sử dụng</li>
-              <li>Chính sách bảo mật thông tin cá nhân</li>
-              <li>Chính sách bảo mật thanh toán</li>
+              <li>
+                <Link to="/policy" className="hover:text-blue-600">
+                  <ThemeWrapper>Điều khoản sử dụng</ThemeWrapper>
+                </Link>
+              </li>
+              <li>
+                <Link to="/policy" className="hover:text-blue-600">
+                  <ThemeWrapper>
+                    Chính sách bảo mật thông tin cá nhân
+                  </ThemeWrapper>
+                </Link>
+              </li>
+              <li>
+                <Link to="/policy" className="hover:text-blue-600">
+                  <ThemeWrapper>Chính sách bảo mật thanh toán</ThemeWrapper>
+                </Link>
+              </li>
             </ul>
           </ThemeWrapper>
 

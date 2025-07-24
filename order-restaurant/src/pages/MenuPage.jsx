@@ -1,87 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { CardItem } from "./../components/CardItem";
 import { SearchOutlined } from "@ant-design/icons";
-import { ThemeWrapper } from './../components/ThemeWrapper';
+import { ThemeWrapper } from "./../components/ThemeWrapper";
+import { useProduct } from "./../hooks/useProduct";
+import { Pagination } from "antd";
+import { AiOutlineClose } from "react-icons/ai";
 
 export const MenuPage = () => {
-  const [allProduct, setAllProduct] = useState([]);
-  const [product, setProduct] = useState([]);
-  const [skip, setSkip] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const [filterCategory, setFilterCategory] = useState("");
-  const [searchProduct, setSearchProduct] = useState("");
+  const {
+    products,
+    total,
+    currentPage,
+    pageSize,
+    handlePageChange,
+    setSearchKeyword,
+  } = useProduct();
+  const [inputValue, setInputValue] = useState("");
 
-  const LIMIT = 10;
-
-  const getAllProducts = async () => {
-    try {
-      const res = await fetch(
-        `https://dummyjson.com/products?limit=${LIMIT}&skip=${skip}`
-      );
-      if (!res.ok) {
-        throw new Error("Không nhận được phẩn hồi");
-      }
-      const data = await res.json();
-      const updatedAll = [...allProduct, ...data.products];
-
-      // setProduct(productList);
-      setAllProduct(updatedAll);
-      setSkip((prev) => prev + LIMIT);
-
-      if (!filterCategory) {
-        setProduct(updatedAll);
-      }
-
-      if (skip + LIMIT > data.total) setHasMore(false);
-    } catch (error) {
-      console.log("Lỗi lấy dữ liệu: ", error);
-    } finally {
-      setLoading(false);
-    }
+  const handleSearch = () => {
+    setSearchKeyword(inputValue);
   };
-
-  useEffect(() => {
-    getAllProducts();
-  }, []);
-
-  //filter product by category
-  const handleFilterCategory = (category) => {
-    setFilterCategory(category);
-    const filteredProduct = allProduct.filter(
-      (item) => item.category === category
-    );
-    setProduct(filteredProduct);
-  };
-
-  //filter product by name
-  const handleFilterName = (name) => {
-    const keyWord = name
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .trim();
-
-    setSearchProduct(name);
-    if (!keyWord) {
-      setProduct(allProduct);
-      return;
-    }
-
-    const searchProduct = allProduct.filter((item) =>
-      item.title?.toLowerCase().includes(keyWord)
-    );
-    setProduct(searchProduct);
-  };
-
-  const handleClearFilter = () => {
-    setFilterCategory("");
-    setProduct(allProduct);
-    setHasMore(true);
-  };
-
-  const categoryList = product.map((item) => item.category);
-  const uniqueCategoryList = Array.from(new Set(categoryList));
 
   return (
     <ThemeWrapper className="!container mx-auto py-4 md:py-8 px-4">
@@ -89,57 +27,39 @@ export const MenuPage = () => {
         Bạn chưa biết ăn gì? Chọn ngay nhé
       </h1>
 
-      {/* Search */}
       <div className="flex justify-center py-5">
         <div className="hidden md:flex items-center justify-between w-[20rem] border-b border-gray-400 pr-2">
           <input
             type="text"
             placeholder="Nhập tên món ăn"
             className="outline-none w-full border-none bg-transparent py-1 px-2 text-base  placeholder-gray-500"
-            onChange={(e) => {
-              const value = e.target.value;
-              setSearchProduct(value), handleFilterName(value);
-            }}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
           />
-          <SearchOutlined className="text-lg text-gray-600" />
+          <div>
+            {inputValue && (
+              <button
+                onClick={() => {
+                  setSearchKeyword("");
+                  setInputValue("");
+                }}
+                className="ml-2"
+              >
+                <AiOutlineClose className="text-lg text-gray-600" />
+              </button>
+            )}
+          </div>
+          <button
+            className="bg-transparent text-black px-4 py-2 !rounded-md hover:!bg-gray-200 hover:!scale-110 !transition"
+            onClick={handleSearch}
+          >
+            <SearchOutlined className="text-lg text-gray-600" />
+          </button>
         </div>
       </div>
 
-      {/* Tag */}
-      <ThemeWrapper className="sticky w-full top-[70px] md:top-[80px] z-10 backdrop-blur-sm bg-white/95 ">
-        <ThemeWrapper className="flex flex-wrap gap-2 py-3 px-0 justify-center">
-          <button
-            className={`px-3 py-2 font-medium text-sm md:text-base w-fit cursor-pointer transition-colors !rounded-[50px] ${
-              filterCategory === ""
-                ? "bg-yellow-700 text-white"
-                : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
-            }`}
-            onClick={handleClearFilter}
-          >
-            Tất cả
-          </button>
-          {uniqueCategoryList.map((item, index) => (
-            <button
-              key={index}
-              className={`px-3 py-2 !rounded-[50px] font-medium text-sm md:text-base w-fit cursor-pointer transition-colors ${
-                filterCategory === item
-                  ? "bg-yellow-700 text-white"
-                  : "bg-slate-100 text-black hover:!bg-slate-300 hover:!scale-110 !transition"
-              }`}
-              onClick={() => {
-                handleFilterCategory(item);
-                setHasMore(false);
-              }}
-            >
-              {item}
-            </button>
-          ))}
-        </ThemeWrapper>
-      </ThemeWrapper>
-
-      {/* Products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 mt-4">
-        {product.map((item) => (
+        {products.map((item) => (
           <CardItem
             key={item.id}
             id={item.id}
@@ -152,18 +72,15 @@ export const MenuPage = () => {
           />
         ))}
       </div>
-
-      {hasMore && (
-        <div className="text-center !my-6">
-          <button
-            onClick={getAllProducts}
-            className="!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700 transition-colors"
-            disabled={loading}
-          >
-            {loading ? "Đang tải..." : "Xem thêm"}
-          </button>
-        </div>
-      )}
+      <div className="flex justify-center">
+        <Pagination
+          current={currentPage}
+          pageSize={pageSize}
+          total={total}
+          onChange={handlePageChange}
+          className="mt-4 text-center "
+        />
+      </div>
     </ThemeWrapper>
   );
 };
