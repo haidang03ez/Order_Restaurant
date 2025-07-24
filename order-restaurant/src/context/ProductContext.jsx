@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import {
+  fetchProductDetails,
   fetchProductList,
   fetchSearchProduct,
 } from "../services/productService";
@@ -8,6 +9,7 @@ export const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [productDetails, setProductDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
 
@@ -18,6 +20,7 @@ const ProductProvider = ({ children }) => {
   // Get all product
   const loadProductList = async (page = 1) => {
     try {
+      setLoading(true);
       const skip = (page - 1) * pageSize;
       const checkSearch =
         searchKeyword.trim() === "" ? fetchProductList : fetchSearchProduct;
@@ -36,6 +39,20 @@ const ProductProvider = ({ children }) => {
     }
   };
 
+  // Get product details
+  const loadProductDetails = async (productId) => {
+    try {
+      setLoading(true);
+      const res = await fetchProductDetails(productId);
+      setProductDetails(res.data);
+    } catch (err) {
+      console.log("Lỗi lấy chi tiết sản phẩm: ", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Handle pagination
   const handlePageChange = (page) => {
     setLoading(true);
     loadProductList(page);
@@ -56,12 +73,15 @@ const ProductProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         products,
+        productDetails,
+        loadProductDetails,
         total,
         currentPage,
         pageSize,
         handlePageChange,
         searchKeyword,
         setSearchKeyword,
+        loading,
       }}
     >
       {children}

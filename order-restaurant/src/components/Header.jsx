@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button, Dropdown, Flex, Segmented, Drawer } from "antd";
 import "../index.css";
 import {
@@ -15,6 +15,8 @@ import {
 import { useTheme } from "../hooks/useTheme";
 import { useAuth } from "../hooks/useAuth";
 import { ThemeWrapper } from "./ThemeWrapper";
+import { useProduct } from "../hooks/useProduct";
+import { AiOutlineClose } from "react-icons/ai";
 
 export const Header = ({
   navItem1,
@@ -27,6 +29,11 @@ export const Header = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const { user, logout } = useAuth();
+  const [inputValue, setInputValue] = useState("");
+  const { setSearchKeyword, products } = useProduct();
+  const [searchDropdown, setSearchDropdown] = useState(false);
+  const location = useLocation();
+  const dropdownRef = useRef(null);
 
   const items = [
     {
@@ -48,7 +55,10 @@ export const Header = ({
     {
       key: "5",
       label: (
-        <a onClick={logout} className="!text-red-600 hover:!text-red-700 hover:!font-bold">
+        <a
+          onClick={logout}
+          className="!text-red-600 hover:!text-red-700 hover:!font-bold"
+        >
           Đăng xuất
         </a>
       ),
@@ -123,6 +133,27 @@ export const Header = ({
     </div>
   );
 
+  const handleSearch = () => {
+    setSearchKeyword(inputValue);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setSearchDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setSearchDropdown(false);
+  }, [location]);
+
   return (
     <ThemeWrapper
       className={`w-full flex border-b border-none transition-all duration-300 ${
@@ -181,13 +212,89 @@ export const Header = ({
         </ThemeWrapper>
 
         <ThemeWrapper className="flex items-center gap-3 md:gap-6">
-          <ThemeWrapper className="hidden md:flex items-center border-b border-gray-400 pr-2">
+          {/* SearchBar */}
+          <ThemeWrapper
+            ref={dropdownRef}
+            className="hidden md:flex items-center border-b border-gray-400 pr-2"
+          >
             <input
               type="text"
               placeholder="Tìm kiếm món ăn"
+              value={inputValue}
               className="outline-none border-none bg-transparent py-1 px-2 text-base w-60 placeholder-gray-500"
+              onChange={(e) => setInputValue(e.target.value)}
+              onFocus={() => setSearchDropdown(true)}
             />
-            <SearchOutlined className="text-lg text-gray-600" />
+            <div>
+              {inputValue && (
+                <button
+                  onClick={() => {
+                    setSearchKeyword("");
+                    setInputValue("");
+                  }}
+                  className="ml-2"
+                >
+                  <AiOutlineClose className="text-lg text-gray-600" />
+                </button>
+              )}
+            </div>
+            <button
+              className="bg-transparent text-black px-4 py-2 !rounded-md hover:!bg-gray-200 hover:!scale-110 !transition"
+              onClick={handleSearch}
+            >
+              <SearchOutlined className="text-lg text-gray-600" />
+            </button>
+            <ThemeWrapper>
+              {searchDropdown && (
+                <div className="absolute z-10 top-full right-30 w-50 bg-white shadow-md mt-2 rounded-xl p-4 space-y-4">
+                  {/* Lịch sử tìm kiếm */}
+                  <div>
+                    <div className="flex justify-between items-center mb-2 text-gray-600 font-medium">
+                      <span>Lịch sử tìm kiếm</span>
+                      <div className="flex items-center gap-3">
+                        <button className="text-sm text-blue-500 hover:underline">
+                          Xoá tất cả
+                        </button>
+                        <button
+                          className="border p-1 rounded text-sm hover:!bg-red-500 hover:!text-white"
+                          onClick={() => setSearchDropdown(false)}
+                        >
+                          <AiOutlineClose className="text-lg text-gray-600 hover:!text-white" />
+                        </button>
+                      </div>
+                    </div>
+                    <ul className="space-y-1 text-sm text-gray-800">
+                      <li>Nothing Phone 3A 8GB 128GB</li>
+                    </ul>
+                  </div>
+
+                  {/* Xu hướng tìm kiếm */}
+                  <div>
+                    <div className="mb-2 text-gray-600 font-medium">
+                      Xu hướng tìm kiếm 🔥
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      {products.map((item, idx) => (
+                        <Link
+                          to={`/product-details/${item.id}`}
+                          key={idx}
+                          className="flex items-center gap-2 text-sm hover:bg-gray-100 p-1 rounded-md"
+                        >
+                          <img
+                            src={item.thumbnail}
+                            className="w-8 h-8 bg-gray-200 rounded-md"
+                          />
+                          <div className="flex flex-col">
+                            <span>{item.title}</span>
+                            <span>{item.price} VND</span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </ThemeWrapper>
           </ThemeWrapper>
 
           {user ? (

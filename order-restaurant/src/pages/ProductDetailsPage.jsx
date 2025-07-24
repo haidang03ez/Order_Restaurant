@@ -1,100 +1,69 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useProduct } from "../hooks/useProduct";
 
 export const ProductDetailsPage = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+
+  const { productDetails, loadProductDetails, loading } = useProduct();
 
   useEffect(() => {
-    const getProductDetails = async () => {
-      try {
-        const res = await fetch(`https://dummyjson.com/products/${id}`);
-        if (!res.ok) throw new Error("Không lấy được sản phẩm");
-        const data = await res.json();
-        setProduct(data);
-      } catch (err) {
-        console.error("Lỗi: ", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getProductDetails();
+    if (id) {
+      loadProductDetails(id);
+    }
   }, [id]);
 
-  const handleAddToCart = (dish) => {
-    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    const indexItems = cartItems.findIndex((item) => item.id === dish.id);
-
-    if (indexItems !== -1) {
-      cartItems[indexItems].quantity += 1;
-    } else {
-      cartItems.push({ ...dish, quantity: 1 });
-    }
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-
-    toast.success("Đã thêm vào thực đơn!", {
-      position: "top-right",
-      autoClose: 1000,
-      className: "!font-sans bg-green-600 text-green rounded-lg shadow-lg",
-      bodyClassName: "text-base font-semibold",
-      progressClassName: "bg-white",
-    });
-  };
-
-  if (loading) return <p className="text-center mt-10">Đang tải dữ liệu...</p>;
-
-  if (!product)
-    return <p className="text-center mt-10">Không tìm thấy sản phẩm.</p>;
+  if (loading || !productDetails) {
+    return <p className="text-center mt-10">Đang tải dữ liệu...</p>;
+  }
 
   return (
     <div className="container flex flex-col mx-auto px-4 !py-8">
       <div className="gap-10 flex items-start">
         <img
-          src={product.thumbnail}
-          alt={product.title}
+          src={productDetails.thumbnail}
+          alt={productDetails.title}
           className="w-1/2 h-1/2 object-cover "
         />
 
         <div className="p-5">
-          <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-          <p className="text-gray-700 mb-4">{product.description}</p>
+          <h1 className="text-3xl font-bold mb-4">{productDetails.title}</h1>
+          <p className="text-gray-700 mb-4">{productDetails.description}</p>
 
           <p>
-            <strong>Giá:</strong> {product.price.toLocaleString()} VND
+            <strong>Giá:</strong> {productDetails.price.toLocaleString()} VND
           </p>
           <p>
-            <strong>Danh mục:</strong> {product.category}
+            <strong>Danh mục:</strong> {productDetails.category}
           </p>
           <p>
-            <strong>Thương hiệu:</strong> {product.brand}
+            <strong>Thương hiệu:</strong> {productDetails.brand}
           </p>
           <p>
-            <strong>Đánh giá:</strong> {product.rating} ⭐
+            <strong>Đánh giá:</strong> {productDetails.rating} ⭐
           </p>
           <p>
-            <strong>Còn lại:</strong> {product.stock} sản phẩm
+            <strong>Còn lại:</strong> {productDetails.stock} sản phẩm
           </p>
 
           <button
             className="!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700"
-            onClick={() => {
-              handleAddToCart(product);
-            }}
+            // onClick={() => {
+            //   handleAddToCart(product);
+            // }}
           >
             Thêm món
           </button>
         </div>
       </div>
-      {product.reviews?.length > 0 && (
+      {productDetails.reviews?.length > 0 && (
         <div className="mt-12 p-5">
           <h2 className="text-2xl font-semibold mb-4">
             Đánh giá từ khách hàng
           </h2>
           <div className="space-y-4 ">
-            {product.reviews.map((review, index) => (
+            {productDetails.reviews.map((review, index) => (
               <div
                 key={index}
                 className="grid md:grid-cols-4 gap-3 border border-gray-200 rounded p-4 bg-gray-50 mt-2"
