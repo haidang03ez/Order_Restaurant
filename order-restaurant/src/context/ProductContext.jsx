@@ -19,7 +19,13 @@ const ProductProvider = ({ children }) => {
   const loadProductList = async (page = 1) => {
     try {
       const skip = (page - 1) * pageSize;
-      const res = await fetchProductList({ limit: pageSize, skip });
+      const checkSearch =
+        searchKeyword.trim() === "" ? fetchProductList : fetchSearchProduct;
+      const res = await checkSearch({
+        q: searchKeyword,
+        limit: pageSize,
+        skip,
+      });
       setProducts(res.data.products);
       setTotal(res.data.total);
       setCurrentPage(page);
@@ -30,36 +36,16 @@ const ProductProvider = ({ children }) => {
     }
   };
 
-  // Search product by name
-  useEffect(() => {
-    const loadProductByName = async (page = 1) => {
-      try {
-        const skip = (page - 1) * pageSize;
-        const res = await fetchSearchProduct({
-          q : searchKeyword,
-          limit: pageSize,
-          skip,
-        });
-        setProducts(res.data.products);
-        setTotal(res.data.total);
-        setCurrentPage(page);
-      } catch (err) {
-        console.log("Lỗi tìm kiếm sản phẩm: ", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProductByName();
-  }, [searchKeyword]);
-
   const handlePageChange = (page) => {
+    setLoading(true);
     loadProductList(page);
   };
 
-  // const handleSearchPageChange = (page) => {
-  //   loadProductByName(page);
-  // };
+  // Search product by name
+  useEffect(() => {
+    setLoading(true);
+    loadProductList(1);
+  }, [searchKeyword]);
 
   useEffect(() => {
     setLoading(true);
@@ -68,7 +54,15 @@ const ProductProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ products, total, currentPage, pageSize, handlePageChange, searchKeyword, setSearchKeyword }}
+      value={{
+        products,
+        total,
+        currentPage,
+        pageSize,
+        handlePageChange,
+        searchKeyword,
+        setSearchKeyword,
+      }}
     >
       {children}
     </ProductContext.Provider>
