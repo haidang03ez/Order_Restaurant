@@ -3,11 +3,11 @@ import { useAuth } from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 
 export const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading  } = useAuth();
 
-  if (!user) {
-    return <Navigate to="/sign-in" replace />;
-  }
+  if (loading) return <div>Đang xác thực phiên đăng nhập...</div>;
+
+  if (!user) return <Navigate to="/sign-in" replace />;
 
   return children;
 };

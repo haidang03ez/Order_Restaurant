@@ -5,16 +5,19 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const [loading, setLoading] = useState(true);
 
   // Restore user session from localStorage
   useEffect(() => {
     const restoreSession = async () => {
       const accessToken = localStorage.getItem("accessToken");
       const refreshToken = localStorage.getItem("refreshToken");
-  
-      if (!accessToken) return;
-  
+
+      if (!accessToken) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await getUserDetails();
         setUser({ ...res.data, accessToken, refreshToken });
@@ -22,9 +25,11 @@ const AuthProvider = ({ children }) => {
         console.warn("Không thể khôi phục phiên đăng nhập:", err.message);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+      } finally {
+        setLoading(false);
       }
     };
-  
+
     restoreSession();
   }, []);
 
@@ -45,7 +50,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
