@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowUp } from "react-icons/bs";
-import { ThemeWrapper } from "./ThemeWrapper";
 
 export const BackTopButton = ({ idTop }) => {
   const [showButton, setShowButton] = useState(false);

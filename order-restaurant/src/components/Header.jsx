@@ -133,8 +133,26 @@ export const Header = ({
     </div>
   );
 
+  // const saveSearchHistory = (keyword) => {
+  //   if (!keyword) return;
+  //   const historyKey = "searchHistory";
+  //   let history = JSON.parse(localStorage.getItem(historyKey)) || [];
+  //   history = history.filter(
+  //     (item) => item.toLowerCase() !== keyword.toLowerCase()
+  //   );
+  //   history.unshift(keyword);
+
+  //   if (history.length > 10) {
+  //     history = history.slice(0, 10);
+  //   }
+  //   localStorage.setItem(historyKey, JSON.stringify(history));
+  // };
+
+  // const savedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
   const handleSearch = () => {
     setSearchKeyword(inputValue);
+    // saveSearchHistory(inputValue);
   };
 
   useEffect(() => {
@@ -201,7 +219,7 @@ export const Header = ({
                 <NavLink to="/place-order">
                   <Button
                     type="primary"
-                    className="!bg-yellow-600 !text-white !font-semibold !px-4 !py-2 hover:!bg-orange-700 hover:!scale-110 !rounded-none"
+                    className="!bg-orange-500 !text-white !font-semibold !px-4 !py-2 hover:!bg-orange-700 hover:!scale-110 !rounded-none"
                   >
                     {navItem5 || "Đặt tiệc ngay"}
                   </Button>
@@ -247,8 +265,8 @@ export const Header = ({
             <ThemeWrapper>
               {searchDropdown && (
                 <div className="absolute z-10 top-full right-30 w-50 bg-white shadow-md mt-2 rounded-xl p-4 space-y-4">
-                  {/* Lịch sử tìm kiếm */}
-                  <div>
+                  
+                  {/* <div>
                     <div className="flex justify-between items-center mb-2 text-gray-600 font-medium">
                       <span>Lịch sử tìm kiếm</span>
                       <div className="flex items-center gap-3">
@@ -263,12 +281,29 @@ export const Header = ({
                         </button>
                       </div>
                     </div>
-                    <ul className="space-y-1 text-sm text-gray-800">
-                      <li>Nothing Phone 3A 8GB 128GB</li>
-                    </ul>
-                  </div>
+                    {savedHistory.length > 0 ? (
+                      <ul className="space-y-1 text-sm text-gray-800">
+                        {savedHistory.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="hover:!text-orange-600 cursor-pointer"
+                            onClick={() => {
+                              setInputValue(item);
+                              setSearchKeyword(item);
+                              setSearchDropdown(false);
+                            }}
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-sm text-gray-500">
+                        Chưa có lịch sử tìm kiếm
+                      </p>
+                    )}
+                  </div> */}
 
-                  {/* Xu hướng tìm kiếm */}
                   <div>
                     <div className="mb-2 text-gray-600 font-medium">
                       Xu hướng tìm kiếm 🔥

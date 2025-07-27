@@ -58,13 +58,13 @@ export const MenuPage = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 mt-4 p-5">
         {products.map((item) => (
           <CardItem
             key={item.id}
             id={item.id}
             title={item.title}
-            image={item.images}
+            image={item.thumbnail}
             description={item.description}
             price={item.price}
             category={item.category}
