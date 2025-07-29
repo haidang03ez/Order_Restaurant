@@ -133,26 +133,8 @@ export const Header = ({
     </div>
   );
 
-  // const saveSearchHistory = (keyword) => {
-  //   if (!keyword) return;
-  //   const historyKey = "searchHistory";
-  //   let history = JSON.parse(localStorage.getItem(historyKey)) || [];
-  //   history = history.filter(
-  //     (item) => item.toLowerCase() !== keyword.toLowerCase()
-  //   );
-  //   history.unshift(keyword);
-
-  //   if (history.length > 10) {
-  //     history = history.slice(0, 10);
-  //   }
-  //   localStorage.setItem(historyKey, JSON.stringify(history));
-  // };
-
-  // const savedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-
   const handleSearch = () => {
     setSearchKeyword(inputValue);
-    // saveSearchHistory(inputValue);
   };
 
   useEffect(() => {
@@ -230,7 +212,6 @@ export const Header = ({
         </ThemeWrapper>
 
         <ThemeWrapper className="flex items-center gap-3 md:gap-6">
-          {/* SearchBar */}
           <ThemeWrapper
             ref={dropdownRef}
             className="hidden md:flex items-center border-b border-gray-400 pr-2"
@@ -264,47 +245,8 @@ export const Header = ({
             </button>
             <ThemeWrapper>
               {searchDropdown && (
-                <div className="absolute z-10 top-full right-30 w-50 bg-white shadow-md mt-2 rounded-xl p-4 space-y-4">
-                  
-                  {/* <div>
-                    <div className="flex justify-between items-center mb-2 text-gray-600 font-medium">
-                      <span>Lịch sử tìm kiếm</span>
-                      <div className="flex items-center gap-3">
-                        <button className="text-sm text-blue-500 hover:underline">
-                          Xoá tất cả
-                        </button>
-                        <button
-                          className="border p-1 rounded text-sm hover:!bg-red-500 hover:!text-white"
-                          onClick={() => setSearchDropdown(false)}
-                        >
-                          <AiOutlineClose className="text-lg text-gray-600 hover:!text-white" />
-                        </button>
-                      </div>
-                    </div>
-                    {savedHistory.length > 0 ? (
-                      <ul className="space-y-1 text-sm text-gray-800">
-                        {savedHistory.map((item, idx) => (
-                          <li
-                            key={idx}
-                            className="hover:!text-orange-600 cursor-pointer"
-                            onClick={() => {
-                              setInputValue(item);
-                              setSearchKeyword(item);
-                              setSearchDropdown(false);
-                            }}
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-sm text-gray-500">
-                        Chưa có lịch sử tìm kiếm
-                      </p>
-                    )}
-                  </div> */}
-
-                  <div>
+                <ThemeWrapper className="absolute z-10 top-full right-30 w-50 bg-white shadow-md mt-2 rounded-xl p-4 space-y-4">
+                  <ThemeWrapper>
                     <div className="mb-2 text-gray-600 font-medium">
                       Xu hướng tìm kiếm 🔥
                     </div>
@@ -326,8 +268,8 @@ export const Header = ({
                         </Link>
                       ))}
                     </div>
-                  </div>
-                </div>
+                  </ThemeWrapper>
+                </ThemeWrapper>
               )}
             </ThemeWrapper>
           </ThemeWrapper>

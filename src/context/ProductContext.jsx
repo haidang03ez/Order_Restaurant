@@ -17,13 +17,12 @@ const ProductProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 16;
 
-  // Get all product
+  // Get product
   const loadProductList = async (page = 1) => {
     try {
       setLoading(true);
       const skip = (page - 1) * pageSize;
-      const checkSearch =
-        searchKeyword.trim() === "" ? fetchProductList : fetchSearchProduct;
+      const checkSearch = searchKeyword.trim() === "" ? fetchProductList : fetchSearchProduct;
       const res = await checkSearch({
         q: searchKeyword,
         limit: pageSize,
@@ -50,7 +49,7 @@ const ProductProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   // Handle pagination
   const handlePageChange = (page) => {
