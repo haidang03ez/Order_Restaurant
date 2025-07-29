@@ -10,7 +10,7 @@ export const ProfileUser = ({ item }) => {
         </div>
 
         <p>
-          <strong>Họ tên:</strong> {item.firstName} {item.lastName}
+          <strong>Họ tên</strong> {item.firstName} {item.lastName}
         </p>
         <p>
           <strong>Email:</strong> {item.email}
