@@ -13,7 +13,6 @@ import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { PolicyPage } from "./pages/PolicyPage";
 import { CartPage } from "./pages/CartPage";
 import ThemeProvider from "./context/ThemeContext";
-import AuthProvider from "./context/AuthContext";
 import { ProfileUserPage } from "./pages/ProfileUserPage";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import ProductProvider from "./context/ProductContext";
@@ -21,7 +20,6 @@ import ProductProvider from "./context/ProductContext";
 function App() {
   return (
     <ThemeProvider>
-      <AuthProvider>
         <ProductProvider>
           <Router>
             <Routes>
@@ -60,7 +58,6 @@ function App() {
             </Routes>
           </Router>
         </ProductProvider>
-      </AuthProvider>
     </ThemeProvider>
   );
 }

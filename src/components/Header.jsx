@@ -13,10 +13,11 @@ import {
   DesktopOutlined,
 } from "@ant-design/icons";
 import { useTheme } from "../hooks/useTheme";
-import { useAuth } from "../hooks/useAuth";
 import { ThemeWrapper } from "./ThemeWrapper";
 import { useProduct } from "../hooks/useProduct";
 import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../redux/actions/userActions";
 
 export const Header = ({
   navItem1,
@@ -28,12 +29,19 @@ export const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { user, logout } = useAuth();
+
+  const dispatch = useDispatch();
+  const { user, loading, error } = useSelector((state) => state.user);
+
   const [inputValue, setInputValue] = useState("");
   const { setSearchKeyword, products } = useProduct();
   const [searchDropdown, setSearchDropdown] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef(null);
+
+  const logout = () => {
+    dispatch(logoutUser());
+  };
 
   const items = [
     {
