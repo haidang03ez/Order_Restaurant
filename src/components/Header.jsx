@@ -14,10 +14,15 @@ import {
 } from "@ant-design/icons";
 import { useTheme } from "../hooks/useTheme";
 import { ThemeWrapper } from "./ThemeWrapper";
-import { useProduct } from "../hooks/useProduct";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/actions/userActions";
+import { debounce } from "lodash";
+import {
+  searchProduct,
+  setPage,
+  setSearchKeyword,
+} from "../redux/actions/productActions";
 
 export const Header = ({
   navItem1,
@@ -32,9 +37,11 @@ export const Header = ({
 
   const dispatch = useDispatch();
   const { user, loading, error } = useSelector((state) => state.user);
+  const { products, searchKeyword, pageSize } = useSelector(
+    (state) => state.productList
+  );
 
   const [inputValue, setInputValue] = useState("");
-  const { setSearchKeyword, products } = useProduct();
   const [searchDropdown, setSearchDropdown] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef(null);
@@ -141,9 +148,25 @@ export const Header = ({
     </div>
   );
 
-  const handleSearch = () => {
-    setSearchKeyword(inputValue);
-  };
+  useEffect(() => {
+    const debouncedSearch = debounce(() => {
+      dispatch(setPage(1));
+      dispatch(setSearchKeyword(inputValue));
+      dispatch(
+        searchProduct({
+          skip: 0,
+          limit: pageSize,
+          q: inputValue,
+        })
+      );
+    }, 500);
+
+    debouncedSearch();
+
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [inputValue]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -245,12 +268,9 @@ export const Header = ({
                 </button>
               )}
             </div>
-            <button
-              className="bg-transparent text-black px-4 py-2 !rounded-md hover:!bg-gray-200 hover:!scale-110 !transition"
-              onClick={handleSearch}
-            >
+            <div className="bg-transparent text-black px-4 py-2 !rounded-md hover:!bg-gray-200 hover:!scale-110 !transition">
               <SearchOutlined className="text-lg text-gray-600" />
-            </button>
+            </div>
             <ThemeWrapper>
               {searchDropdown && (
                 <ThemeWrapper className="absolute z-10 top-full right-30 w-50 bg-white shadow-md mt-2 rounded-xl p-4 space-y-4">

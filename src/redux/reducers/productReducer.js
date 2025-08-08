@@ -1,15 +1,20 @@
-const initialState = {
+const productListState = {
   loading: false,
   products: [],
-  product: {},
-  error: null,
+  total: 0,
   currentPage: 1,
   pageSize: 16,
-  total: 0,
   searchKeyword: "",
+  error: null,
 };
 
-export const productListReducer = (state = initialState, action) => {
+const productDetailState = {
+  loading: false,
+  product: {},
+  error: null,
+};
+
+export const productListReducer = (state = productListState, action) => {
   switch (action.type) {
     case "PRODUCT_LIST_REQUEST":
       return {
@@ -52,7 +57,7 @@ export const productListReducer = (state = initialState, action) => {
   }
 };
 
-export const productDetailsReducer = (state = initialState, action) => {
+export const productDetailsReducer = (state = productDetailState, action) => {
   switch (action.type) {
     case "PRODUCT_DETAILS_REQUEST":
       return {
