@@ -10,10 +10,16 @@ import {
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ThemeWrapper } from "./ThemeWrapper";
-import { useAuth } from "./../hooks/useAuth";
+import { logoutUser } from "../redux/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Footer = () => {
-  const { logout } = useAuth();
+  const dispatch = useDispatch();
+  const { user, loading, error } = useSelector((state) => state.user);
+
+  const logout = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <ThemeWrapper className="bg-gray-100 text-gray-700 !py-8 md:!py-10">

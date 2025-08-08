@@ -16,56 +16,7 @@ export const CardItem = ({
   rating,
 }) => {
   return (
-    // <ThemeWrapper>
-    //   <Card
-    //     className="rounded-lg shadow-md transition duration-300 hover:shadow-xl border border-gray-100 h-full"
-    //     style={{ width: "100%" }}
-    //     cover={
-    //       <img
-    //         alt={title}
-    //         src={image}
-    //         className="h-[150px] sm:h-[180px] object-cover rounded-t-lg pt-2 px-2"
-    //       />
-    //     }
-    //   >
-    //     <ThemeWrapper className=" flex flex-col h-full justify-between">
-    //       <Link to={`/product-details/${id}`}>
-    //         <Meta
-    //           title={
-    //             <ThemeWrapper>
-    //               <h2 className="text-base md:text-lg font-semibold text-amber-900 truncate">
-    //                 {title}
-    //               </h2>
-    //             </ThemeWrapper>
-    //           }
-    //           description={
-    //             <ThemeWrapper>
-    //               <p className="text-xs md:text-sm text-gray-600 line-clamp-3 mt-1">
-    //                 {description}
-    //               </p>
-    //             </ThemeWrapper>
-    //           }
-    //         />
-
-    //         <ThemeWrapper className="mt-3 md:mt-4 space-y-1 text-xs md:text-sm text-gray-700">
-    //           <p>
-    //             <strong>Giá:</strong> {price.toLocaleString()} VND
-    //           </p>
-    //           <p>
-    //             <strong>Đánh giá:</strong> {rating} ⭐
-    //           </p>
-    //           <p>
-    //             <strong>Loại:</strong> {category}
-    //           </p>
-    //         </ThemeWrapper>
-
-    //         <button className="w-full !px-4 md:!px-6 py-2 !bg-yellow-600 !text-white rounded hover:!bg-yellow-700 transition-colors text-sm md:text-base mt-3">
-    //           Xem chi tiết
-    //         </button>
-    //       </Link>
-    //     </ThemeWrapper>
-    //   </Card>
-    // </ThemeWrapper>
+    
 
     <ThemeWrapper>
       <div className="relative w-full max-w-xs rounded-2xl overflow-hidden shadow-lg group transition-transform duration-300 hover:scale-105">

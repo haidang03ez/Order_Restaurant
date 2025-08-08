@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartItemCard } from "../components/CardItemCart";
-import { useAuth } from "../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
 
 export const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+
+  const dispatch = useDispatch();
+  const { user, loading, error } = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -20,8 +21,6 @@ export const CartPage = () => {
         console.log("Giỏ hàng:", data.carts);
       } catch (err) {
         console.log("Lỗi lấy giỏ hàng: ", err);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -33,7 +32,7 @@ export const CartPage = () => {
   return (
     <div className="container mt-5 !mb-[200px] px-4">
       <div>
-        { !cartItems[0]?.products?.length ? (
+        {!cartItems[0]?.products?.length ? (
           <div className="flex flex-col sm:flex-row border bg-gray-100 rounded justify-center items-center gap-3 p-5">
             <p className="flex items-center text-center !m-0">
               Chưa có món nào trong thực đơn
