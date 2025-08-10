@@ -2,24 +2,67 @@ import React, { useEffect, useState } from "react";
 import { CardItem } from "./../components/CardItem";
 import { SearchOutlined } from "@ant-design/icons";
 import { ThemeWrapper } from "./../components/ThemeWrapper";
-import { useProduct } from "./../hooks/useProduct";
 import { Pagination } from "antd";
 import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProduct,
+  searchProduct,
+  setPage,
+  setSearchKeyword,
+} from "../redux/actions/productActions";
+import { debounce } from "lodash";
 
 export const MenuPage = () => {
-  const {
-    products,
-    total,
-    currentPage,
-    pageSize,
-    handlePageChange,
-    setSearchKeyword,
-  } = useProduct();
-  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
+  const { products, currentPage, pageSize, total, searchKeyword } = useSelector(
+    (state) => state.productList
+  );
 
-  const handleSearch = () => {
-    setSearchKeyword(inputValue);
+  const [inputValue, setInputValue] = useState("");
+  const skip = (currentPage - 1) * pageSize;
+
+  useEffect(() => {
+    const debouncedSearch = debounce(() => {
+      dispatch(setPage(1));
+      dispatch(setSearchKeyword(inputValue));
+      dispatch(
+        searchProduct({
+          skip: 0,
+          limit: pageSize,
+          q: inputValue,
+        })
+      );
+    }, 500);
+
+    debouncedSearch();
+
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [inputValue]);
+
+  const handlePageChange = (page) => {
+    dispatch(setPage(page));
   };
+
+  useEffect(() => {
+    if (searchKeyword === "") {
+      dispatch(
+        getAllProduct({
+          skip,
+          limit: pageSize,
+        })
+      );
+    }
+  }, [dispatch, currentPage, pageSize, searchKeyword]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setPage(1));
+      dispatch(setSearchKeyword(""));
+    };
+  }, []);
 
   return (
     <ThemeWrapper className="!container mx-auto py-4 md:py-8 px-4">
@@ -40,7 +83,8 @@ export const MenuPage = () => {
             {inputValue && (
               <button
                 onClick={() => {
-                  setSearchKeyword("");
+                  dispatch(setSearchKeyword(""));
+                  dispatch(setPage(1));
                   setInputValue("");
                 }}
                 className="ml-2"
@@ -49,12 +93,9 @@ export const MenuPage = () => {
               </button>
             )}
           </div>
-          <button
-            className="bg-transparent text-black px-4 py-2 !rounded-md hover:!bg-gray-200 hover:!scale-110 !transition"
-            onClick={handleSearch}
-          >
+          <div className="bg-transparent text-black px-4 py-2 !rounded-md">
             <SearchOutlined className="text-lg text-gray-600" />
-          </button>
+          </div>
         </div>
       </div>
 

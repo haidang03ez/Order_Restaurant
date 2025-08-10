@@ -1,44 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import image_banner_1 from "../assets/image_banner_1.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../hooks/useAuth";
 import { toast, ToastContainer } from "react-toastify";
 import { ThemeWrapper } from "../components/ThemeWrapper";
-import { login as loginApi } from "../services/authService";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
 export const SignInPage = () => {
-  const { login } = useAuth();
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { user, loading, error } = useSelector((state) => state.user);
 
   const {
     register,
     handleSubmit,
-    remember,
     formState: { errors },
   } = useForm();
   const [showPass, setShowPass] = useState(false);
 
   const onSubmit = async (data) => {
     try {
-      const res = await loginApi({
-        username: data.username,
-        password: data.password,
-        expiresInMins: 60,
-      });
+      await dispatch(loginUser(data));
 
       toast.success("Đăng nhập thành công!", {
         position: "top-center",
         autoClose: 2000,
       });
-
-      login(res.data);
-      navigate("/");
-    } catch (err) {
-      console.error("Lỗi đăng nhập:", err.message);
-      alert("Sai tài khoản hoặc mật khẩu");
+    } catch (error) {
+      toast.error(error.message || "Sai tài khoản hoặc mật khẩu", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <ThemeWrapper className="flex items-center justify-center min-h-screen bg-gray-100 px-4 bg-gradient-to-tr from-gray-800 to-yellow-600">
@@ -109,7 +111,7 @@ export const SignInPage = () => {
             </div>
 
             <div className="my-3 flex gap-2 items-center">
-              <input type="checkbox" className="w-4 h-4" {...remember}></input>
+              <input type="checkbox" className="w-4 h-4"></input>
               <label className="text-sm md:text-base">Ghi nhớ đăng nhập</label>
             </div>
 

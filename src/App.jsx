@@ -13,54 +13,48 @@ import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { PolicyPage } from "./pages/PolicyPage";
 import { CartPage } from "./pages/CartPage";
 import ThemeProvider from "./context/ThemeContext";
-import AuthProvider from "./context/AuthContext";
 import { ProfileUserPage } from "./pages/ProfileUserPage";
 import { PrivateRoute } from "./routes/PrivateRoute";
-import ProductProvider from "./context/ProductContext";
 
 function App() {
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <ProductProvider>
-          <Router>
-            <Routes>
-              <Route element={<MainLayout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="about" element={<AboutUsPage />} />
-                <Route path="news" element={<NewsPage />} />
-                <Route path="menu" element={<MenuPage />} />
-                <Route path="place-order" element={<PlaceOrderPage />} />
-                <Route
-                  path="product-details/:id"
-                  element={<ProductDetailsPage />}
-                />
-                <Route path="policy" element={<PolicyPage />} />
-                <Route
-                  path="shopping-cart"
-                  element={
-                    <PrivateRoute>
-                      <CartPage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="profile"
-                  element={
-                    <PrivateRoute>
-                      <ProfileUserPage />
-                    </PrivateRoute>
-                  }
-                />
-              </Route>
+      <Router>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="about" element={<AboutUsPage />} />
+            <Route path="news" element={<NewsPage />} />
+            <Route path="menu" element={<MenuPage />} />
+            <Route path="place-order" element={<PlaceOrderPage />} />
+            <Route
+              path="product-details/:id"
+              element={<ProductDetailsPage />}
+            />
+            <Route path="policy" element={<PolicyPage />} />
+            <Route
+              path="shopping-cart"
+              element={
+                <PrivateRoute>
+                  <CartPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="profile"
+              element={
+                <PrivateRoute>
+                  <ProfileUserPage />
+                </PrivateRoute>
+              }
+            />
+          </Route>
 
-              <Route path="sign-in" element={<SignInPage />} />
-              <Route path="sign-up" element={<SignUpPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Router>
-        </ProductProvider>
-      </AuthProvider>
+          <Route path="sign-in" element={<SignInPage />} />
+          <Route path="sign-up" element={<SignUpPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

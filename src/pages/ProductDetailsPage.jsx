@@ -1,20 +1,23 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import { useProduct } from "../hooks/useProduct";
+import { ToastContainer } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetails } from "../redux/actions/productActions";
 
 export const ProductDetailsPage = () => {
   const { id } = useParams();
-
-  const { productDetails, loadProductDetails, loading } = useProduct();
+  const dispatch = useDispatch();
+  const { product, loading, error } = useSelector(
+    (state) => state.productDetails
+  );
 
   useEffect(() => {
     if (id) {
-      loadProductDetails(id);
+      dispatch(getProductDetails(id));
     }
   }, [id]);
 
-  if (loading || !productDetails) {
+  if (loading || !product) {
     return <p className="text-center mt-10">Đang tải dữ liệu...</p>;
   }
 
@@ -22,29 +25,29 @@ export const ProductDetailsPage = () => {
     <div className="container flex flex-col mx-auto px-4 !py-8">
       <div className="gap-10 flex items-start">
         <img
-          src={productDetails.thumbnail}
-          alt={productDetails.title}
+          src={product.thumbnail}
+          alt={product.title}
           className="w-1/2 h-1/2 object-cover "
         />
 
         <div className="p-5">
-          <h1 className="text-3xl font-bold mb-4">{productDetails.title}</h1>
-          <p className="text-gray-700 mb-4">{productDetails.description}</p>
+          <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
+          <p className="text-gray-700 mb-4">{product.description}</p>
 
           <p>
-            <strong>Giá:</strong> {productDetails.price.toLocaleString()} VND
+            <strong>Giá:</strong> {product.price} VND
           </p>
           <p>
-            <strong>Danh mục:</strong> {productDetails.category}
+            <strong>Danh mục:</strong> {product.category}
           </p>
           <p>
-            <strong>Thương hiệu:</strong> {productDetails.brand}
+            <strong>Thương hiệu:</strong> {product.brand}
           </p>
           <p>
-            <strong>Đánh giá:</strong> {productDetails.rating} ⭐
+            <strong>Đánh giá:</strong> {product.rating} ⭐
           </p>
           <p>
-            <strong>Còn lại:</strong> {productDetails.stock} sản phẩm
+            <strong>Còn lại:</strong> {product.stock} sản phẩm
           </p>
 
           <button
@@ -57,13 +60,13 @@ export const ProductDetailsPage = () => {
           </button>
         </div>
       </div>
-      {productDetails.reviews?.length > 0 && (
+      {product.reviews?.length > 0 && (
         <div className="mt-12 p-5">
           <h2 className="text-2xl font-semibold mb-4">
             Đánh giá từ khách hàng
           </h2>
           <div className="space-y-4 ">
-            {productDetails.reviews.map((review, index) => (
+            {product.reviews.map((review, index) => (
               <div
                 key={index}
                 className="grid md:grid-cols-4 gap-3 border border-gray-200 rounded p-4 bg-gray-50 mt-2"

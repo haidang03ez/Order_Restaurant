@@ -13,10 +13,16 @@ import {
   DesktopOutlined,
 } from "@ant-design/icons";
 import { useTheme } from "../hooks/useTheme";
-import { useAuth } from "../hooks/useAuth";
 import { ThemeWrapper } from "./ThemeWrapper";
-import { useProduct } from "../hooks/useProduct";
 import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../redux/actions/userActions";
+import { debounce } from "lodash";
+import {
+  searchProduct,
+  setPage,
+  setSearchKeyword,
+} from "../redux/actions/productActions";
 
 export const Header = ({
   navItem1,
@@ -28,12 +34,21 @@ export const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { user, logout } = useAuth();
+
+  const dispatch = useDispatch();
+  const { user, loading, error } = useSelector((state) => state.user);
+  const { products, searchKeyword, pageSize } = useSelector(
+    (state) => state.productList
+  );
+
   const [inputValue, setInputValue] = useState("");
-  const { setSearchKeyword, products } = useProduct();
   const [searchDropdown, setSearchDropdown] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef(null);
+
+  const logout = () => {
+    dispatch(logoutUser());
+  };
 
   const items = [
     {
@@ -133,27 +148,25 @@ export const Header = ({
     </div>
   );
 
-  // const saveSearchHistory = (keyword) => {
-  //   if (!keyword) return;
-  //   const historyKey = "searchHistory";
-  //   let history = JSON.parse(localStorage.getItem(historyKey)) || [];
-  //   history = history.filter(
-  //     (item) => item.toLowerCase() !== keyword.toLowerCase()
-  //   );
-  //   history.unshift(keyword);
+  useEffect(() => {
+    const debouncedSearch = debounce(() => {
+      dispatch(setPage(1));
+      dispatch(setSearchKeyword(inputValue));
+      dispatch(
+        searchProduct({
+          skip: 0,
+          limit: pageSize,
+          q: inputValue,
+        })
+      );
+    }, 500);
 
-  //   if (history.length > 10) {
-  //     history = history.slice(0, 10);
-  //   }
-  //   localStorage.setItem(historyKey, JSON.stringify(history));
-  // };
+    debouncedSearch();
 
-  // const savedHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-
-  const handleSearch = () => {
-    setSearchKeyword(inputValue);
-    // saveSearchHistory(inputValue);
-  };
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [inputValue]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -230,7 +243,6 @@ export const Header = ({
         </ThemeWrapper>
 
         <ThemeWrapper className="flex items-center gap-3 md:gap-6">
-          {/* SearchBar */}
           <ThemeWrapper
             ref={dropdownRef}
             className="hidden md:flex items-center border-b border-gray-400 pr-2"
@@ -256,55 +268,13 @@ export const Header = ({
                 </button>
               )}
             </div>
-            <button
-              className="bg-transparent text-black px-4 py-2 !rounded-md hover:!bg-gray-200 hover:!scale-110 !transition"
-              onClick={handleSearch}
-            >
+            <div className="bg-transparent text-black px-4 py-2 !rounded-md hover:!bg-gray-200 hover:!scale-110 !transition">
               <SearchOutlined className="text-lg text-gray-600" />
-            </button>
+            </div>
             <ThemeWrapper>
               {searchDropdown && (
-                <div className="absolute z-10 top-full right-30 w-50 bg-white shadow-md mt-2 rounded-xl p-4 space-y-4">
-                  
-                  {/* <div>
-                    <div className="flex justify-between items-center mb-2 text-gray-600 font-medium">
-                      <span>Lịch sử tìm kiếm</span>
-                      <div className="flex items-center gap-3">
-                        <button className="text-sm text-blue-500 hover:underline">
-                          Xoá tất cả
-                        </button>
-                        <button
-                          className="border p-1 rounded text-sm hover:!bg-red-500 hover:!text-white"
-                          onClick={() => setSearchDropdown(false)}
-                        >
-                          <AiOutlineClose className="text-lg text-gray-600 hover:!text-white" />
-                        </button>
-                      </div>
-                    </div>
-                    {savedHistory.length > 0 ? (
-                      <ul className="space-y-1 text-sm text-gray-800">
-                        {savedHistory.map((item, idx) => (
-                          <li
-                            key={idx}
-                            className="hover:!text-orange-600 cursor-pointer"
-                            onClick={() => {
-                              setInputValue(item);
-                              setSearchKeyword(item);
-                              setSearchDropdown(false);
-                            }}
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-sm text-gray-500">
-                        Chưa có lịch sử tìm kiếm
-                      </p>
-                    )}
-                  </div> */}
-
-                  <div>
+                <ThemeWrapper className="absolute z-10 top-full right-30 w-50 bg-white shadow-md mt-2 rounded-xl p-4 space-y-4">
+                  <ThemeWrapper>
                     <div className="mb-2 text-gray-600 font-medium">
                       Xu hướng tìm kiếm 🔥
                     </div>
@@ -326,8 +296,8 @@ export const Header = ({
                         </Link>
                       ))}
                     </div>
-                  </div>
-                </div>
+                  </ThemeWrapper>
+                </ThemeWrapper>
               )}
             </ThemeWrapper>
           </ThemeWrapper>
